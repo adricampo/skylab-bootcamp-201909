@@ -12,17 +12,28 @@ const app = express()
 app.use(express.static('public'))
 
 
-app.get('/landing', (require, response) => {
-    response.send(View({ body: Landing({ register: '/register'}) }))
-})
-
-app.get('/login', (require, response) => {
-    response.send(View(Login({ login: '/login'})))
+app.get('/', (require, response) => {
+    response.send(View({ body: Landing({ register: '/register', login: '/login' }) }))
 })
 
 app.get('/register', (require, response) => {
-    response.send(View(Register()))
+    response.send(View({ body: Register() }))
 })
+
+app.post('/register', (require, response) => {
+    let content = ''
+
+    require 
+
+
+
+
+})
+
+app.get('/login', (require, response) => {
+    response.send(View({ body: Login() }))
+})
+
 
 app.get('/search', (require, response) => {
     response.send(View(Search()))
