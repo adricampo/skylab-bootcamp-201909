@@ -7,6 +7,7 @@ const registerUser = require('./logic/register-user')
 const authenticateUser = require('./logic/authenticate-user')
 const Login = require('./components/login')
 const Search = require('./components/search')
+const searchDucks = require('./logic/search-ducks')
 // const session = require('express-session')
 
 const { argv: [, , port = 8080] } = process
@@ -77,7 +78,16 @@ app.post('/login', (require, response) => {
 
 
 app.get('/search', (require, response) => {
-    response.send(View({ body: Search({ path: '/search'}) }))
+    const { query: { q }} = require
+    if (!q) response.send(View({ body: Search({ path: '/search'}) }))
+    else {
+        try{
+        response.send("QUERY")
+    } catch {
+
+    }
+}
+
 })
 
 app.listen(port, () => console.log(`server running on port ${port}`))
