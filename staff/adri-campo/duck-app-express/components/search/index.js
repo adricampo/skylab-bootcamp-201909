@@ -10,6 +10,6 @@ module.exports = function ({ path, query, name, logout}) {
             <button class="search__submit">🔍</button>
         </form>
 
-        ${Feedback()}
+        ${Feedback({})}
     </section>`
 }
