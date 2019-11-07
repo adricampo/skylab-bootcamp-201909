@@ -1,27 +1,23 @@
 const express = require('express')
 const View = require('./view/index.js')
-const Landing = require('./components/landing')
-const Register = require('./components/register')
 const querystring = require('querystring')
 const registerUser = require('./logic/register-user')
 const authenticateUser = require('./logic/authenticate-user')
+const searchDucks = require('./logic/search-ducks')
+const retrieveUser = require('./logic/retrieve-user')
+const Landing = require('./components/landing')
+const Register = require('./components/register')
 const Login = require('./components/login')
 const Search = require('./components/search')
-const searchDucks = require('./logic/search-ducks')
-// const session = require('express-session')
+
 
 const { argv: [, , port = 8080] } = process
 
+const sessions = {}
+
 const app = express() 
 
-// app.use(session({
-//     secret: 's3cr3t th1ng',
-//     saveUninitialized: true,
-//     resave: true
-// }))
-
 app.use(express.static('public'))
-
 
 app.get('/', (require, response) => {
     response.send(View({ body: Landing({ register: '/register', login: '/login' }) }))
@@ -42,7 +38,8 @@ app.post('/register', (require, response) => {
         try {
             registerUser(name, surname, email, password, error => {
                 if (error) response.send("ERROR")
-                else response.redirect('/login')
+
+                else response.redirect('/')
             })
 
         } catch(error) {
@@ -65,9 +62,13 @@ app.post('/login', (require, response) => {
         const { email, password } = querystring.parse(content)
     
         try {
-            authenticateUser(email, password, (error,credentials) => {
+            authenticateUser(email, password, (error, credentials) => {
                 if (error) return response.send('ERROR authenticate')
-                credentials.id = id
+
+                const { id, token } = credentials
+                sessions[id] = token
+
+                response.setHeader('set-cookie', `id=${id}`)
                 response.redirect('/search')
             })
         } catch(error) {
@@ -76,18 +77,21 @@ app.post('/login', (require, response) => {
     })
 })
 
-
 app.get('/search', (require, response) => {
-    const { query: { q }} = require
-    if (!q) response.send(View({ body: Search({ path: '/search'}) }))
-    else {
-        try{
-        response.send("QUERY")
-    } catch {
+    try {
+        const 
 
+    } catch (error) {
+        response.send('That is wrong mate')
     }
-}
 
+})
+
+
+app.post('/logout', (require, response) => { 
+    response.setHeader('set-cookie', 'id=""; expires=Thu, 01 Jan 1970 00:00:00 GMT')
+
+    response.redirect('/')
 })
 
 app.listen(port, () => console.log(`server running on port ${port}`))
