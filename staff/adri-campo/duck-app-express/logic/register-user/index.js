@@ -15,4 +15,4 @@ module.exports = function(name, surname, email, password, callback) {
     call('POST', undefined, 'https://skylabcoders.herokuapp.com/api/user', { name, surname, username: email, password }, result => {
         result.error ? callback(new Error(result.error)) : callback();
     })
-}
+}   

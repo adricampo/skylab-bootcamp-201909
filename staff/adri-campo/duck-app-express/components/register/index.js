@@ -12,5 +12,5 @@ module.exports = function () {
     </form>
 
     ${Feedback()}
-</section>`
+</section>` 
 }
