@@ -1,23 +1,25 @@
 {
-  "name": "skylab-bootcamp-201909",
+  "name": "duck-app-express",
   "version": "1.0.0",
-  "description": "![](stuff/misc/skylab-logo.png)",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/adricampo/skylab-bootcamp-201909.git"
+    "start": "node .",
+    "watch": "npx nodemon .",
+    "test": "npx mocha logic/*/*.spec.js",
+    "test-debug": "npx mocha inspect logic/*/*.spec.js",
+    "sass": "sass index.sass public/index.css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/adricampo/skylab-bootcamp-201909/issues"
-  },
-  "homepage": "https://github.com/adricampo/skylab-bootcamp-201909#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "nodemon": "^1.19.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
   }
 }

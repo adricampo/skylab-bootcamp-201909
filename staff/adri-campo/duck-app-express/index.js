@@ -7,10 +7,17 @@ const registerUser = require('./logic/register-user')
 const authenticateUser = require('./logic/authenticate-user')
 const Login = require('./components/login')
 const Search = require('./components/search')
+// const session = require('express-session')
 
 const { argv: [, , port = 8080] } = process
 
 const app = express() 
+
+// app.use(session({
+//     secret: 's3cr3t th1ng',
+//     saveUninitialized: true,
+//     resave: true
+// }))
 
 app.use(express.static('public'))
 
@@ -20,7 +27,7 @@ app.get('/', (require, response) => {
 })
 
 app.get('/register', (require, response) => {
-    response.send(View({ body: Register() }))
+    response.send(View({ body: Register({ path: '/register'}) }))
 })
 
 app.post('/register', (require, response) => {
@@ -44,11 +51,11 @@ app.post('/register', (require, response) => {
     })
 })
 
-app.get('/login', (require, response) => {
-    response.send(View({ body: Login() }))
+app.get('/login', (require, response) => { 
+    response.send(View({ body: Login({ path: '/login'}) }))
 })
 
-app.post('/login', (require, response) => {
+app.post('/login', (require, response) => { 
     let content = ''
 
     require.on('data', chunk => content += chunk)
@@ -57,20 +64,20 @@ app.post('/login', (require, response) => {
         const { email, password } = querystring.parse(content)
     
         try {
-            authenticateUser(email, password, error => {
-                if (error) response.send("ERROR")
-                else response.redirect('/search')
+            authenticateUser(email, password, (error,credentials) => {
+                if (error) return response.send('ERROR authenticate')
+                credentials.id = id
+                response.redirect('/search')
             })
-
         } catch(error) {
-            if(error) response.send('WTF! THAT IS WRONG')
+                if(error) response.send('WTF! THAT IS WRONG')
         }
-
     })
 })
 
+
 app.get('/search', (require, response) => {
-    response.send(View({ body: Search() }))
+    response.send(View({ body: Search({ path: '/search'}) }))
 })
 
 app.listen(port, () => console.log(`server running on port ${port}`))

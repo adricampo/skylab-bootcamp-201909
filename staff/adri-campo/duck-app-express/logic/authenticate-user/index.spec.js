@@ -1,3 +1,8 @@
+const { expect } = require('chai')
+const call = require('../../helpers/call')
+const authenticateUser = require('../authenticate-user')
+const { ContentError } = require('../../utils/errors')
+
 describe('logic - authenticate user', () => {
     let name, surname, email, password
 
@@ -15,19 +20,19 @@ describe('logic - authenticate user', () => {
 
     it('should succeed on correct credentials', done => {
         authenticateUser(email, password, (error, response) => {
-            expect(error).toBeUndefined()
+            expect(error).not.to.exist
 
-            expect(response).toBeDefined()
+            expect(response).to.exist
 
             const { id, token } = response
 
-            expect(id).toBeDefined()
-            expect(typeof id).toBe('string')
-            expect(id.length).toBeGreaterThan(0)
+            expect(id).to.exist
+            expect(typeof id).to.equal('string')
+            expect(id.length).to.be.greaterThan(0)
 
-            expect(token).toBeDefined()
-            expect(typeof token).toBe('string')
-            expect(token.length).toBeGreaterThan(0)
+            expect(token).to.exist
+            expect(typeof token).to.equal('string')
+            expect(token.length).to.be.GreaterThan(0)
 
             done()
         })
