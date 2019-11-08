@@ -5,7 +5,6 @@ const { ContentError } = require('../../utils/errors')
 
 describe('logic - authenticate user', () => {
     let name, surname, email, password
-
     beforeEach( done => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`

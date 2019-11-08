@@ -1,6 +1,6 @@
 const express = require('express')
 const { View, Landing, Register, Login, Search } = require('./components')
-const { registerUser, authenticateUser, searchDucks, retrieveUser } =('./logic')
+const { registerUser, authenticateUser, retrieveUser, searchDucks } =('./logic')
 const { bodyParser, cookieParser } = require('./utils/middlewares')
 
 
@@ -27,7 +27,7 @@ app.post('/register', bodyParser, (require, response) => {
             registerUser(name, surname, email, password)
                 .then( () => response.redirect('/'))
                 .catch(({ message }) => response.send(View({ body: Register({ path: '/register', error: message }) })))
-        } catch(error) {
+        } catch({ message }) {
             response.send(View({ body: Register({ path: '/register', error: error.message })}))
         }
     })
@@ -38,52 +38,56 @@ app.get('/login', (require, response) => {
 
 app.post('/login', bodyParser, (require, response) => { 
     const { body: { email, password } } = require
-    
-        try {
-            authenticateUser(email, password)
+    debugger
+    try {
+        authenticateUser(email, password)
             .then(credentials => {
                 const { id, token } = credentials
-                sessions[id] = token
-                .then( () => response.setHeader('set-cookie', `id=${id}`))
-                .then( () => response.redirect('/search'))
-        })
 
-            .catch(({ message }) => response.send(View({ body: Register({ path: '/register', error: message }) })))
-    } catch(error) {
-            response.send(View({ body: Login({ path: '/login', error: error.message })}))
+                sessions[id] = token
+
+
+
+                response.setHeader('set-cookie', `id=${id}`) 
+
+                response.redirect('/search') 
+        })
+        .catch(({ message }) => {
+            response.send(View({ body: Login({ path: '/login', error: message + '1' }) })) 
+        })
+    } catch ({ message }) {
+            response.send(View({ body: Login({ path: '/login', error: message + '2' }) }))
         }
     })
 
 app.get('/search', cookieParser, (require, response) => {
     try {
         const { cookies: { id } } = require
+
         if (!id) return response.redirect('/')
+
         const token = sessions[id]
+
         if (!token) return response.redirect('/')
 
-        retrieveUser(id, token, (error, user) => {
-            if (error) return response.send("ERROR")
+        retrieveUser(id, token)
+            .then(user => {
 
-            const { name } = user
-            const { query: { q: query } } = require
+                const { name } = user
+                const { query: { q: query } } = require
 
-            if (!query) response.send(View({ body: Search({ path: '/search', name, logout: '/logout' }) }))
-            else {
-                try {
-                    searchDucks(id, token, query, (error,ducks) => {
-                        if (error) return response.send("ERROR")
-
-                        console.log(ducks)
-
-                        response.send(View({ body: `${Search({ path: '/search', query, name, logout: '/logout' })} ` }))
-                    })
-                } catch (error) {
-                    response.send('ERROR')
-                }
-            }
-        })
-    } catch (error) {
-        response.send('That is wrong mate')
+                if (!query) return response.send(View({ body: Search({ path: '/search', name, logout: '/logout' }) }))
+                    
+                    try {
+                        searchDucks(id, token, query)
+                            .then(ducks => response.send(View({ body: `${Search({ path: '/search', query, name, logout: '/logout' })}` })))
+                            .catch(({ message }) => response.send(View({ body: Search({ path: '/search', name, logout: '/logout', error: message }) })))
+                    } catch ({ message }) {
+                        response.send(View({ body: Search({ path: '/search', name, logout: '/logout', error: message }) }))
+                    }
+                })
+    } catch ({ message }) {
+        response.send(View({ body: Search({ path: '/search', name, logout: '/logout', error: message }) }))
     }
 
 })
