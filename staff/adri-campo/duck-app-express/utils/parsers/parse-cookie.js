@@ -1,13 +1,15 @@
-module.exports = function (req) {
-    const { headers: { cookie } } = req
+module.exports = function (require) {
+    const { headers: { cookie } } = require
 
-    req.cookies = {}
+    const cookies = {}
 
     const keyValues = cookie.split(';')
 
     keyValues.forEach(keyValue => {
         const [key, value] = keyValue.trim().split('=')
 
-        req.cookies[key] = value
+        cookies[key] = value
     })
+
+    return cookies
 }

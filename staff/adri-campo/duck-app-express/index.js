@@ -1,6 +1,6 @@
 const express = require('express')
 const { View, Landing, Register, Login, Search } = require('./components')
-const { registerUser, authenticateUser, retrieveUser, searchDucks } =('./logic')
+const { registerUser, authenticateUser, retrieveUser, searchDucks, toggleFavDuck } =('./logic')
 const { bodyParser, cookieParser } = require('./utils/middlewares')
 
 
@@ -38,13 +38,13 @@ app.get('/login', (require, response) => {
 
 app.post('/login', bodyParser, (require, response) => { 
     const { body: { email, password } } = require
-    debugger
-    try {
+    
+    try { debugger
         authenticateUser(email, password)
             .then(credentials => {
                 const { id, token } = credentials
 
-                sessions[id] = token
+                sessions[id] = { token }
 
 
 
@@ -53,39 +53,41 @@ app.post('/login', bodyParser, (require, response) => {
                 response.redirect('/search') 
         })
         .catch(({ message }) => {
-            response.send(View({ body: Login({ path: '/login', error: message + '1' }) })) 
+            response.send(View({ body: Login({ path: '/login', error: message }) })) 
         })
     } catch ({ message }) {
-            response.send(View({ body: Login({ path: '/login', error: message + '2' }) }))
-        }
-    })
+        response.send(View({ body: Login({ path: '/login', error: message }) }))
+    }
+})
 
 app.get('/search', cookieParser, (require, response) => {
     try {
-        const { cookies: { id } } = require
+        const { cookies: { id }, query: { q: query } } = require
 
         if (!id) return response.redirect('/')
 
-        const token = sessions[id]
+        const session = sessions[id]
+
+        if (!session) return response.redirect('/')
+
+        const { token } = session
 
         if (!token) return response.redirect('/')
 
+        let name
+
         retrieveUser(id, token)
             .then(user => {
-
-                const { name } = user
-                const { query: { q: query } } = require
-
+                name = user.name
+                
                 if (!query) return response.send(View({ body: Search({ path: '/search', name, logout: '/logout' }) }))
-                    
-                    try {
-                        searchDucks(id, token, query)
-                            .then(ducks => response.send(View({ body: `${Search({ path: '/search', query, name, logout: '/logout' })}` })))
-                            .catch(({ message }) => response.send(View({ body: Search({ path: '/search', name, logout: '/logout', error: message }) })))
-                    } catch ({ message }) {
-                        response.send(View({ body: Search({ path: '/search', name, logout: '/logout', error: message }) }))
-                    }
-                })
+                
+                session.query = query
+
+                return searchDucks(id, token, query)
+                    .then(ducks => response.send(View({ body: Search({ path: '/search', query, name, logout: '/logout', results: ducks, favPath: '/fav', detailPath: '/ducks' }) })))
+            })
+            .catch(({ message }) => response.send(View({ body: Search({ path: '/search', name, logout: '/logout', error: message }) })))
     } catch ({ message }) {
         response.send(View({ body: Search({ path: '/search', name, logout: '/logout', error: message }) }))
     }
@@ -104,5 +106,37 @@ app.post('/logout', cookieParser, (require, response) => {
 
     response.redirect('/')
 })
+
+app.post('/fav', cookieParser, bodyParser, (require, response) => {
+    try {
+            const { cookies: { id }, body: { id: duckId } } = require
+
+            if (!id) return response.redirect('/')
+
+            const session = sessions[id]
+
+            if (!session) return response.redirect('/')
+
+            const { token, query } = session
+
+            if (!token) return response.redirect('/')
+
+            toggleFavDuck(id, token, duckId)
+                .then(() => response.redirect(`/search?q=${query}`))
+                .catch(({ message }) => {
+                    response.send('TODO error handling')
+                })
+        } catch ({ message }) {
+            reponse.send('TODO error handling')
+        }
+    })
+
+    app.get('/ducks/:id', (require, response) => {
+        const { params: { id } } = require
+
+        // TODO control session, etc
+
+        response.send('TODO detail of duck ' + id)
+    })
 
 app.listen(port, () => console.log(`server running on port ${port}`))
