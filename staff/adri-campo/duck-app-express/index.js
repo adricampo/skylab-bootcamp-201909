@@ -40,39 +40,31 @@ app.post('/login', bodyParser, (require, response) => {
     const { body: { email, password } } = require
     
         try {
-            authenticateUser(email, password, (error, credentials) => {
-                if (error) return response.send('ERROR authenticate')
-
+            authenticateUser(email, password)
+            .then(credentials => {
                 const { id, token } = credentials
-
                 sessions[id] = token
+                .then( () => response.setHeader('set-cookie', `id=${id}`))
+                .then( () => response.redirect('/search'))
+        })
 
-                response.setHeader('set-cookie', `id=${id}`)
-
-                response.redirect('/search')
-            })
-        } catch(error) {
-            if(error) response.send('WTF! THAT IS WRONG')
+            .catch(({ message }) => response.send(View({ body: Register({ path: '/register', error: message }) })))
+    } catch(error) {
+            response.send(View({ body: Login({ path: '/login', error: error.message })}))
         }
     })
-
-
 
 app.get('/search', cookieParser, (require, response) => {
     try {
         const { cookies: { id } } = require
-
         if (!id) return response.redirect('/')
-
         const token = sessions[id]
-
         if (!token) return response.redirect('/')
 
         retrieveUser(id, token, (error, user) => {
             if (error) return response.send("ERROR")
 
             const { name } = user
-
             const { query: { q: query } } = require
 
             if (!query) response.send(View({ body: Search({ path: '/search', name, logout: '/logout' }) }))
