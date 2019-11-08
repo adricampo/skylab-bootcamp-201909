@@ -62,7 +62,7 @@ describe('logic - search ducks', () => {
         })
     })
 
-    describe('when fav already exists', () => {
+    describe.skip('when fav already exists', () => {
         beforeEach(done => {
             call('PUT', token, `https://skylabcoders.herokuapp.com/api/user/${id}`, { favs: [duckId] }, result => {
                 result.error ? done(new Error(result.error)) : done()

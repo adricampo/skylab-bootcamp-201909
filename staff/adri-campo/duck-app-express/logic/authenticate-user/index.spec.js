@@ -32,39 +32,39 @@ describe('logic - authenticate user', () => {
 
             expect(token).to.exist
             expect(typeof token).to.equal('string')
-            expect(token.length).to.be.GreaterThan(0)
+            expect(token.length).to.be.greaterThan(0)
 
             done()
         })
     })
 
     it('should fail on incorrect name, surname, email, password, or expression type and content', () => {
-        expect(() => authenticateUser(1)).toThrowError(TypeError, '1 is not a string')
-        expect(() => authenticateUser(true)).toThrowError(TypeError, 'true is not a string')
-        expect(() => authenticateUser([])).toThrowError(TypeError, ' is not a string')
-        expect(() => authenticateUser({})).toThrowError(TypeError, '[object Object] is not a string')
-        expect(() => authenticateUser(undefined)).toThrowError(TypeError, 'undefined is not a string')
-        expect(() => authenticateUser(null)).toThrowError(TypeError, 'null is not a string')
+        expect(() => authenticateUser(1)).to.throw(TypeError, '1 is not a string')
+        expect(() => authenticateUser(true)).to.throw(TypeError, 'true is not a string')
+        expect(() => authenticateUser([])).to.throw(TypeError, ' is not a string')
+        expect(() => authenticateUser({})).to.throw(TypeError, '[object Object] is not a string')
+        expect(() => authenticateUser(undefined)).to.throw(TypeError, 'undefined is not a string')
+        expect(() => authenticateUser(null)).to.throw(TypeError, 'null is not a string')
 
-        expect(() => authenticateUser('')).toThrowError(ContentError, 'e-mail is empty or blank')
-        expect(() => authenticateUser(' \t\r')).toThrowError(ContentError, 'e-mail is empty or blank')
+        expect(() => authenticateUser('')).to.throw(ContentError, 'e-mail is empty or blank')
+        expect(() => authenticateUser(' \t\r')).to.throw(ContentError, 'e-mail is empty or blank')
 
-        expect(() => authenticateUser(email, 1)).toThrowError(TypeError, '1 is not a string')
-        expect(() => authenticateUser(email, true)).toThrowError(TypeError, 'true is not a string')
-        expect(() => authenticateUser(email, [])).toThrowError(TypeError, ' is not a string')
-        expect(() => authenticateUser(email, {})).toThrowError(TypeError, '[object Object] is not a string')
-        expect(() => authenticateUser(email, undefined)).toThrowError(TypeError, 'undefined is not a string')
-        expect(() => authenticateUser(email, null)).toThrowError(TypeError, 'null is not a string')
+        expect(() => authenticateUser(email, 1)).to.throw(TypeError, '1 is not a string')
+        expect(() => authenticateUser(email, true)).to.throw(TypeError, 'true is not a string')
+        expect(() => authenticateUser(email, [])).to.throw(TypeError, ' is not a string')
+        expect(() => authenticateUser(email, {})).to.throw(TypeError, '[object Object] is not a string')
+        expect(() => authenticateUser(email, undefined)).to.throw(TypeError, 'undefined is not a string')
+        expect(() => authenticateUser(email, null)).to.throw(TypeError, 'null is not a string')
 
-        expect(() => authenticateUser(email, '')).toThrowError(ContentError, 'password is empty or blank')
-        expect(() => authenticateUser(email, ' \t\r')).toThrowError(ContentError, 'password is empty or blank')
+        expect(() => authenticateUser(email, '')).to.throw(ContentError, 'password is empty or blank')
+        expect(() => authenticateUser(email, ' \t\r')).to.throw(ContentError, 'password is empty or blank')
 
-        expect(() => authenticateUser(email, password, 1)).toThrowError(TypeError, '1 is not a function')
-        expect(() => authenticateUser(email, password, true)).toThrowError(TypeError, 'true is not a function')
-        expect(() => authenticateUser(email, password, [])).toThrowError(TypeError, ' is not a function')
-        expect(() => authenticateUser(email, password, {})).toThrowError(TypeError, '[object Object] is not a function')
-        expect(() => authenticateUser(email, password, undefined)).toThrowError(TypeError, 'undefined is not a function')
-        expect(() => authenticateUser(email, password, null)).toThrowError(TypeError, 'null is not a function')
+        expect(() => authenticateUser(email, password, 1)).to.throw(TypeError, '1 is not a function')
+        expect(() => authenticateUser(email, password, true)).to.throw(TypeError, 'true is not a function')
+        expect(() => authenticateUser(email, password, [])).to.throw(TypeError, ' is not a function')
+        expect(() => authenticateUser(email, password, {})).to.throw(TypeError, '[object Object] is not a function')
+        expect(() => authenticateUser(email, password, undefined)).to.throw(TypeError, 'undefined is not a function')
+        expect(() => authenticateUser(email, password, null)).to.throw(TypeError, 'null is not a function')
     })
 
     // TODO other cases

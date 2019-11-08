@@ -1,3 +1,7 @@
+const { expect } = require('chai')
+const call = require('../../helpers/call')
+const retrieveUser = require('../retrieve-user')
+
 describe('logic - retrieve user', () => {
     let name, surname, email, password, id, token
 
@@ -27,13 +31,13 @@ describe('logic - retrieve user', () => {
 
     it('should succeed on correct user data', done => {
         retrieveUser(id, token, (error, data) => {
-            expect(error).toBeUndefined()
+            expect(error).not.to.exist
 
-            expect(data).toBeDefined()
-            expect(data.name).toBe(name)
-            expect(data.surname).toBe(surname)
-            expect(data.username).toBe(email)
-            expect(data.password).toBeUndefined()
+            expect(data).to.exist
+            expect(data.name).to.equal(name)
+            expect(data.surname).to.equal(surname)
+            expect(data.username).to.equal(email)
+            expect(data.password).not.to.exist
 
             done()
         })

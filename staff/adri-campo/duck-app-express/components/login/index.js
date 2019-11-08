@@ -9,6 +9,6 @@ module.exports = function ({ path }) {
             <button class="login__submit">🗝</button>
         </form>
 
-        ${Feedback()}
+        ${Feedback({})}
     </section>`
 }
