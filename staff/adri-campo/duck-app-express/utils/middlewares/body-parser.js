@@ -1,8 +1,8 @@
 const { parseBody } = require('../parsers')
 
-module.exports = function (req, res, next) {
-    parseBody(req, body => {
-        req.body = body
+module.exports = function (require, response, next) {
+    parseBody(require, body => {
+        require.body = body
 
         next()
     })
