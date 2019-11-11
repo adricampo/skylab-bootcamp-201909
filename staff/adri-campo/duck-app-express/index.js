@@ -1,16 +1,29 @@
 const express = require('express')
 const { View, Landing, Register, Login, Search, Detail } = require('./components')
 const { registerUser, authenticateUser, retrieveUser, searchDucks, toggleFavDuck, retrieveDuck } = require('./logic')
-// const logic = require('./logic')
 const { bodyParser, cookieParser } = require('./utils/middlewares')
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const FileStore = require('session-file-store')(session)
 
 const { argv: [, , port = 8080] } = process
 
-const sessions = {}
-
 const app = express()
 
+app.set('view engine', 'pug')
+app.set('views', 'components')
+
 app.use(express.static('public'))
+
+app.use(session({
+    store: new FileStore({
+    }),
+    secret: 'a super secret thing',
+    saveUninitialized: true,
+    resave: true
+}))
+
+const formBodyParser = bodyParser.urlencoded({ extended: false })
 
 app.get('/', (require, response) => {
     response.send(View({ body: Landing({ register: '/register', login: '/login' }) }))
@@ -19,10 +32,11 @@ app.get('/', (require, response) => {
 app.route('/register')
 
     .get((require, response) => {
-        response.send(View({ body: Register({ path: '/register' }) }))
+        // response.send(View({ body: Register({ path: '/register' }) }))
+        response.render('register', { path: '/register'})
     })
 
-    .post(bodyParser, (require, response) => {
+    .post(formBodyParser, (require, response) => {
         const { body: { name, surname, email, password } } = require
 
         try {
@@ -40,21 +54,20 @@ app.route('/login')
         response.send(View({ body: Login({ path: '/login' }) }))
     })
 
-    .post(bodyParser, (require, response) => {
-        const { body: { email, password } } = require
+    .post(formBodyParser, (require, response) => {
+        const { session, body: { email, password } } = require
 
         try { 
             authenticateUser(email, password)
                 .then(credentials => {
                     const { id, token } = credentials
 
-                    sessions[id] = { token }
+                    session.userId = id
+                    session.token = token
 
-                    //console.dir(sessions)
+                    session.save(() => response.redirect('/search'))
 
-                    response.setHeader('set-cookie', `id=${id}`)
-
-                    response.redirect('/search')
+            
                 })
                 .catch(({ message }) => {
                     response.send(View({ body: Login({ path: '/login', error: message }) }))
@@ -64,17 +77,13 @@ app.route('/login')
         }
     })
 
-app.get('/search', cookieParser, (require, response) => { 
+app.get('/search', (require, response) => { 
     try {
-        const { cookies: { id }, query: { q: query } } = require
-
-        if (!id) return response.redirect('/')
-
-        const session = sessions[id]
+        const { session, query: { q: query } } = require
 
         if (!session) return response.redirect('/')
 
-        const { token } = session
+        const { userId: id, token } = session
 
         if (!token) return response.redirect('/')
 
@@ -86,11 +95,14 @@ app.get('/search', cookieParser, (require, response) => {
 
                 if (!query) return response.send(View({ body: Search({ path: '/search', name, logout: '/logout' }) }))
 
-                session.query = query
-
                 return searchDucks(id, token, query)
-                    .then(ducks => response.send(View({ body: Search({ path: '/search', query, name, logout: '/logout', results: ducks, favPath: '/fav', detailPath: '/ducks' }) })))
-            })
+                    .then(ducks => {
+                        session.query = query
+                        session.view = 'search'
+
+                        session.save(() => response.send(View({ body: Search({ path: '/search', query, name, logout: '/logout', results: ducks, favPath: '/fav', detailPath: '/ducks' }) })))
+                    })
+                })        
             .catch(({ message }) => response.send(View({ body: Search({ path: '/search', query, name, logout: '/logout', error: message }) })))
     } catch ({ message }) {
         response.send(View({ body: Search({ path: '/search', query, name, logout: '/logout', error: message }) }))
@@ -145,17 +157,16 @@ app.get('/ducks/:id', cookieParser, (require, response) => {
 
         if (!session) return response.redirect('/')
 
-        const { token, query } = session
+        const { token, view, query } = session
 
         if (!token) return response.redirect('/')
         
-        debugger
         retrieveDuck(id, token, duckId) 
              
             // .then(() => response.redirect(`/ducks/${duckId}`))
             //.then(duck => response.send(View({ body: console.log(duck) })))
             .then(item => {
-                 response.send(View({ body: Detail({ path: '/detail', item, favPath: '/fav', onBack: `/search?q=${query}` }) }))})
+                 response.send(View({ body: Detail({ path: '/detail', item, favPath: '/fav', onBack: view === 'search' ? `/search?q=${query}` : '/' }) }))})
             .catch(({message }) => {
                 response.send(View({ body: Detail({ path: '/detail', error: message }) }))
             })
