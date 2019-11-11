@@ -30,7 +30,7 @@ describe('logic - retrieve duck', () => {
     })
 
     it('should succeed on correct duck id', () => {
-        retrieveDuck(id, token, duckId)
+        return retrieveDuck(id, token, duckId)
             .then((duck) => {
                 expect(duck).not.to.be.undefined
                 expect(duck.id).to.equal(duckId)
@@ -68,7 +68,7 @@ describe('logic - retrieve duck', () => {
         })
 
         it('should succeed on correct duck id', () => {
-            retrieveDuck(id, token, duckId)
+            return retrieveDuck(id, token, duckId)
                 .then(duck => {
     
                     expect(duck).not.to.be.undefined
@@ -103,7 +103,7 @@ describe('logic - retrieve duck', () => {
     it('should fail on incorrect duck id', () => {
         const wrongDuckId = '5c3853ABCd1bde8520e66e1b'
 
-        retrieveDuck(id, token, wrongDuckId)
+        return retrieveDuck(id, token, wrongDuckId)
             .then(() => {
                 throw Error ('should not reach this point')
             

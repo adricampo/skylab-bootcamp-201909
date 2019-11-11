@@ -1,4 +1,7 @@
-module.exports = function ({ item: { id, title, image, description, price, isFav }, onBack, favPath }) {
+const Feedback = require('../feedback')
+
+module.exports = function ({ item: {id, title, image, description, store, price, isFav }, error, onBack, favPath }) {
+    debugger
     return `<section class="view detail">
                 <h2 class="detail__title">${title}</h2>
                 <img class="detail__image" src=${image} />
@@ -9,6 +12,9 @@ module.exports = function ({ item: { id, title, image, description, price, isFav
                     <input type="hidden" name="id" value="${id}">
                     <button type="submit">${isFav ? '🧡' : '💔'}</button>
                 </form>
-                <form method="post" action="${onBack}"><button class="search__logout">Back</button></form>
+                <a href="${onBack}"><button class="search__on-back">Back</button></a>
+                
+                ${error ? Feedback({ message: error }) : ""}
+
         </section>`
 }

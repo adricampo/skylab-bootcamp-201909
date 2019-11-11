@@ -1,5 +1,5 @@
 const express = require('express')
-const { View, Landing, Register, Login, Search } = require('./components')
+const { View, Landing, Register, Login, Search, Detail } = require('./components')
 const { registerUser, authenticateUser, retrieveUser, searchDucks, toggleFavDuck, retrieveDuck } = require('./logic')
 // const logic = require('./logic')
 const { bodyParser, cookieParser } = require('./utils/middlewares')
@@ -133,10 +133,11 @@ app.post('/fav', cookieParser, bodyParser, (require, response) => {
     }
 })
 
-app.get('/ducks/:id', cookieParser, bodyParser, (require, response) => { debugger
+app.get('/ducks/:id', cookieParser, (require, response) => { 
     try {
-        // const { params: { duckId } } = require 
-        const { cookies: { id }, body: { id: duckId } } = require
+        const { params: { id: duckId } } = require 
+        const { cookies: { id } } = require
+        // const { body: { id: duckId } } = require
 
         if (!id) return response.redirect('/')
 
@@ -148,14 +149,19 @@ app.get('/ducks/:id', cookieParser, bodyParser, (require, response) => { debugge
 
         if (!token) return response.redirect('/')
         
-        retrieveDuck(id, token, duckId)
-            .then(() => response.redirect(`/ducks/${duckId}`))
-            .catch(({ message }) => {
-                response.send('TODO error handling')
+        debugger
+        retrieveDuck(id, token, duckId) 
+             
+            // .then(() => response.redirect(`/ducks/${duckId}`))
+            //.then(duck => response.send(View({ body: console.log(duck) })))
+            .then(item => {
+                 response.send(View({ body: Detail({ path: '/detail', item, favPath: '/fav', onBack: `/search?q=${query}` }) }))})
+            .catch(({message }) => {
+                response.send(View({ body: Detail({ path: '/detail', error: message }) }))
             })
 
     } catch ({ message }) {
-        response.send('TODO error handling + 2')
+        response.send(View({ body: Detail({ path: '/detail', error: message }) }))
     }
 })
 

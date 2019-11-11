@@ -9,11 +9,11 @@ module.exports = function (id, token, duckId) {
     validate.string(duckId)
     validate.string.notVoid('duck id', duckId)
 
-    return new Promise((resolve, reject) => {
-        call('GET', undefined, `https://duckling-api.herokuapp.com/api/ducks/${duckId}`, undefined, result => {
+    return new Promise((resolve, reject) => { debugger
+        call('GET', undefined, `https://duckling-api.herokuapp.com/api/ducks/${duckId}`, undefined, result => {debugger
                 if (result.error) return reject(new Error(result.error))
 
-                call('GET', token, `https://skylabcoders.herokuapp.com/api/user/${id}`, undefined, result2 => {
+                call('GET', token, `https://skylabcoders.herokuapp.com/api/user/${id}`, undefined, result2 => {debugger
                     if (result2.error) return reject(new Error(result2.error))
 
                     const { data: { favs = [] } } = result2
