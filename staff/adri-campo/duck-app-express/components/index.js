@@ -5,5 +5,5 @@ module.exports = {
     Register: require('./register'),
     Search: require('./search'),
     View: require('./view'),
-    Detail: require('./detail')
+    Detail: require('./detail'),
 }
