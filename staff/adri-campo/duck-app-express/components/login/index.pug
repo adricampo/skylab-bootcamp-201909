@@ -1,8 +1,12 @@
+extends ../view/index
+
+include ../feedback/index
+
 block body 
     section.view.login
         form(method="post" action=path)
         h1.register__title Login
-        input.login__field(type="email" name"email placeholder="name")
+        input.login__field(type="email" name"email" placeholder="name")
         input.login__field(type="password" name="password" placeholder="password")
         button.login__submit 🗝
     if error
