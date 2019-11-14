@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { name, version } = require('./package.json')
 const users = require('./data/users')()
-const { registerUser, authenticateUser, retrieveUser, retrieveUsers } = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, retrieveUsers, createTask } = require('./logic')
 const { ConflictError, CredentialsError, NotFoundError } = require('./utils/errors')
 const jwt = require('jsonwebtoken')
 

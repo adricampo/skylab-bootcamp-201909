@@ -3,5 +3,5 @@ module.exports = {
     registerUser: require('./register-user'),
     retrieveUser: require('./retrieve-user'),
     retrieveUsers: require('./retrieve-users'),
-    createTasks: require('./create-task')
+    createTask: require('./create-task')
 }
