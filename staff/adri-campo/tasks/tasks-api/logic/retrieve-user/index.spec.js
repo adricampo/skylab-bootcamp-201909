@@ -1,11 +1,13 @@
 const { expect } = require('chai')
-const retrieveUser = require('.')
 const { random } = Math
-const users = require('../../data/users')
+const users = require('../../data/users')('test')
+const retrieveUser = require('.')
 const uuid = require('uuid/v4')
 const { NotFoundError } = require('../../utils/errors')
 
 describe('logic - retrieve user', () => {
+    before(() => users.load())
+
     let id, name, surname, email, username, password
 
     beforeEach(() => {
@@ -16,7 +18,7 @@ describe('logic - retrieve user', () => {
         username = `username-${random()}`
         password = `password-${random()}`
 
-        users.push({ id, name, surname, email, username, password })
+        users.data.push({ id, name, surname, email, username, password })
     })
 
     it('should succeed on correct user id', () =>

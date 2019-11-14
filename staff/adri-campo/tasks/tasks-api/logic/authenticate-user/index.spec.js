@@ -1,11 +1,13 @@
 const { expect } = require('chai')
+const users = require('../../data/users')('test')
 const authenticateUser = require('.')
 const { ContentError, CredentialsError } = require('../../utils/errors')
 const { random } = Math
-const users = require('../../data/users')
 const uuid = require('uuid/v4')
 
 describe('logic - authenticate user', () => {
+    before(() => users.load())
+
     let id, name, surname, email, username, password
 
     beforeEach(() => {
@@ -16,7 +18,7 @@ describe('logic - authenticate user', () => {
         username = `username-${random()}`
         password = `password-${random()}`
 
-        users.push({ id, name, surname, email, username, password })
+        users.data.push({ id, name, surname, email, username, password })
     })
 
     it('should succeed on correct credentials', () =>

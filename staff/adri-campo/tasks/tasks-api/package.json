@@ -5,12 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "watch": "npx nodemon . --ignore sessions",
     "debug": "node inspect .",
-    "test": "npx mocha logic/*/*.spec.js",
-    "test-debug": "npx mocha inspect logic/*/*.spec.js",
-    "sass": "sass index.sass public/index.css",
-    "sass-watch": "sass --watch index.sass public/index.css"
+    "test": "npx mocha logic/**/*.spec.js",
+    "test-debug": "npx mocha inspect logic/*/*.spec.js"
   },
   "keywords": [],
   "author": "",
@@ -18,11 +15,10 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "express-session": "^1.17.0"
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.2.2",
-    "nodemon": "^1.19.4"
+    "mocha": "^6.2.2"
   }
 }

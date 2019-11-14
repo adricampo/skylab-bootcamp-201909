@@ -30,9 +30,9 @@ const validate = {
     array(target) {
         this.instanceOf(Array, target)
     },
-    
+
     email(target) {
-        if (!EMAIL_REGEX.test(String(target).toLowerCase())) throw ContentError(`${target} is not an e-mail`)
+        if (!EMAIL_REGEX.test(String(target).toLowerCase())) throw new ContentError(`${target} is not an e-mail`)
     }
 }
 
