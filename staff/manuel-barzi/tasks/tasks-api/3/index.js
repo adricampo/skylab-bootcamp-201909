@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const { name, version } = require('./package.json')
 const users = require('./data/users')()
 const tasks = require('./data/tasks')()
-const { registerUser, authenticateUser, retrieveUser, createTask, listTasks } = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, createTask, listTasks, modifyTask } = require('./logic')
 const { ConflictError, CredentialsError, NotFoundError } = require('./utils/errors')
 const jwt = require('jsonwebtoken')
 const { argv: [, , port], env: { SECRET, PORT = port || 8080 } } = process
@@ -114,6 +114,33 @@ api.get('/tasks', tokenVerifier, (req, res) => {
     } catch ({ message }) {
         res.status(400).json({ message })
     }
+})
+
+api.patch('/tasks/:taskId', tokenVerifier, jsonBodyParser, (req, res) => {
+    try {
+        const { id, params: { taskId }, body: { title, description, status } } = req
+
+        modifyTask(id, taskId, title, description, status)
+            .then(() =>
+                res.end()
+            )
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+                if (error instanceof ConflictError)
+                    return res.status(409).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch ({ message }) {
+        res.status(400).json({ message })
+    }
+})
+
+api.delete('/tasks/:taskId', tokenVerifier, (req, res) => {
+    res.send('TODO')
 })
 
 Promise.all([users.load(), tasks.load()])
