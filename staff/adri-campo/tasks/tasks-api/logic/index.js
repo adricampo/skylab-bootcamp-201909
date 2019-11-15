@@ -4,6 +4,7 @@ module.exports = {
     retrieveUser: require('./retrieve-user'),
     retrieveUsers: require('./retrieve-users'),
     createTask: require('./create-task'),
+    listTasks: require('./list-tasks'),
     // modifyTask: require('./modify-task'),
     // removeTask: require('./remove-task')
 }

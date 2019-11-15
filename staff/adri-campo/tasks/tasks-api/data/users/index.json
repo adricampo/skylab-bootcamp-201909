@@ -13,7 +13,8 @@
         "surname": "WTF",
         "email": "OMG@WTF.com",
         "username": "WTF",
-        "password": "123"
+        "password": "123",
+        "lastAccess": "2019-11-15T10:27:36.034Z"
     },
     {
         "id": "c3540ec3-9451-454d-a7f3-bb4bd492dc53",
@@ -39,5 +40,4 @@
         "username": "LukitoPato",
         "password": "LukitoPato"
     }
-   
 ]

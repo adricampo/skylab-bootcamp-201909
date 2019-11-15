@@ -39,7 +39,7 @@ api.post('/auth', jsonBodyParser, (req, res) => {
 
     try {
         authenticateUser(username, password)
-            .then(id => {
+            .then(id => { debugger
                 const token = jwt.sign({ sub: id }, SECRET, { expiresIn: '1d' })
 
                 res.json({ token })
@@ -81,7 +81,7 @@ api.get('/users', tokenVerifier, (req, res) => {
 api.post('/tasks', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
         const { id, body: { title, description } } = req
-
+ 
         createTask(id, title, description)
             .then(id => res.status(201).json({ id }))
             .catch(error => {
