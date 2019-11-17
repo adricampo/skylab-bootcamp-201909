@@ -2,14 +2,13 @@ require('dotenv').config()
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const { name, version } = require('./package.json')
-const users = require('./data/users')()
-const tasks = require('./data/tasks')()
-const { registerUser, authenticateUser, retrieveUser, createTask, listTasks } = require('./logic')
+const { name, version } = require('./package.json.js')
+const { registerUser, authenticateUser, retrieveUser, createTask, listTasks, modifyTask } = require('./logic')
 const { ConflictError, CredentialsError, NotFoundError } = require('./utils/errors')
 const jwt = require('jsonwebtoken')
-const { argv: [, , port], env: { SECRET, PORT = port || 8080 } } = process
+const { argv: [, , port], env: { SECRET, PORT = port || 8080, DB_URL } } = process
 const tokenVerifier = require('./utils/token/token-verifier')(SECRET)
+const database = require('./utils/database')
 
 const api = express()
 
@@ -39,7 +38,7 @@ api.post('/auth', jsonBodyParser, (req, res) => {
 
     try {
         authenticateUser(username, password)
-            .then(id => { debugger
+            .then(id => {
                 const token = jwt.sign({ sub: id }, SECRET, { expiresIn: '1d' })
 
                 res.json({ token })
@@ -81,7 +80,7 @@ api.get('/users', tokenVerifier, (req, res) => {
 api.post('/tasks', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
         const { id, body: { title, description } } = req
- 
+
         createTask(id, title, description)
             .then(id => res.status(201).json({ id }))
             .catch(error => {
@@ -116,5 +115,34 @@ api.get('/tasks', tokenVerifier, (req, res) => {
     }
 })
 
-Promise.all([users.load(), tasks.load()])
+api.patch('/tasks/:taskId', tokenVerifier, jsonBodyParser, (req, res) => {
+    try {
+        const { id, params: { taskId }, body: { title, description, status } } = req
+
+        modifyTask(id, taskId, title, description, status)
+            .then(() =>
+                res.end()
+            )
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+                if (error instanceof ConflictError)
+                    return res.status(409).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch ({ message }) {
+        res.status(400).json({ message })
+    }
+})
+
+api.delete('/tasks/:taskId', tokenVerifier, (req, res) => {
+    res.send('TODO')
+})
+
+database(DB_URL)
+    .connect()
     .then(() => api.listen(PORT, () => console.log(`${name} ${version} up and running on port ${PORT}`)))
+
