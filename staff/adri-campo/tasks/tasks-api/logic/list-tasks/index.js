@@ -25,10 +25,11 @@ module.exports = function (id) {
                                 tasks.updateOne({_id: task._id}, { $set: { lastAccess: new Date } })
                                 
                                 task.id = task._id.toString() 
-                                task.user = task.user.toString()
+                                task.user = id
                                 delete task._id
                                 
                             })
+
                             return _tasks    
                                 
                         })

@@ -6,7 +6,7 @@ const { ContentError } = require('../../utils/errors')
 const { random } = Math
 const database = require('../../utils/database')
 
-describe('logic - register user', () => {
+describe.skip('logic - register user', () => {
     let client, users
 
     before(() => {

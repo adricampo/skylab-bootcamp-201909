@@ -68,6 +68,6 @@ describe('logic - retrieve user', () => {
                 expect(error.message).to.equal(`user with id ${id} not found`)
             })
     })
-
-
+    
+    after(() => client.close())
 })
