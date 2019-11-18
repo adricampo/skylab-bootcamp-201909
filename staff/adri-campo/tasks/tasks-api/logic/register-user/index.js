@@ -17,7 +17,7 @@ module.exports = function (name, surname, email, username, password) {
 
 
     const client = database()
-
+    
     return client.connect()
         .then(connection => {
             const users = connection.db().collection('users')
@@ -33,16 +33,3 @@ module.exports = function (name, surname, email, username, password) {
                 })
         })
 }
-
-
-return new Promise((resolve, reject) => {
-    const user = users.data.find(user => user.username === username)
-
-    if (user) return reject(new ConflictError(`user with username ${username} already exists`))
-
-    const id = uuid()
-
-    users.data.push({ id, name, surname, email, username, password })
-
-    users.persist().then(resolve).catch(reject)
-})

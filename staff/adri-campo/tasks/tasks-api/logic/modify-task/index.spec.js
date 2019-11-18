@@ -7,7 +7,7 @@ const uuid = require('uuid')
 require('../../utils/array-random')
 const { NotFoundError, ConflictError, ContentError } = require('../../utils/errors')
 
-describe('logic - modify task', () => {
+describe.skip('logic - modify task', () => {
     before(() => Promise.all([users.load(), tasks.load()]))
 
     const statuses = ['TODO', 'DOING', 'REVIEW', 'DONE']

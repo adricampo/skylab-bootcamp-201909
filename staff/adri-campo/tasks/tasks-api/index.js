@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const { name, version } = require('./package.json.js')
+const { name, version } = require('./package.json')
 const { registerUser, authenticateUser, retrieveUser, createTask, listTasks, modifyTask } = require('./logic')
 const { ConflictError, CredentialsError, NotFoundError } = require('./utils/errors')
 const jwt = require('jsonwebtoken')

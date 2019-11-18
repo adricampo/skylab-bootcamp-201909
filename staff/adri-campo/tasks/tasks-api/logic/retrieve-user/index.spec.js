@@ -2,11 +2,11 @@ require('dotenv').config()
 const { env: { DB_URL_TEST }} = process
 const { expect } = require('chai')
 const retrieveUser = require('.')
-const { NotFoundError } = require('../../utils/errors')
+const { Error } = require('../../utils/errors')
 const { random } = Math
 const database = require('../../utils/database')
 
-describe.only('logic - retrieve user', () => {
+describe('logic - retrieve user', () => {
     let client, users 
 
     before(() => {
