@@ -10,17 +10,19 @@ const { ObjectId } = database
 
 describe('logic - remove task', () => {
     let client, users, tasks
+
     before(() => {
         client = database(DB_URL_TEST)
+
         return client.connect()
-            .then(connection => {
-                const db = connection.db()
+            .then(db => {
                 users = db.collection('users')
                 tasks = db.collection('tasks')
             })
     })
-    const statuses = ['TODO', 'DOING', 'REVIEW', 'DONE']
+
     let id, name, surname, email, username, password, taskIds, titles, descriptions
+    
     beforeEach(() => {
         name = `name-${random()}`
         surname = `surname-${random()}`
@@ -28,13 +30,16 @@ describe('logic - remove task', () => {
         username = `username-${random()}`
         password = `password-${random()}`
         
-        return users.insertOne({ name, surname, email, username, password })
+        return Promise.all([users.deleteMany(), tasks.deleteMany()]) 
+            .then(() => users.insertOne({ name, surname, email, username, password }))
             .then(({ insertedId }) => id = insertedId.toString())
             .then(() => {
                 taskIds = []
                 titles = []
                 descriptions = []
+
                 const insertions = []
+
                 for (let i = 0; i < 10; i++) {
                     const task = {
                         user: ObjectId(id),
@@ -45,6 +50,7 @@ describe('logic - remove task', () => {
                     }
                     insertions.push(tasks.insertOne(task)
                         .then(result => taskIds.push(result.insertedId.toString())))
+                    
                     titles.push(task.title)
                     descriptions.push(task.description)
                 }
@@ -61,9 +67,11 @@ describe('logic - remove task', () => {
     })
     it('should succeed on correct user and task data', () => {
         const taskId = taskIds.random()
+
         return removeTask(id, taskId)
             .then(response => {
                 expect(response).to.not.exist
+
                 return tasks.findOne({ _id: ObjectId(taskId) })
             })
             .then(task => expect(task).to.not.exist)
@@ -103,5 +111,5 @@ describe('logic - remove task', () => {
             })
     })
   
-    after(() => client.close())
+    after(() => Promise.all([users.deleteMany(), tasks.deleteMany()]).then(client.close))
 })

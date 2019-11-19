@@ -1,9 +1,9 @@
 require('dotenv').config()
 const { env: { DB_URL_TEST } } = process
 const { expect } = require('chai')
+const database = require('../../utils/database')
 const listTasks = require('.')
 const { random } = Math
-const database = require('../../utils/database')
 const { ObjectId } = database
 
 describe('logic - list tasks', () => {
@@ -30,34 +30,43 @@ describe('logic - list tasks', () => {
         username = `username-${random()}`
         password = `password-${random()}`
 
-        return users.insertOne({ name, surname, email, username, password })
-            .then(result => {
-                id = result.insertedId.toString()
-
+        return Promise.all([users.deleteMany(), tasks.deleteMany()])
+            .then(() => users.insertOne({ name, surname, email, username, password }))
+            .then(({ insertedId }) => id = insertedId.toString())
+            .then(() => {
                 taskIds = []
                 titles = []
                 descriptions = []
-                
-                for (let i = 0; i < 4; i++) {
+
+                const insertions = []
+
+                for (let i = 0; i < 10; i++) {
                     const task = {
                         user: ObjectId(id),
                         title: `title-${random()}`,
                         description: `description-${random()}`,
                         status: 'REVIEW',
-                        date: new Date,
-                        lastAccess: new Date
+                        date: new Date
                     }
-                    
-                    tasks.insertOne(task)
-                        .then(result => {
-                            if(result.insertedCount === 0) throw new Error ('Failed to create task')
-                            taskIds.push(result.insertedId.toString())
-                            titles.push(task.title)
-                            descriptions.push(task.description)
-                })
-                
-            }
-        })
+
+                    insertions.push(tasks.insertOne(task)
+                        .then(result => taskIds.push(result.insertedId.toString())))
+
+                    titles.push(task.title)
+                    descriptions.push(task.description)
+                }
+
+                for (let i = 0; i < 10; i++)
+                    insertions.push(tasks.insertOne({
+                        user: ObjectId(),
+                        title: `title-${random()}`,
+                        description: `description-${random()}`,
+                        status: 'REVIEW',
+                        date: new Date
+                    }))
+
+                return Promise.all(insertions)
+            })
     })
             
     it('should succeed on correct user and task data', () =>

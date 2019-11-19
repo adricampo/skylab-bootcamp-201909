@@ -1,10 +1,10 @@
 require('dotenv').config()
 const { env: { DB_URL_TEST }} = process
 const { expect } = require('chai')
-const retrieveUser = require('.')
-const { Error } = require('../../utils/errors')
 const { random } = Math
 const database = require('../../utils/database')
+const retrieveUser = require('.')
+const { NotFoundError } = require('../../utils/errors')
 
 describe('logic - retrieve user', () => {
     let client, users 
@@ -13,7 +13,7 @@ describe('logic - retrieve user', () => {
         client = database(DB_URL_TEST)
 
         return client.connect()
-            .then(connection => users = connection.db().collection('users'))
+            .then(db => users = db.collection('users'))
     })
 
     let id, name, surname, email, username, password
@@ -25,7 +25,8 @@ describe('logic - retrieve user', () => {
         username = `username-${random()}`
         password = `password-${random()}`
 
-        return users.insertOne({ name, surname, email, username, password })
+        return users.deleteMany()
+            .then(() => users.insertOne({ name, surname, email, username, password }))
             .then(({insertedId}) => id = insertedId.toString())
     })
 
@@ -69,5 +70,5 @@ describe('logic - retrieve user', () => {
             })
     })
     
-    after(() => client.close())
+    after(() => users.deleteMany().then(client.close))
 })

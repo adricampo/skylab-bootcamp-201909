@@ -16,9 +16,7 @@ describe('logic - modify task', () => {
         client = database(DB_URL_TEST)
 
         return client.connect()
-            .then(connection => {
-                const db = connection.db()
-
+            .then(db => {
                 users = db.collection('users')
                 tasks = db.collection('tasks')
             })
@@ -34,7 +32,8 @@ describe('logic - modify task', () => {
         username = `username-${random()}`
         password = `password-${random()}`
 
-        return users.insertOne({ name, surname, email, username, password })
+        return Promise.all([users.deleteMany(), tasks.deleteMany()])
+            .then(() => users.insertOne({ name, surname, email, username, password }))
             .then(({ insertedId }) => id = insertedId.toString())
             .then(() => {
                 taskIds = []
@@ -43,7 +42,7 @@ describe('logic - modify task', () => {
 
                 const insertions = []
 
-                for (let i = 0; i < 10; i++) {
+                for (let i = 0; i < 4; i++) {
                     const task = {
                         user: ObjectId(id),
                         title: `title-${random()}`,
@@ -59,7 +58,7 @@ describe('logic - modify task', () => {
                     descriptions.push(task.description)
                 }
 
-                for (let i = 0; i < 10; i++)
+                for (let i = 0; i < 4; i++)
                     insertions.push(tasks.insertOne({
                         user: ObjectId(),
                         title: `title-${random()}`,
@@ -290,5 +289,5 @@ describe('logic - modify task', () => {
 
     // TODO other test cases
 
-    after(() => client.close())
+    after(() => Promise.all([users.deleteMany(), tasks.deleteMany()]).then(client.close))
 })

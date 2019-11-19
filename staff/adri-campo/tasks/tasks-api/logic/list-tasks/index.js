@@ -10,8 +10,7 @@ module.exports = function (id) {
     const client = database()
 
     return client.connect()
-        .then(connection => {
-            const db = connection.db()
+        .then(db => {
             const users = db.collection('users')
             const tasks = db.collection('tasks')
 
