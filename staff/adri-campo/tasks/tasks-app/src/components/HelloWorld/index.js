@@ -1,7 +1,8 @@
 import React from 'react'
+import './index.sass'
 
 function Hello({name}) {
-    return <h1>Hello, {name}!</h1>
+    return <p>Hello, {name}!</p>
 }
 
 export default Hello
