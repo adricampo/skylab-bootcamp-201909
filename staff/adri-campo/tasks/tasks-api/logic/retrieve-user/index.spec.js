@@ -1,8 +1,8 @@
 require('dotenv').config()
-const { env: { DB_URL_TEST }} = process
+const { env: { DB_URL_TEST } } = process
 const { expect } = require('chai')
 const { random } = Math
-const { database, models: { User }} = require('../../data')
+const { database, models: { User } } = require('../../data')
 const retrieveUser = require('.')
 const { NotFoundError } = require('../../utils/errors')
 
@@ -24,18 +24,20 @@ describe.only('logic - retrieve user', () => {
     })
 
 
-    it('should succeed on correct user id', () => 
-        retrieveUser(id)
-            .then(user => {
-                expect(user).to.exist
-                expect(user.id).to.equal(id)
-                expect(user.name).to.equal(name)
-                expect(user.surname).to.equal(surname)
-                expect(user.email).to.equal(email)
-                expect(user.username).to.equal(username)
-                expect(user.password).to.be.undefined
-            })
-    )
+    it('should succeed on correct user id', async () => {
+        const user = await retrieveUser(id)
+
+        expect(user).to.exist
+        expect(user.id).to.equal(id)
+        expect(user._id).to.not.exist
+        expect(user.name).to.equal(name)
+        expect(user.surname).to.equal(surname)
+        expect(user.email).to.equal(email)
+        expect(user.username).to.equal(username)
+        expect(user.password).to.be.undefined
+
+    })
+
 
     // it('should fail on wrong user id & not enough lenght', () => {
     //     const id = 'wrong'
@@ -64,6 +66,6 @@ describe.only('logic - retrieve user', () => {
                 expect(error.message).to.equal(`user with id ${id} not found`)
             })
     })
-    
+
     after(() => User.deleteMany().then(database.disconnect))
 })

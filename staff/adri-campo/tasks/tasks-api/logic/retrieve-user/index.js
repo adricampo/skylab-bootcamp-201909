@@ -7,21 +7,23 @@ module.exports = function (id) {
     validate.string.notVoid('id', id)
     if (!ObjectId.isValid(id)) throw new ContentError(`${id} is not a valid id`)
 
-    return User.findById(id)
-        .then(user => {
-            if (!user) throw new NotFoundError(`user with id ${id} not found`)
+    return (async () => {
+        let user = await User.findById(id)
 
-            user.lastAccess = new Date
+        if (!user) throw new NotFoundError(`user with id ${id} not found`)
 
-            return user.save()
-        })
-        .then(user => { debugger
-            user = user.toObject()
-            user.id = user._id.toString()
+        user.lastAccess = new Date
 
-            delete user._id
-            delete user.password
+        await user.save()
+    
+        user = user.toObject()
+        
+        user.id = user._id.toString()
 
-            return user
-        })     
+        delete user._id
+        delete user.password
+
+        return user
+
+    })()
 }

@@ -8,15 +8,16 @@ module.exports = function (username, password) {
     validate.string(password)
     validate.string.notVoid('password', password)
 
-    return User.findOne({ username, password })
-        .then(user => {
-            if (!user) throw new CredentialsError('wrong credentials')
+    return (async () => {
+        let user = await User.findOne({ username, password })
+        
+        if (!user) throw new CredentialsError('wrong credentials')
 
-            const { _id } = user
+        const { _id } = user
 
-            return User.updateOne({ _id }, { $set: { lastAccess: new Date } })
-                .then(() => {
-                    return _id.toString()
-                })
-        })
+        await User.updateOne({ _id }, { $set: { lastAccess: new Date } })
+    
+        return _id.toString()
+
+    })()
 }

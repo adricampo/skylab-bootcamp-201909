@@ -3,28 +3,27 @@ const { env: { DB_URL_TEST } } = process
 const { expect } = require('chai')
 const createTask = require('.')
 const { random } = Math
-const { database, models: { User, Task }} = require('../../data')
+const { database, models: { User, Task } } = require('../../data')
 
 describe.only('logic - create task', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let id, name, surname, email, username, password, title, description
 
-    beforeEach(() => {
+    beforeEach( async () => {
         name = `name-${random()}`
         surname = `surname-${random()}`
         email = `email-${random()}@mail.com`
         username = `username-${random()}`
         password = `password-${random()}`
 
-        return Promise.all([User.deleteMany(), Task.deleteMany()])
-            .then(() => User.create({ name, surname, email, username, password }))
-            .then(user => {
-                id = user.id
+        await Promise.all([User.deleteMany(), Task.deleteMany()])
+        const user = await User.create({ name, surname, email, username, password })
 
-                title = `title-${random()}`
-                description = `description-${random()}`
-            })
+        id = user.id
+        title = `title-${random()}`
+        description = `description-${random()}`
+
 
     })
 
