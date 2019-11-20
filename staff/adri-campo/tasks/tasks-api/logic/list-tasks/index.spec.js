@@ -1,25 +1,13 @@
 require('dotenv').config()
 const { env: { DB_URL_TEST } } = process
 const { expect } = require('chai')
-const database = require('../../utils/database')
+const { database, ObjectId, models: { User, Task }} = require('../../data')
 const listTasks = require('.')
 const { random } = Math
-const { ObjectId } = database
 
-describe('logic - list tasks', () => {
-    let client, users, tasks
 
-    before(() => {
-        client = database(DB_URL_TEST)
-
-        return client.connect()
-            .then(connection => {
-                const db = connection.db()
-
-                users = db.collection('users')
-                tasks = db.collection('tasks')
-            })
-    })
+describe('logic - list tasks', () => { 
+    before(() => database.connect(DB_URL_TEST))
 
     let id, name, surname, email, username, password, taskIds, titles, descriptions
 
@@ -30,9 +18,9 @@ describe('logic - list tasks', () => {
         username = `username-${random()}`
         password = `password-${random()}`
 
-        return Promise.all([users.deleteMany(), tasks.deleteMany()])
-            .then(() => users.insertOne({ name, surname, email, username, password }))
-            .then(({ insertedId }) => id = insertedId.toString())
+        return Promise.all([User.deleteMany(), Task.deleteMany()])
+            .then(() => User.create({ name, surname, email, username, password }))
+            .then(user => id = user.id)
             .then(() => {
                 taskIds = []
                 titles = []
@@ -42,22 +30,22 @@ describe('logic - list tasks', () => {
 
                 for (let i = 0; i < 10; i++) {
                     const task = {
-                        user: ObjectId(id),
+                        user: id,
                         title: `title-${random()}`,
                         description: `description-${random()}`,
                         status: 'REVIEW',
                         date: new Date
                     }
 
-                    insertions.push(tasks.insertOne(task)
-                        .then(result => taskIds.push(result.insertedId.toString())))
+                    insertions.push(Task.create(task)
+                        .then(task => taskIds.push(task.id)))
 
                     titles.push(task.title)
                     descriptions.push(task.description)
                 }
 
                 for (let i = 0; i < 10; i++)
-                    insertions.push(tasks.insertOne({
+                    insertions.push(Task.create({
                         user: ObjectId(),
                         title: `title-${random()}`,
                         description: `description-${random()}`,
@@ -76,8 +64,6 @@ describe('logic - list tasks', () => {
                 expect(tasks).to.have.lengthOf(4)
 
                 tasks.forEach(task => {
-
-                    debugger
 
                     expect(task.id).to.exist
                     expect(task.id).to.be.a('string')
@@ -105,5 +91,5 @@ describe('logic - list tasks', () => {
             })
     )
 
-    after(() => client.close())
+    after(() => Promise.all([User.deleteMany(), Task.deleteMany()]).then(database.disconnect))
 })

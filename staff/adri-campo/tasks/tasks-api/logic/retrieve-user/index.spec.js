@@ -2,19 +2,12 @@ require('dotenv').config()
 const { env: { DB_URL_TEST }} = process
 const { expect } = require('chai')
 const { random } = Math
-const database = require('../../utils/database')
+const { database, models: { User }} = require('../../data')
 const retrieveUser = require('.')
 const { NotFoundError } = require('../../utils/errors')
 
-describe('logic - retrieve user', () => {
-    let client, users 
-
-    before(() => {
-        client = database(DB_URL_TEST)
-
-        return client.connect()
-            .then(db => users = db.collection('users'))
-    })
+describe.only('logic - retrieve user', () => {
+    before(() => database.connect(DB_URL_TEST))
 
     let id, name, surname, email, username, password
 
@@ -25,9 +18,9 @@ describe('logic - retrieve user', () => {
         username = `username-${random()}`
         password = `password-${random()}`
 
-        return users.deleteMany()
-            .then(() => users.insertOne({ name, surname, email, username, password }))
-            .then(({insertedId}) => id = insertedId.toString())
+        return User.deleteMany()
+            .then(() => User.create({ name, surname, email, username, password }))
+            .then(user => id = user.id)
     })
 
 
@@ -44,18 +37,19 @@ describe('logic - retrieve user', () => {
             })
     )
 
-    it('should fail on wrong user id & not enough lenght', () => {
-        const id = 'wrong'
+    // it('should fail on wrong user id & not enough lenght', () => {
+    //     const id = 'wrong'
 
-        return retrieveUser(id)
-            .then(() => {
-                throw Error('should not reach this point')
-            })
-            .catch(error => {
-                expect(error).to.exist
-                expect(error.message).to.equal(`Argument passed in must be a single String of 12 bytes or a string of 24 hex characters`)
-            })
-    })
+    //     return retrieveUser(id)
+    //         .then(() => {
+    //             throw Error('should not reach this point')
+    //         })
+    //         .catch(error => {
+    //             expect(error).to.exist
+    //             expect(error).to.be.an.instanceOf(NotFoundError)
+    //             expect(error.message).to.equal(`Argument passed in must be a single String of 12 bytes or a string of 24 hex characters`)
+    //         })
+    // })
 
     it('should fail on wrong user id', () => {
         const id = '123456789112'
@@ -66,9 +60,10 @@ describe('logic - retrieve user', () => {
             })
             .catch(error => {
                 expect(error).to.exist
+                expect(error).to.be.an.instanceOf(NotFoundError)
                 expect(error.message).to.equal(`user with id ${id} not found`)
             })
     })
     
-    after(() => users.deleteMany().then(client.close))
+    after(() => User.deleteMany().then(database.disconnect))
 })

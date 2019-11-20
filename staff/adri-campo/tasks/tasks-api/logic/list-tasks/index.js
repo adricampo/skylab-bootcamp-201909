@@ -1,38 +1,26 @@
 const validate = require('../../utils/validate')
-const { NotFoundError } = require('../../utils/errors')
-const database = require('../../utils/database')
-const { ObjectId } = database 
+const { ObjectId, models: { User, Task } } = require('../../data')
+const { NotFoundError, ContentError } = require('../../utils/errors')
 
 module.exports = function (id) {
     validate.string(id)
     validate.string.notVoid('id', id)
+    if (!ObjectId.isValid(id)) throw new ContentError(`${id} is not a valid id`)
 
-    const client = database()
+    return User.findById(id)
+        .then(user => { 
+            if (!user) throw new NotFoundError(`user with id ${id} not found`)
+            return Task.find({ user: id }).lean()
+                .then(tasks => {
+                    tasks.forEach(task => {
+                        tasks.updateOne({ _id: task._id }, { $set: { lastAccess: new Date } })
 
-    return client.connect()
-        .then(db => {
-            const users = db.collection('users')
-            const tasks = db.collection('tasks')
+                        task.id = task._id.toString()
+                        task.user = id
+                        delete task._id
 
-            return users.findOne( {_id: ObjectId(id)})
-                .then(user => { 
-                    if (!user) throw new NotFoundError(`user with id ${id} not found`)
-
-                    return tasks.find({ user: ObjectId(id) }).toArray()
-                        .then(_tasks => {
-                            _tasks.forEach( task => {
-                                tasks.updateOne({_id: task._id}, { $set: { lastAccess: new Date } })
-                                
-                                task.id = task._id.toString() 
-                                task.user = id
-                                delete task._id
-                                
-                            })
-
-                            return _tasks    
-                                
-                        })
-
+                    })
+                    return tasks
                 })
         })
 }

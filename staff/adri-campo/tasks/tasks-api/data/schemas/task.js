@@ -17,6 +17,16 @@ module.exports =  new Schema({
     status: {
         type: String,
         required: true,
-        unique: true
+        enum: ['TODO', 'DOING', 'REVIEW', 'DONE'],
+        default: 'TODO'
+        
+    },
+    date: {
+        type: Date,
+        required: true,
+        default: Date.now
+    },
+    lastAccess: {
+        type: Date
     }
 })
