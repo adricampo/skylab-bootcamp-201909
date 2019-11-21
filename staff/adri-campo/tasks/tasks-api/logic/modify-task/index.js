@@ -1,8 +1,5 @@
-const validate = require('../../utils/validate')
-const database = require('../../utils/database')
-const { NotFoundError, ConflictError } = require('../../utils/errors')
-
-const { ObjectId } = database
+const { validate, errors: { ConflictError, NotFoundError } } = require('tasks-util')
+const { ObjectId, models: { User, Task } } = require('tasks-data')
 
 module.exports = function (id, taskId, title, description, status) {
     validate.string(id)
@@ -27,33 +24,24 @@ module.exports = function (id, taskId, title, description, status) {
         validate.matches('status', status, 'TODO', 'DOING', 'REVIEW', 'DONE')
     }
 
-    const client = database()
+    return (async () => {
+        const user = await User.findById(id)
 
-    return client.connect()
-        .then(db => {
-            const users = db.collection('users')
-            const tasks = db.collection('tasks')
+        if (!user) throw new NotFoundError(`user with id ${id} not found`)
 
-            return users.findOne({ _id: ObjectId(id) })
-                .then(user => {
-                    if (!user) throw new NotFoundError(`user with id ${id} not found`)
+        const task = await Task.findById(taskId)
 
-                    return tasks.findOne({ _id: ObjectId(taskId) })
-                })
-                .then(task => {
-                    if (!task) throw new NotFoundError(`user does not have task with id ${taskId}`)
+        if (!task) throw new NotFoundError(`user does not have task with id ${taskId}`)
 
-                    if (task.user.toString() !== id.toString()) throw new ConflictError(`user with id ${id} does not correspond to task with id ${taskId}`)
+        if (task.user.toString() !== id.toString()) throw new ConflictError(`user with id ${id} does not correspond to task with id ${taskId}`)
 
-                    const update = {}
+        const update = {}
 
-                    title && (update.title = title)
-                    description && (update.description = description)
-                    status && (update.status = status)
-                    update.lastAccess = new Date
+        title && (update.title = title)
+        description && (update.description = description)
+        status && (update.status = status)
+        update.lastAccess = new Date
 
-                    return tasks.updateOne({ _id: ObjectId(taskId) }, { $set: update })
-                })
-                .then(() => { })
-        })
+        await Task.updateOne({ _id: ObjectId(taskId) }, { $set: update })
+    })()
 }

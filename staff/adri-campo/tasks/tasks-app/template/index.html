@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Tasks App</title>
+        <link rel="stylesheet" href="./style.css">
+        <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Staatliches&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/80c46885ed.js"></script>
+    </head>
+    <body>
+        <header class="header">
+            <img class="header__logo" src="./img/trello-logo-blue.png">
+            <h1 class="header__title">TasksAPP</h1>
+            <div class="header__login">
+                <div class="icon"><i class="far fa-user"></i><span class="icon__text">LOG IN</span></div>
+            </div>
+        </header>
+        <section class="menu">
+            <span class="menu__activity1">TODO</span>
+            <span class="menu__activity2">DOING</span>
+            <span class="menu__activity3">REVIEW</span>
+            <span class="menu__activity4">DONE</span>
+            <h2 class="menu__title-create">Create New task</h2>
+        </section>
+        <ul class="tasks">
+            <li class="tasks__card">
+                <h2 class="tasks__title">> TODO</h2>
+                <div class="tasks__block">
+                    <div class="tasks__container">
+                        <h3 class="tasks__subtitle">TASK 1</h3><div class="close-icon"><i class="fas fa-times"></i></div>
+                        <p class="tasks__text">Tenemos la tarea 1.1</p>
+                        <div class="tasks__select">
+                            <select name="select" class="select">
+                                <option value="select1">TODO</option> 
+                                <option value="select2" selected>DOING</option>
+                                <option value="select3">REVIEW</option>
+                                <option value="select4">DONE</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tasks__container">
+                        <h3 class="tasks__subtitle">TASK 2</h3><div class="close-icon"><i class="fas fa-times"></i></div>
+                        <p class="tasks__text">Tenemos la tarea 1.2</p>
+                        <div class="tasks__select">
+                            <select name="select" class="select">
+                                <option value="select1">TODO</option> 
+                                <option value="select2" selected>DOING</option>
+                                <option value="select3">REVIEW</option>
+                                <option value="select4">DONE</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> 
+            </li>
+            <li class="tasks__card">
+                <h2 class="tasks__title">> DOING</h2>
+                <div class="tasks__block">
+                    <div class="tasks__container">
+                        <h3 class="tasks__subtitle">TASK 1</h3><div class="close-icon"><i class="fas fa-times"></i></div>
+                        <p class="tasks__text">Tenemos la tarea 1</p>
+                        <div class="tasks__select">
+                            <select name="select" class="select">
+                                <option value="select1">TODO</option> 
+                                <option value="select2" selected>DOING</option>
+                                <option value="select3">REVIEW</option>
+                                <option value="select4">DONE</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> 
+            </li>
+            <li class="tasks__card">
+                <h2 class="tasks__title">> REVIEW</h2>
+                <div class="tasks__block">
+                    <div class="tasks__container">
+                        <h3 class="tasks__subtitle">TASK 1</h3><div class="close-icon"><i class="fas fa-times"></i></div>
+                        <p class="tasks__text">Tenemos la tarea 1</p>
+                        <div class="tasks__select">
+                            <select name="select" class="select">
+                                <option value="select1">TODO</option> 
+                                <option value="select2" selected>DOING</option>
+                                <option value="select3">REVIEW</option>
+                                <option value="select4">DONE</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> 
+            </li>
+            <li class="tasks__card">
+                <h2 class="tasks__title">> DONE</h2>
+                <div class="tasks__block">
+                    <div class="tasks__container">
+                        <h3 class="tasks__subtitle">TASK 1</h3><div class="close-icon"><i class="fas fa-times"></i></div>
+                        <p class="tasks__text">Tenemos la tarea 1</p>
+                        <div class="tasks__select">
+                            <select name="select" class="select">
+                                <option value="select1">TODO</option> 
+                                <option value="select2" selected>DOING</option>
+                                <option value="select3">REVIEW</option>
+                                <option value="select4">DONE</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> 
+            </li>
+        </ul>
+        <section class="login hidden">
+            <section class="sign-in">
+                <h2 class="login__title">Sign In</h2>
+                <form class="sign-in__form">
+                    <label for="username">Username: <input type="email" class="sign-in__name" name="username" placeholder="Enter your email"></label>
+                    <label for="password">Password: <input type="password" class="sign-in__name" name="password"></label>
+                    <button class="sign-in__button">Sign In</button>
+                </form>
+            </section>
+            <section class="sign-up">
+                <h2 class="login__title">Create a new account</h2>
+                <p class="sign-up__text">Improve your project management, join us!</p>
+                <form class="sign-up__form">
+                    <label for="name">Name: <input type="text" class="sign-up__name" name="name"></label>
+                    <label for="surname">Surname: <input type="text" class="sign-up__name" name="surname"></label>
+                    <label for="username">Username: <input type="email" class="sign-up__name" name="username" placeholder="Enter your email"></label>
+                    <label for="password">Password: <input type="password" class="sign-up__name" name="password"></label>
+                    <button class="sign-up__button">Sign Up</button>
+                </form>
+            </section>
+        </section>
+        <footer class="footer">
+            <div>About Us</div>
+            <div>Privacy Policy</div>
+            <div>Contact us</div>
+            <div>Conditions</div>
+            <div class="footer__copyright"> adricampo productions ©2019 </div>
+            <div> -- social media icons -- </div>  
+        </footer>
+    </body>
+</html>

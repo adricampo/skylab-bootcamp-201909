@@ -3,7 +3,8 @@ const { Schema, ObjectId } = require('mongoose')
 module.exports =  new Schema({
     user: {
         type: ObjectId,
-        required: true
+        required: true,
+        ref: 'User'
     },
     title: {
         type: String,
@@ -11,8 +12,7 @@ module.exports =  new Schema({
     },
     description: {
         type: String,
-        required: true,
-     
+        required: true
     },
     status: {
         type: String,

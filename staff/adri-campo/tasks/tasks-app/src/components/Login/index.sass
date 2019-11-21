@@ -1,0 +1,61 @@
+.login
+    position: absolute
+    z-index: 100000
+    top: 10vh
+    left: 0
+    width: 100vw
+    min-height: 50vh
+    background-color: rgb(69, 188, 243)
+    transition: 1s height ease
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-around
+    align-items: center
+
+    &__title
+        display: flex
+        justify-content: flex-start
+        width: 100%
+        font-size: 150%
+        padding-bottom: 2%
+        font-family: 'Staatliches'
+        color: whitesmoke
+
+.sign-in
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    width: 100%
+    padding: 2%
+    align-items: center
+    
+    &__form
+        display: flex
+        flex-direction: column
+        color: whitesmoke
+        width: 30%
+        & label, button
+            margin-top: 8%
+
+.sign-up
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    width: 100%
+    padding: 2%
+    align-items: center
+
+    &__text
+        display: flex
+        flex-direction: column
+        color: whitesmoke
+        margin-bottom: 2%
+
+    &__form
+        display: flex
+        flex-direction: column
+        color: whitesmoke
+        width: 30%
+        &__label, button
+            margin-top: 8%
