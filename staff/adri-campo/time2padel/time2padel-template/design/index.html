@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Time2Padel</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Staatliches&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/80c46885ed.js"></script>
+</head>
+<body>
+<!-- Vist 1 -->
+    <section class="landing hidden">
+            <article class="landing__container container">
+                <h2 class="container__title">Time2Padel</h2>
+                <div class="container__images images">
+                    <img class="images__img1" src="img/logoPro1.png">
+                    <img class="images__img2" src="img/logoPro2.png">
+                </div>
+            </article>
+    </section>
+<!-- Vist 2 -->
+    <section class="registration-page hidden">
+        <div class="registration-page__container container">
+            <section class="container__sign-in sign-in">
+                <h2 class="container__title">Sign In</h2>
+                <form class="sign-in__form">
+                    <label for="username">Username: <input type="email" class="sign-in__name" name="username"></label>
+                    <label for="password">Password: <input type="password" class="sign-in__name" name="password"></label>
+                    <a href="#" class="link">Forgot your password?</a>
+                    <button class="sign-in__button">Sign In</button>
+                </form>
+            </section>
+            <section class="container__sign-up sign-up">
+                <h2 class="container__title">Create a new account</h2>
+                <p class="sign-up__text">Register and create an account to be part of our Padel Fam!</p>
+                <form class="sign-up__form">
+                    <label for="name">Name: <input type="text" class="sign-up__name" name="name"></label>
+                    <label for="surname">Surname: <input type="text" class="sign-up__name" name="surname"></label>
+                    <label for="username">Username: <input type="email" class="sign-up__name" name="username"></label>
+                    <label for="phone">Phone: <input type="tel" class="sign-up__name" name="phone"></label>
+                    <label for="gender">Gender: <input type="radio" class="sign-up__name" name="gender" value="Male"> Male  <input type="radio" class="sign-up__name" name="gender" value="Female"> Female</label>                    <label for="password">Password: <input type="password" class="sign-up__name" name="password"></label>
+                    <button class="sign-up__button">Sign Up</button>
+                </form>
+            </section>
+        </div>
+    </section>
+<!-- Vist 3  -->
+    <header class="header hidden">
+        <img class="header__logo" src="img/logoPro1.png">
+        <h1 class="header__title">Time2Padel</h1>
+        <input type="checkbox" id="show-menu">
+        <label class="header__hamburguer" for="show-menu"><i class="fas fa-bars"></i></label>
+        <nav class="header__nav menu">
+            <ul class="menu__list list">
+                <li><a href="#" class="list__item">News</a></li>
+                <li><a href="#" class="list__item">Friends</a></li>
+                <li><a href="#" class="list__item">Leagues</a></li>
+                <li><a href="#" class="list__item">Logout</a></li>
+            </ul>
+        </nav>  
+    </header>
+    <main class="main hidden">
+        <section class="main__welcome welcome">
+            <h2 class="welcome__title">Welcome</h2>
+        </section>
+        <section class="main__news news">
+                <article class="news__new new">
+                        <h2 class="new__title">New 1</h2>
+                        <img class="new__img" src="img/main2.jpeg">
+                        <p class="new__text">Description</p>
+                </article>
+                <article class="news__new new">
+                        <h2 class="new__title">New 2</h2>
+                        <img class="new__img" src="img/main3.jpeg">
+                        <p class="new__text">Description</p>
+                </article>
+                <article class="news__new new">
+                        <h2 class="new__title">New 3</h2>
+                        <img class="new__img" src="img/main4.jpeg">
+                        <p class="new__text">Description</p>
+                </article>
+                <article class="news__new new">
+                        <h2 class="new__title">New 4</h2>
+                        <img class="new__img" src="img/padel-balls.jpg">
+                        <p class="new__text">Description</p>
+                </article>
+        </section>
+        <section class="main__speech speech">
+            <div class="speech__title">Find here all the info you need</div>
+            <div class="speech__description">Keep informed of the news, check your results, join our leagues and more!</div>
+        </section>
+    </main>
+    <footer class="footer hidden">
+        <div class="footer__footer-menu footer-menu">
+            <div class="footer-menu__about-us">About Us</div>
+            <div class="footer-menu__privacy">Privacy Policy</div>
+            <div class="footer-menu__contact-us">Contact us</div>
+            <div class="footer-menu__conditions">Conditions</div>
+        </div>
+        <div class="footer__others others">
+            <div class="others__copyright"> adricampo productions ©2019 </div>
+            <ul class="others__social-media social-media">
+                <li className="social-media__media-icon">
+                    <a href="#"><i class="fab fa-twitter-square"></i></a>
+                </li>
+                <li className="social-media__media-icon">
+                    <a href="#"><i class="fab fa-facebook-square"></i></a>
+                </li>
+                <li className="social-media__media-icon">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </li>
+                <li className="social-media__media-icon">
+                    <a href="#"><i class="fab fa-youtube-square"></i></a>
+                </li>
+                <li className="social-media__media-icon">
+                    <a href="#"><i class="fab fa-pinterest-square"></i></a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <!-- Vist 4 -->
+    <header class="header hidden">
+        <img class="header__logo" src="img/logoPro1.png">
+        <h1 class="header__title">Leagues</h1>
+        <input type="checkbox" id="show-menu">
+        <label class="header__hamburguer" for="show-menu"><i class="fas fa-bars"></i></label>
+        <nav class="header__nav menu">
+            <ul class="menu__list list">
+                <li><a href="#" class="list__item">News</a></li>
+                <li><a href="#" class="list__item">Friends</a></li>
+                <li><a href="#" class="list__item">Leagues</a></li>
+                <li><a href="#" class="list__item">Logout</a></li>
+            </ul>
+        </nav>  
+    </header>
+    <main class="leagues hidden">
+        <ul class="leagues__list list">
+            <div class="list__container container">
+                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level B - Masc - W: 20:00h</a></li>
+            </div>
+            <div class="list__container container">
+                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level C+ - Fem - M: 19:00h</a></li>
+            </div>
+            <div class="list__container container"> 
+                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level B+ - Masc - Tu: 18:00h</a></li>
+            </div>    
+            <div class="list__container container"> 
+                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level D - Mix - F: 20:00h</a></li>
+            </div> 
+            <div class="list__container container">
+                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level B- - Masc - Th: 20:30h</a></li>
+            </div>   
+            <div class="list__container container">
+                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level B+ - Fem - F: 21:00h</a></li>
+            </div>    
+            <div class="list__container container">
+                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level C - Mix - W: 20:00h</a></li>
+            </div>
+        </ul>
+        <div class="leagues__back-button back-button">
+            <button class="back-button__button">Go Back</button>
+        </div>
+    </main>
+    <footer class="footer hidden">
+            <div class="footer__footer-menu footer-menu">
+                <div class="footer-menu__about-us">About Us</div>
+                <div class="footer-menu__privacy">Privacy Policy</div>
+                <div class="footer-menu__contact-us">Contact us</div>
+                <div class="footer-menu__conditions">Conditions</div>
+            </div>
+            <div class="footer__others others">
+                <div class="others__copyright"> adricampo productions ©2019 </div>
+                <ul class="others__social-media social-media">
+                    <li className="social-media__media-icon">
+                        <a href="#"><i class="fab fa-twitter-square"></i></a>
+                    </li>
+                    <li className="social-media__media-icon">
+                        <a href="#"><i class="fab fa-facebook-square"></i></a>
+                    </li>
+                    <li className="social-media__media-icon">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </li>
+                    <li className="social-media__media-icon">
+                        <a href="#"><i class="fab fa-youtube-square"></i></a>
+                    </li>
+                    <li className="social-media__media-icon">
+                        <a href="#"><i class="fab fa-pinterest-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    <!-- Vist 5 -->
+    <section class="league-registration">
+        <div class="league-registration__container container">
+            <h2 class="container__title">League Registration</h2>
+            <section class="container__players-info players-info">
+                <h3 class="players-info__title">Player1</h3>
+                <form class="players-info__form1">
+                    <label for="username">Username: <input type="email" class="players-info_name" name="username"></label>
+                    <label for="password">Password: <input type="password" class="players-info__name" name="password"></label>
+                </form>
+                <h3 class="players-info__title">Player2</h3>
+                <form class="players-info__form2">
+                    <label for="username">Username: <input type="email" class="players-info_name" name="username"></label>
+                    <span>A request will be sent to this user</span>
+                </form>
+            </section>
+            <div class="container__buttons buttons">
+                <button class="buttons__confirm">Confirm</button>
+                <button class="buttons__cancel">Cancel</button>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

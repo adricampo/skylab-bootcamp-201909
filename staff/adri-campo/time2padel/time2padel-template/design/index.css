@@ -1,0 +1,442 @@
+.header {
+  position: fixed;
+  z-index: 10;
+  display: flex;
+  justify-content: space-around;
+  height: 10vh;
+  width: 100vw;
+  padding: 0.5%;
+  background-color: white;
+  color: black;
+  border-bottom: solid 2px black;
+}
+.header__logo {
+  height: 100%;
+  max-width: 30vw;
+}
+.header__title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+.header__hamburguer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  width: 20%;
+  align-items: center;
+}
+.header__nav {
+  display: none;
+}
+.header #show-menu:checked ~ .menu {
+  display: flex;
+  position: absolute;
+  top: 10vh;
+  right: 0;
+  width: 30%;
+  background-color: white;
+}
+.header #show-menu:checked ~ .menu .list {
+  display: flex;
+  flex-direction: column;
+  top: 10vh;
+  height: 25vh;
+  justify-content: flex-start;
+  list-style: none;
+}
+.header #show-menu:checked ~ .menu .list .list__item {
+  padding: 1rem;
+  align-items: center;
+}
+
+.menu {
+  flex-direction: column;
+  justify-content: space-around;
+  border-left: solid 1px;
+  border-bottom: solid 1px;
+}
+.menu .list__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: black;
+  font-size: 100%;
+  margin-left: 1%;
+  margin-right: 1%;
+  cursor: pointer;
+}
+.menu .list__item:hover {
+  color: tomato;
+}
+
+.welcome__title {
+  margin-top: 10%;
+  margin-left: 12%;
+  font-size: 150%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.news {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.news .new {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 45%;
+}
+.news .new__title {
+  font-family: "Staatliches";
+  font-size: 120%;
+}
+.news .new__img {
+  max-width: 75%;
+  height: 10vh;
+}
+.news .new__text {
+  font-size: 75%;
+}
+
+.speech {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.speech__title {
+  text-align: center;
+  font-family: "Staatliches";
+  font-size: 130%;
+}
+.speech__description {
+  text-align: center;
+  font-size: 70%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+.main__welcome {
+  position: absolute;
+  top: 10vh;
+  width: 100vw;
+  height: 15rem;
+  color: #2c2c2c;
+  display: flex;
+  flex-direction: column;
+  background-image: url("img/main1.jpg");
+  background-size: 130%;
+}
+.main__news {
+  position: absolute;
+  top: 42vh;
+  width: 100vw;
+  height: 20rem;
+  background-color: #e2dfdf;
+}
+.main__speech {
+  position: absolute;
+  top: 84vh;
+  width: 100vw;
+  height: 8rem;
+  background-color: #e2dfdf;
+}
+
+.footer {
+  position: absolute;
+  top: 100vh;
+  bottom: 0;
+  width: 100vw;
+  height: 5rem;
+  background-color: #2187db;
+  color: black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1%;
+  border-top: solid black 1px;
+}
+.footer .footer-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.footer .footer-menu__about-us {
+  font-size: 70%;
+}
+.footer .footer-menu__privacy {
+  font-size: 70%;
+}
+.footer .footer-menu__contact-us {
+  font-size: 70%;
+}
+.footer .footer-menu__conditions {
+  font-size: 70%;
+}
+.footer .others {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.footer .others__copyright {
+  font-size: 70%;
+  width: 60%;
+}
+.footer .others .social-media {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  width: 25%;
+}
+.footer .others .social-media__media-icon {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+  justify-content: flex-start;
+  font-size: 6rem;
+  margin: 0 10rem 0 10rem;
+}
+
+.landing {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #fae885;
+}
+.landing .container {
+  position: fixed;
+  top: 34%;
+  z-index: 1000;
+  width: 65%;
+  height: 13rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border: black solid 2px;
+  background-color: white;
+}
+.landing .container__title {
+  font-size: 185%;
+}
+.landing .container .images {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.landing .container .images__img1 {
+  max-width: 35vw;
+  width: 70%;
+  margin-left: -20%;
+}
+.landing .container .images__img2 {
+  max-width: 7vw;
+  margin-bottom: -2rem;
+  width: 30%;
+}
+
+.sign-in {
+  width: 100vw;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 2%;
+  align-items: center;
+}
+.sign-in__form {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  align-items: center;
+}
+.sign-in__form label, .sign-in__form button {
+  margin: 2%;
+}
+.sign-in__form label {
+  width: 100%;
+}
+
+.sign-up {
+  width: 100vw;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 2%;
+  align-items: center;
+}
+.sign-up__text {
+  color: black;
+  width: 95%;
+  text-align: center;
+  margin-bottom: 5%;
+  font-size: 70%;
+}
+.sign-up__form {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  align-items: center;
+}
+.sign-up__form label, .sign-up__form button {
+  margin: 2%;
+}
+.sign-up__form label {
+  width: 100%;
+}
+
+.registration-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #fae885;
+}
+.registration-page .container {
+  position: fixed;
+  top: 18%;
+  width: 80%;
+  min-height: 60vh;
+  border: black solid 2px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.registration-page .container__title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 130%;
+  padding-bottom: 2%;
+  font-family: "Staatliches";
+  color: black;
+}
+
+.leagues {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 12vh;
+  width: 100vw;
+  height: 85vh;
+}
+.leagues .list {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.leagues .list .container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.leagues .list .container__img {
+  max-width: 15vw;
+  width: 20%;
+}
+.leagues .list .container__item {
+  width: 80%;
+}
+.leagues__back-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 95%;
+  margin-top: 10%;
+}
+
+.league-registration {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #fae885;
+}
+.league-registration .container {
+  position: fixed;
+  top: 18%;
+  width: 80%;
+  min-height: 60vh;
+  border: black solid 2px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.league-registration .container__title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 130%;
+  padding-bottom: 2%;
+  font-family: "Staatliches";
+  color: black;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Big Shoulders Text";
+  letter-spacing: 0.2rem;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+#show-menu {
+  display: none;
+}
+
+ul {
+  list-style: none;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.icon {
+  font-size: 1rem;
+}
+.icon__text {
+  font-size: 0.8rem;
+}
+
+/*# sourceMappingURL=index.css.map */
