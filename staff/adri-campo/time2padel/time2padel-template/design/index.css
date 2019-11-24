@@ -158,7 +158,7 @@
   width: 100vw;
   height: 5rem;
   background-color: #2187db;
-  color: black;
+  color: white;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -221,8 +221,8 @@
 }
 .landing .container {
   position: fixed;
-  top: 34%;
-  z-index: 1000;
+  top: 30%;
+  z-index: 100;
   width: 65%;
   height: 13rem;
   display: flex;
@@ -338,40 +338,18 @@
 }
 
 .leagues {
-  display: flex;
-  flex-direction: column;
   position: absolute;
-  top: 12vh;
+  top: 10vh;
   width: 100vw;
-  height: 85vh;
+  height: 80vh;
 }
 .leagues .list {
-  width: 95%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.leagues .list .container {
   width: 100%;
-  display: flex;
-  flex-direction: row;
 }
-.leagues .list .container__img {
-  max-width: 15vw;
+.leagues .list__img {
+  max-width: 35vw;
   width: 20%;
 }
-.leagues .list .container__item {
-  width: 80%;
-}
-.leagues__back-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  width: 95%;
-  margin-top: 10%;
-}
-
 .league-registration {
   display: flex;
   flex-direction: row;
@@ -383,12 +361,12 @@
 .league-registration .container {
   position: fixed;
   top: 18%;
-  width: 80%;
-  min-height: 60vh;
+  width: 85%;
+  min-height: 65vh;
   border: black solid 2px;
   background-color: white;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
@@ -397,10 +375,103 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  font-size: 130%;
-  padding-bottom: 2%;
+  font-size: 150%;
   font-family: "Staatliches";
   color: black;
+}
+.league-registration .container .players-info {
+  margin-top: -10%;
+}
+.league-registration .container .players-info__title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.league-registration .container .players-info__form1 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.league-registration .container .players-info__form1 label {
+  margin: 5%;
+}
+.league-registration .container .players-info__form2 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-around;
+}
+.league-registration .container .players-info__form2 label {
+  margin: 5%;
+}
+.league-registration .container .buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-around;
+  height: 4vh;
+  width: 65%;
+}
+.league-registration .container .buttons__confirm {
+  width: 5rem;
+  heigth: 5rem;
+  border-radius: 0.2rem;
+  background-color: green;
+}
+.league-registration .container .buttons__cancel {
+  width: 5rem;
+  heigth: 5rem;
+  border-radius: 0.2rem;
+  background-color: red;
+}
+
+.message {
+  margin: 5%;
+  font-size: 65%;
+  width: 100%;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 12vh;
+  width: 100vw;
+  height: 85vh;
+}
+.results .container {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5%;
+}
+.results .container__img {
+  max-width: 15vw;
+  width: 20%;
+}
+.results .container__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+}
+.results__table {
+  border: solid black 3px;
+  width: 90%;
+}
+
+thead th {
+  font-size: 160%;
+  border-bottom: solid black 2px;
+}
+
+tbody p {
+  border-rigth: solid black 5px;
+  margin-top: 7%;
+  margin-bottom: 9%;
 }
 
 * {
