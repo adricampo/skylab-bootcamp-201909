@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,7 +52,7 @@
         </div>
     </section>
     <!-- Vist 3  -->
-    <header class="header hidden">
+    <header class="header">
         <img class="header__logo" src="img/logoPro1.png">
         <h1 class="header__title">Time2Padel</h1>
         <input type="checkbox" id="show-menu">
@@ -231,7 +230,7 @@
         </div>
     </section>
     <!-- Vist 6 -->
-    <header class="header">
+    <header class="header hidden">
         <img class="header__logo" src="img/logoPro1.png">
         <h1 class="header__title">Results</h1>
         <input type="checkbox" id="show-menu">
@@ -249,13 +248,13 @@
         <div class="results__container container">
             <img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level B - Masc - W: 20:00h</a>
         </div>
-        <table class="results__table">
+        <table class="results__table" border="1">
             <thead class="table-titles">
                 <tr>
                     <th> Players </th><th> W </th><th> L </th><th> Points </th>
                 </tr>
             </thead>
-           <tbody>
+        <tbody>
                 <tr>
                     <th>
                         <p>Player 1</p>
@@ -291,11 +290,13 @@
                     </th>
                     <td> </td><td> </td><td> </td>
                 </tr>
-           </tbody>
+        </tbody>
         </table>
+        <div class="results__back-button back-button">
+            <button class="back-button__button">Go Back</button>
+        </div>
     </section>
-
-    <footer class="footer">
+    <footer class="footer hidden">
         <div class="footer__footer-menu footer-menu">
             <div class="footer-menu__about-us">About Us</div>
             <div class="footer-menu__privacy">Privacy Policy</div>
@@ -323,8 +324,5 @@
             </ul>
         </div>
     </footer>
-
-
 </body>
-
 </html>

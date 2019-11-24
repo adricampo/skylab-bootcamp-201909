@@ -338,18 +338,40 @@
 }
 
 .leagues {
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  top: 10vh;
+  top: 12vh;
   width: 100vw;
-  height: 80vh;
+  height: 85vh;
 }
 .leagues .list {
-  width: 100%;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.leagues .list__img {
-  max-width: 35vw;
+.leagues .list .container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.leagues .list .container__img {
+  max-width: 15vw;
   width: 20%;
 }
+.leagues .list .container__item {
+  width: 80%;
+}
+.leagues__back-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 95%;
+  margin-top: 10%;
+}
+
 .league-registration {
   display: flex;
   flex-direction: row;
@@ -440,32 +462,55 @@
   position: absolute;
   top: 12vh;
   width: 100vw;
-  height: 85vh;
+  height: 90vh;
 }
 .results .container {
   width: 90%;
+  height: 11%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-bottom: 5%;
 }
 .results .container__img {
-  max-width: 15vw;
-  width: 20%;
+  max-height: 15vh;
+  max-width: 20vw;
+  width: 25%;
+  height: 100%;
 }
 .results .container__item {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 80%;
+  height: 100%;
+  width: 75%;
 }
 .results__table {
   border: solid black 3px;
   width: 90%;
 }
+.results .back-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  height: 4vh;
+  width: 90%;
+  margin-top: 10%;
+}
+.results .back-button__button {
+  width: 5rem;
+  heigth: 5rem;
+  border-radius: 0.2rem;
+}
 
 thead th {
-  font-size: 160%;
+  font-size: 145%;
   border-bottom: solid black 2px;
+  background-color: black;
+  color: white;
+  width: 25%;
+  padding: 0.6rem;
 }
 
 tbody p {
