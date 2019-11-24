@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,52 @@
 </head>
 
 <body>
-    <!-- Vist 1 -->
+    <!-- Component: HEADER -->
+    <header class="header">
+        <img class="header__logo" src="img/logoPro1.png">
+        <h1 class="header__title">Time2Padel</h1>
+        <input type="checkbox" id="show-menu">
+        <label class="header__hamburguer" for="show-menu"><i class="fas fa-bars"></i></label>
+        <nav class="header__nav menu">
+            <ul class="menu__list list">
+                <li><a href="#" class="list__item">News</a></li>
+                <li><a href="#" class="list__item">Requests</a></li>
+                <li><a href="#" class="list__item">Leagues</a></li>
+                <li><a href="#" class="list__item">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Component: FOOTER -->
+    <footer class="footer">
+        <div class="footer__footer-menu footer-menu">
+            <div class="footer-menu__about-us">About Us</div>
+            <div class="footer-menu__privacy">Privacy Policy</div>
+            <div class="footer-menu__contact-us">Contact us</div>
+            <div class="footer-menu__conditions">Conditions</div>
+        </div>
+        <div class="footer__others others">
+            <div class="others__copyright"> adricampo productions ©2019 </div>
+            <ul class="others__social-media social-media">
+                <li className="social-media__media-icon">
+                    <a href="#"><i class="fab fa-twitter-square"></i></a>
+                </li>
+                <li className="social-media__media-icon">
+                    <a href="#"><i class="fab fa-facebook-square"></i></a>
+                </li>
+                <li className="social-media__media-icon">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </li>
+                <li className="social-media__media-icon">
+                    <a href="#"><i class="fab fa-youtube-square"></i></a>
+                </li>
+                <li className="social-media__media-icon">
+                    <a href="#"><i class="fab fa-pinterest-square"></i></a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Wireframe 1 -->
     <section class="landing hidden">
         <article class="landing__container container">
             <h2 class="container__title">Time2Padel</h2>
@@ -21,7 +67,7 @@
             </div>
         </article>
     </section>
-    <!-- Vist 2 -->
+    <!-- Wireframe 2 -->
     <section class="registration-page hidden">
         <div class="registration-page__container container">
             <section class="container__sign-in sign-in">
@@ -51,21 +97,10 @@
             </section>
         </div>
     </section>
-    <!-- Vist 3  -->
-    <header class="header">
-        <img class="header__logo" src="img/logoPro1.png">
-        <h1 class="header__title">Time2Padel</h1>
-        <input type="checkbox" id="show-menu">
-        <label class="header__hamburguer" for="show-menu"><i class="fas fa-bars"></i></label>
-        <nav class="header__nav menu">
-            <ul class="menu__list list">
-                <li><a href="#" class="list__item">News</a></li>
-                <li><a href="#" class="list__item">Friends</a></li>
-                <li><a href="#" class="list__item">Leagues</a></li>
-                <li><a href="#" class="list__item">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Wireframe 3  -->
+
+    <!-- Aquí va un HEADER -->
+
     <main class="main hidden">
         <section class="main__welcome welcome">
             <h2 class="welcome__title">Welcome</h2>
@@ -98,113 +133,45 @@
             </div>
         </section>
     </main>
-    <footer class="footer hidden">
-        <div class="footer__footer-menu footer-menu">
-            <div class="footer-menu__about-us">About Us</div>
-            <div class="footer-menu__privacy">Privacy Policy</div>
-            <div class="footer-menu__contact-us">Contact us</div>
-            <div class="footer-menu__conditions">Conditions</div>
-        </div>
-        <div class="footer__others others">
-            <div class="others__copyright"> adricampo productions ©2019 </div>
-            <ul class="others__social-media social-media">
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-twitter-square"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-facebook-square"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-youtube-square"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-pinterest-square"></i></a>
-                </li>
-            </ul>
-        </div>
-    </footer>
-    <!-- Vist 4 -->
-    <header class="header hidden">
-        <img class="header__logo" src="img/logoPro1.png">
-        <h1 class="header__title">Leagues</h1>
-        <input type="checkbox" id="show-menu">
-        <label class="header__hamburguer" for="show-menu"><i class="fas fa-bars"></i></label>
-        <nav class="header__nav menu">
-            <ul class="menu__list list">
-                <li><a href="#" class="list__item">News</a></li>
-                <li><a href="#" class="list__item">Friends</a></li>
-                <li><a href="#" class="list__item">Leagues</a></li>
-                <li><a href="#" class="list__item">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
+
+    <!-- Aquí va un FOOTER -->
+
+    <!-- Wireframe 4 -->
+
+    <!-- Aquí va un HEADER -->
+
     <main class="leagues hidden">
         <ul class="leagues__list list">
             <div class="list__container container">
-                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level B -
-                        Masc - W: 20:00h</a></li>
+                <li><a href="#" class="container__item"><img class="container__img" src="img/logoPro2.png"><p>Level B - Masc - W: 20:00h</p></a></li>
             </div>
             <div class="list__container container">
-                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level C+ -
-                        Fem - M: 19:00h</a></li>
+                <li><a href="#" class="container__item"><img class="container__img" src="img/logoPro2.png"><p>Level C+ - Fem - M: 19:00h</p></a></li>
             </div>
             <div class="list__container container">
-                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level B+ -
-                        Masc - Tu: 18:00h</a></li>
+                <li><a href="#" class="container__item"><img class="container__img" src="img/logoPro2.png"><p>Level B+ - Masc - Tu: 18:00h</p></a></li>
             </div>
             <div class="list__container container">
-                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level D - Mix
-                        - F: 20:00h</a></li>
+                <li><a href="#" class="container__item"><img class="container__img" src="img/logoPro2.png"><p>Level D - Mix - F: 20:00h</p></a></li>
             </div>
             <div class="list__container container">
-                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level B- -
-                        Masc - Th: 20:30h</a></li>
+                <li><a href="#" class="container__item"><img class="container__img" src="img/logoPro2.png"><p>Level B- - Masc - Th: 20:30h</p></a></li>
             </div>
             <div class="list__container container">
-                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level B+ -
-                        Fem - F: 21:00h</a></li>
+                <li><a href="#" class="container__item"><img class="container__img" src="img/logoPro2.png"><p>Level B+ - Fem - F: 21:00h</p></a></li>
             </div>
             <div class="list__container container">
-                <li><img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level C - Mix
-                        - W: 20:00h</a></li>
+                <li><a href="#" class="container__item"><img class="container__img" src="img/logoPro2.png"><p>Level C - Mix - W: 20:00h</p></a></li>
             </div>
         </ul>
         <div class="leagues__back-button back-button">
             <button class="back-button__button">Go Back</button>
         </div>
     </main>
-    <footer class="footer hidden">
-        <div class="footer__footer-menu footer-menu">
-            <div class="footer-menu__about-us">About Us</div>
-            <div class="footer-menu__privacy">Privacy Policy</div>
-            <div class="footer-menu__contact-us">Contact us</div>
-            <div class="footer-menu__conditions">Conditions</div>
-        </div>
-        <div class="footer__others others">
-            <div class="others__copyright"> ©AC19 </div>
-            <ul class="others__social-media social-media">
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-twitter-square"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-facebook-square"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-youtube-square"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-pinterest-square"></i></a>
-                </li>
-            </ul>
-        </div>
-    </footer>
-    <!-- Vist 5 -->
+
+    <!-- Aquí va un FOOTER -->
+
+    <!-- Wireframe 5 -->
     <section class="league-registration hidden">
         <div class="league-registration__container container">
             <h2 class="container__title">League Registration</h2>
@@ -229,100 +196,116 @@
             </div>
         </div>
     </section>
-    <!-- Vist 6 -->
-    <header class="header hidden">
-        <img class="header__logo" src="img/logoPro1.png">
-        <h1 class="header__title">Results</h1>
-        <input type="checkbox" id="show-menu">
-        <label class="header__hamburguer" for="show-menu"><i class="fas fa-bars"></i></label>
-        <nav class="header__nav menu">
-            <ul class="menu__list list">
-                <li><a href="#" class="list__item">News</a></li>
-                <li><a href="#" class="list__item">Friends</a></li>
-                <li><a href="#" class="list__item">Leagues</a></li>
-                <li><a href="#" class="list__item">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section class="results">
+    <!-- Wireframe 6 -->
+
+    <!-- Aquí va un HEADER -->
+
+    <section class="results hidden">
         <div class="results__container container">
             <img class="container__img" src="img/logoPro2.png"><a href="#" class="container__item">Level B - Masc - W: 20:00h</a>
         </div>
         <table class="results__table" border="1">
             <thead class="table-titles">
                 <tr>
-                    <th> Players </th><th> W </th><th> L </th><th> Points </th>
+                    <th> Players </th>
+                    <th> W </th>
+                    <th> L </th>
+                    <th> Points </th>
                 </tr>
             </thead>
-        <tbody>
+            <tbody>
                 <tr>
                     <th>
                         <p>Player 1</p>
                         <p>Player 2</p>
                     </th>
-                    <td> </td><td> </td><td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
                 <tr>
                     <th>
                         <p>Player 3</p>
                         <p>Player 4</p>
                     </th>
-                    <td> </td><td> </td><td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
                 <tr>
                     <th>
                         <p>Player 5</p>
                         <p>Player 6</p>
                     </th>
-                    <td> </td><td> </td><td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
                 <tr>
                     <th>
                         <p>Player 7</p>
                         <p>Player 8</p>
                     </th>
-                    <td> </td><td> </td><td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
                 <tr>
                     <th>
                         <p>Player 9</p>
                         <p>Player 10</p>
                     </th>
-                    <td> </td><td> </td><td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                 </tr>
-        </tbody>
+            </tbody>
         </table>
         <div class="results__back-button back-button">
             <button class="back-button__button">Go Back</button>
         </div>
     </section>
-    <footer class="footer hidden">
-        <div class="footer__footer-menu footer-menu">
-            <div class="footer-menu__about-us">About Us</div>
-            <div class="footer-menu__privacy">Privacy Policy</div>
-            <div class="footer-menu__contact-us">Contact us</div>
-            <div class="footer-menu__conditions">Conditions</div>
+
+    <!-- Aquí va un FOOTER -->
+
+    <!-- Wireframe 7 -->
+
+    <!-- Aquí va un HEADER -->
+
+    <section class="requests">
+        <div class="requests__box box">
+            <div class="box__info info">
+                <p class="info__message">HONGDA has invited you to play! 🎾🎾</p>
+                <a href="#" class="info__league">Level B - Masc - W: 20:00h</a>
+                <div class="info__buttons buttons">
+                    <button class="buttons__confirm">Confirm</button>
+                    <button class="buttons__cancel">Cancel</button>
+                </div>
+            </div>
         </div>
-        <div class="footer__others others">
-            <div class="others__copyright"> adricampo productions ©2019 </div>
-            <ul class="others__social-media social-media">
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-twitter-square"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-facebook-square"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-youtube-square"></i></a>
-                </li>
-                <li className="social-media__media-icon">
-                    <a href="#"><i class="fab fa-pinterest-square"></i></a>
-                </li>
-            </ul>
+        <div class="requests__box box">
+            <div class="box__info info">
+                <p class="info__message">HONGDA has invited you to play! 🎾🎾</p>
+                <a href="#" class="info__league">Level D - Mix - W: 21:30h</a>
+                <div class="info__buttons buttons">
+                    <button class="buttons__confirm">Confirm</button>
+                    <button class="buttons__cancel">Cancel</button>
+                </div>
+            </div>
         </div>
-    </footer>
+        <div class="requests__box box">
+            <div class="box__info info">
+                <p class="info__message">HONGDA has invited you to play! 🎾🎾</p>
+                <a href="#" class="info__league">Level C - Fem - F: 18:00h</a>
+                <div class="info__buttons buttons">
+                    <button class="buttons__confirm">Confirm</button>
+                    <button class="buttons__cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aquí va un FOOTER -->
 </body>
+
 </html>
