@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const { Schema } = mongoose
+const { Schema } = require('mongoose')
+const { validators: { isEmail } } = require('time2padel-util')
 
 module.exports = new Schema({
     name: {
@@ -20,9 +20,10 @@ module.exports = new Schema({
         enum: ['Male', 'Female'],
         required: true
     },
-    phone: {
-        type: Number,
+    email: {
+        type: String,
         required: true,
+        validate: isEmail,
         unique: true
     },
     password: {
