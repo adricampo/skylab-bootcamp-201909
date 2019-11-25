@@ -137,22 +137,22 @@
 }
 .main__news {
   position: absolute;
-  top: 42vh;
+  top: 48vh;
   width: 100vw;
   height: 20rem;
   background-color: #e2dfdf;
 }
 .main__speech {
   position: absolute;
-  top: 84vh;
+  top: 98vh;
   width: 100vw;
-  height: 8rem;
+  height: 20vh;
   background-color: #e2dfdf;
 }
 
 .footer {
   position: absolute;
-  top: 103vh;
+  top: 120vh;
   width: 100vw;
   height: 5rem;
   background-color: #e2dfdf;
