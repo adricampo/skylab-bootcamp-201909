@@ -63,7 +63,7 @@ List of the components used in the project:
 ### Blocks
 ### Data Model 
 
-![Data Model](datamodel.png)
+![Data Model](datamodelfinal.png)
 
 
 
