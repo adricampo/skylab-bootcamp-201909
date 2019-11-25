@@ -22,21 +22,24 @@ User will be able to register in many leagues with another user. For each regist
 At Time2Padel, user will see an Application with information related to the club and the leagues they have available on that moment.
 
 User can also join every league they want if it matches with the gender. More detailed info below:
+
     - Fem Leagues: Need two Fem profiles to succeed.
     - Masc Leagues: Need two Masc profiles to succeed.
     - Mix Leagues: Need one Fem and one Masc profile to succeed.
 
 Users information will be stored in a data base where we will later call them to recover the information required to join the different leagues. This process will involve two users:
+
     1) Will make the registration using username and password and will add the username of the user who wants play with.
     2) The other user will receive a request and will have the possiblity to accept it or decline it. 
 
 The process will have 2 endpoints:
+
     - If the request is accepted, both players will be added to the selected league.
     - If the request is declined, the registration process will be deleted.
 
 ### Use cases
 
-User ca Log-In, Log-Out, Register, Find Leagues, Join a League, Accept Requests, Decline Requests and Check the results. 
+User can Log-In, Log-Out, Register, Find Leagues, Join a League, Accept Requests, Decline Requests and Check the results. 
 
 ![Use Cases](usecasesfinal.png)
 
