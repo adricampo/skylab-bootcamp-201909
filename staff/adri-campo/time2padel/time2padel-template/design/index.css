@@ -151,8 +151,9 @@
 }
 
 .footer {
-  position: absolute;
-  top: 120vh;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
   width: 100vw;
   height: 5rem;
   background-color: #e2dfdf;
@@ -369,7 +370,7 @@
 .leagues .list .container__item {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-content: center;
 }
 .leagues .list .container p {
@@ -581,6 +582,13 @@ tbody p {
   heigth: 5rem;
   border-radius: 0.2rem;
   background-color: red;
+}
+.requests .back-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 10%;
 }
 
 * {
