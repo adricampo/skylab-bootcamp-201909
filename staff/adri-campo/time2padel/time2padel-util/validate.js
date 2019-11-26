@@ -21,9 +21,25 @@ const validate = {
     gender(target) {
         this.typeOf('gender', target)
     },
-    
+
+    level(target) {
+        this.typeOf('level', target)
+    },
+
+    date(target) {
+        this.typeOf('date', target)
+    },
+
+    time(target) {
+        this.typeOf('time', target)
+    },
+
     boolean(target) {
         this.typeOf('boolean', target)
+    },
+
+    team(target) {
+        this.typeOf('team', target)
     },
 
     instanceOf(type, target) {

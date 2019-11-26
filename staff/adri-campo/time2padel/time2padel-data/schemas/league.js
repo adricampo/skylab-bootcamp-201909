@@ -1,10 +1,12 @@
 const { Schema } = require('mongoose')
-const Team = require('./teams')
+const Team = require('./team')
 
 module.exports = new Schema({
     level: {
         type: String,
+        enum: ['D', 'C-', 'C+', 'B-', 'B+', 'A'],
         required: true
+
     },
     gender: {
         type: String,
@@ -12,12 +14,19 @@ module.exports = new Schema({
         required: true
     },
     date: {
-        type: Date,
-        required: true,
+        type: String,
+        required: true
     },
     time: {
         type: String,
         required: true
     },
-    teams: [Team]
+    teams: {
+        type: [Team]
+    },
+    numberOfTeams: {
+        type: Number,
+        default: 6
+    }
 })
+

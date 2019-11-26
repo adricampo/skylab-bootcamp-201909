@@ -1,5 +1,6 @@
 const { validate, errors: { ConflictError } } = require('time2padel-util')
 const { models: { User } } = require('time2padel-data')
+const bcrypt = require('bcryptjs')
 
 
 module.exports = function (name, surname, email, username, password, gender) {
@@ -22,6 +23,8 @@ module.exports = function (name, surname, email, username, password, gender) {
 
         if (user) throw new ConflictError(`user with username ${username} already exists`)
 
-        await User.create({ name, surname, email, username, password, gender })
+        const hash = await bcrypt.hash(password, 10)
+
+        await User.create({ name, surname, email, username, password: hash, gender })
     })()
 }

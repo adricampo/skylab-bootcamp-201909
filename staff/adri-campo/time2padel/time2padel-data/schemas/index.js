@@ -1,6 +1,6 @@
 module.exports = {
     user: require('./user'),
     league: require('./league'),
-    teams: require('./teams'),
+    team: require('./team'),
     request: require('./request')
 }

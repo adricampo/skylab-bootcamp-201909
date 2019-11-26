@@ -6,17 +6,12 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    user1: {
+    players: [{
         type: ObjectId,
         required: true,
         ref: 'User'
-    },
-    user2: {
-        type: ObjectId,
-        required: true,
-        ref: 'User'
-    },
-
+    }],
+    
     request: Request
 
 })

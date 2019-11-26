@@ -5,13 +5,14 @@ const registerUser = require('.')
 const { random, floor } = Math
 const { errors: { ContentError } } = require('time2padel-util')
 const { database, models: { User } } = require('time2padel-data')
+const bcrypt = require('bcryptjs')
 
 describe('logic - register user', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let name, surname, email, username, password, index, genders, gender
     genders = ['Male', 'Female']
-    index = floor(random()* 2)
+    index = floor(random() * 2)
     
     beforeEach(() => {
         name = `name-${random()}`
@@ -25,24 +26,25 @@ describe('logic - register user', () => {
     })
 
     it('should succeed on correct credentials', async () => {
-        const response = await registerUser(name, surname, email, username, password, gender)
-
-        expect(response).to.be.undefined
+        const result = await registerUser(name, surname, email, username, password, gender)
+        expect(result).not.to.exist
 
         const user = await User.findOne({ username })
-
         expect(user).to.exist
-
         expect(user.name).to.equal(name)
         expect(user.surname).to.equal(surname)
         expect(user.gender).to.equal(gender)
         expect(user.email).to.equal(email)
         expect(user.username).to.equal(username)
-        expect(user.password).to.equal(password)
+
+        const match = await bcrypt.compare(password, user.password)
+        expect(match).to.be.true
+      
     })
 
-    describe('when user already exists', () => {
-        beforeEach(() => User.create({ name, surname, email, username, password, gender }))
+    describe('when user already exists', async () => {
+
+        await User.create({ name, surname, email, username, password, gender })
 
         it('should fail on already existing user', async () => {
             try {

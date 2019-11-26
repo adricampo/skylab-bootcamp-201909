@@ -5,6 +5,7 @@ const authenticateUser = require('.')
 const { random, floor } = Math
 const { errors: { ContentError, CredentialsError } } = require('time2padel-util')
 const { database, models: { User } } = require('time2padel-data')
+const bcrypt = require('bcryptjs')
 
 describe('logic - authenticate user', () => {
     before(() => database.connect(DB_URL_TEST))
@@ -22,9 +23,7 @@ describe('logic - authenticate user', () => {
         gender = genders[index]
 
         await User.deleteMany()
-
-        const user = await User.create({ name, surname, email, username, password, gender })
-
+        const user = await User.create({ name, surname, email, username, password: await bcrypt.hash(password, 10), gender })
         id = user.id
     })
 
@@ -51,7 +50,7 @@ describe('logic - authenticate user', () => {
                 expect(error).to.be.an.instanceOf(CredentialsError)
 
                 const { message } = error
-                expect(message).to.equal(`wrong credentials`)
+                expect(message).to.equal(`wrong username`)
             }
         })
 
@@ -67,7 +66,7 @@ describe('logic - authenticate user', () => {
                 expect(error).to.be.an.instanceOf(CredentialsError)
 
                 const { message } = error
-                expect(message).to.equal(`wrong credentials`)
+                expect(message).to.equal(`wrong password`)
             }
         })
     })
