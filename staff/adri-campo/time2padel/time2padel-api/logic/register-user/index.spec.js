@@ -2,28 +2,30 @@ require('dotenv').config()
 const { env: { DB_URL_TEST } } = process
 const { expect } = require('chai')
 const registerUser = require('.')
-const { random } = Math
+const { random, floor } = Math
 const { errors: { ContentError } } = require('time2padel-util')
 const { database, models: { User } } = require('time2padel-data')
 
 describe('logic - register user', () => {
     before(() => database.connect(DB_URL_TEST))
 
-    let name, surname, username, gender, email, password
-
+    let name, surname, email, username, password, index, genders, gender
+    genders = ['Male', 'Female']
+    index = floor(random()* 2)
+    
     beforeEach(() => {
         name = `name-${random()}`
         surname = `surname-${random()}`
-        username = `username-${random()}`
-        gender = `gender-${random()}`
         email = `email-${random()}@mail.com`
+        username = `username-${random()}`
         password = `password-${random()}`
+        gender = genders[index]
 
         return User.deleteMany()
     })
 
     it('should succeed on correct credentials', async () => {
-        const response = await registerUser(name, surname, username, gender, email, password)
+        const response = await registerUser(name, surname, email, username, password, gender)
 
         expect(response).to.be.undefined
 
@@ -40,11 +42,11 @@ describe('logic - register user', () => {
     })
 
     describe('when user already exists', () => {
-        beforeEach(() => User.create({ name, surname, username, gender, email, password }))
+        beforeEach(() => User.create({ name, surname, email, username, password, gender }))
 
         it('should fail on already existing user', async () => {
             try {
-                await registerUser(name, surname, username, gender, email, password)
+                await registerUser(name, surname, email, username, password, gender)
 
                 throw Error('should not reach this point')
             } catch (error) {

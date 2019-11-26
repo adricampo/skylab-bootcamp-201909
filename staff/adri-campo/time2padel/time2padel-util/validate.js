@@ -17,11 +17,11 @@ const validate = {
     number(target) {
         this.typeOf('number', target)
     },
-    
+ 
     gender(target) {
         this.typeOf('gender', target)
     },
-
+    
     boolean(target) {
         this.typeOf('boolean', target)
     },

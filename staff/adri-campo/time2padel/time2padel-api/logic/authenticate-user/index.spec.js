@@ -2,26 +2,28 @@ require('dotenv').config()
 const { env: { DB_URL_TEST } } = process
 const { expect } = require('chai')
 const authenticateUser = require('.')
-const { random } = Math
+const { random, floor } = Math
 const { errors: { ContentError, CredentialsError } } = require('time2padel-util')
 const { database, models: { User } } = require('time2padel-data')
 
 describe('logic - authenticate user', () => {
     before(() => database.connect(DB_URL_TEST))
 
-    let id, name, surname, username, gender, email, password
+    let name, surname, email, username, password, index, genders, gender
+    genders = ['Male', 'Female']
+    index = floor(random()* 2)
 
     beforeEach(async () => {
         name = `name-${random()}`
         surname = `surname-${random()}`
-        username = `username-${random()}`
-        gender = `gender-${random()}`
         email = `email-${random()}@mail.com`
+        username = `username-${random()}`
         password = `password-${random()}`
+        gender = genders[index]
 
         await User.deleteMany()
 
-        const user = await User.create({ name, surname, username, gender, email, password })
+        const user = await User.create({ name, surname, email, username, password, gender })
 
         id = user.id
     })
