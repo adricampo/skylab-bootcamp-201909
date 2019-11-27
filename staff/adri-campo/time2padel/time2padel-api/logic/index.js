@@ -5,5 +5,6 @@ module.exports = {
     modifyUser: require('./modify-user'),
     deleteUser: require('./delete-user'),
     createLeague: require('./create-league'),
-    deleteLeague: require('./delete-league')
+    deleteLeague: require('./delete-league'),
+    retrieveLeagues: require('./retrieve-leagues')
 }

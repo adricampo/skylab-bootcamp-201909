@@ -1,8 +1,8 @@
 const { Router } = require('express')
-const { createLeague, deleteLeague } = require('../../logic')
+const { createLeague, deleteLeague, retrieveLeagues } = require('../../logic')
 // const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
-// const tokenVerifier = require('../../helpers/token-verifier')(SECRET)
+const tokenVerifier = require('../../helpers/token-verifier')(SECRET)
 const bodyParser = require('body-parser')
 const { errors: { NotFoundError, ConflictError, CredentialsError } } = require('time2padel-util')
 
@@ -48,6 +48,26 @@ router.delete('/:id', (req, res) => {
                 res.status(500).json({ message })
             })
     } catch ({ message }) {
+        res.status(400).json({ message })
+    }
+})
+
+//RETRIEVE LEAGUES
+router.get('/', tokenVerifier, (req, res) => {
+    try {
+        retrieveLeagues()
+            .then(league => res.json({ league }))
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch (error) {
+        const { message } = error
+
         res.status(400).json({ message })
     }
 })

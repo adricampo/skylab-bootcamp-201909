@@ -19,11 +19,19 @@ module.exports = function (level, gender, numberOfTeams, date, time) {
     validate.string.notVoid('time', time)
     
     return (async () => {
-        const league = await League.findOne({ level, gender, numberOfTeams, date, time })
+        let league = await League.findOne({ level, gender, numberOfTeams, date, time })
 
         if (league) throw new ConflictError(`league ${league.id} already exists`)
 
         await League.create({ level, gender, numberOfTeams, date, time })
+
+        league.forEach(league => {
+            id = league.id
+            delete league._id
+            delete league.__v
+        })
+
+        
 
     })()
 }

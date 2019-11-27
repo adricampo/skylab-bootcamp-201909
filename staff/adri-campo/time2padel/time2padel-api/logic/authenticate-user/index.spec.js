@@ -11,7 +11,7 @@ describe('logic - authenticate user', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let name, surname, email, username, password, index, genders, gender
-    genders = ['Male', 'Female']
+    genders = ['MALE', 'FEMALE']
     index = floor(random()* 2)
 
     beforeEach(async () => {
@@ -19,9 +19,9 @@ describe('logic - authenticate user', () => {
         surname = `surname-${random()}`
         email = `email-${random()}@mail.com`
         username = `username-${random()}`
-        password = `password-${random()}`
+        password = `password-${random()}` 
         gender = genders[index]
-
+        
         await User.deleteMany()
         const user = await User.create({ name, surname, email, username, password: await bcrypt.hash(password, 10), gender })
         id = user.id

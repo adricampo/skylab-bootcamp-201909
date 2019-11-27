@@ -9,7 +9,7 @@ const { errors: { ContentError } } = require('time2padel-util')
 describe('logic - create league', () => {
     before(() => database.connect(DB_URL_TEST))
     
-    let levels, indexlevel, level, genders, indexgender, gender, numberOfTeams, dates, indexdates, date, times, indextimes, time, league
+    let levels, indexlevel, level, genders, indexgender, gender, numberOfTeams, dates, indexdates, date, times, indextimes, time
 
     levels = ['D', 'C-', 'C+', 'B-', 'B+', 'A']
     indexlevel = floor(random() * 6)

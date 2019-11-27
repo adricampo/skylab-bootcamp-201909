@@ -11,7 +11,7 @@ describe('logic - modify user', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let name, surname, email, username, password, index, genders, gender
-    genders = ['Male', 'Female']
+    genders = ['MALE', 'FEMALE']
     index = floor(random()* 2)
 
     beforeEach(async () => {

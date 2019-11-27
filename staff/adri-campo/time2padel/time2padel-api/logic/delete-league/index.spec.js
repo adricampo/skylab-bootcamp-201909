@@ -6,7 +6,7 @@ const { random, floor } = Math
 const { errors: { NotFoundError, ConflictError } } = require('time2padel-util')
 const { database, ObjectId, models: { League } } = require('time2padel-data')
 
-describe.only('logic - delete league', () => {
+describe('logic - delete league', () => {
     before(() => database.connect(DB_URL_TEST))
     
     let levels, indexlevel, level, genders, indexgender, gender, numberOfTeams, dates, indexdates, date, times, indextimes, time, league
