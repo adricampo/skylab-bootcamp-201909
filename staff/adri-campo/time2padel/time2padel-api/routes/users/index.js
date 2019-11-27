@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { registerUser, authenticateUser, retrieveUser, modifyUser } = require('../../logic')
+const { registerUser, authenticateUser, retrieveUser, modifyUser, deleteUser } = require('../../logic')
 const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 const tokenVerifier = require('../../helpers/token-verifier')(SECRET)
@@ -88,6 +88,30 @@ router.patch('/:id', tokenVerifier, jsonBodyParser, (req, res) => {
 
                 if (error instanceof NotFoundError)
                     return res.status(404).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch ({ message }) {
+        res.status(400).json({ message })
+    }
+})
+
+//DELETE USER
+router.delete('/:id', tokenVerifier, (req, res) => {
+    try {
+        const { params: { id } } = req
+
+        deleteUser(id)
+            .then(() =>
+                res.end()
+            )
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+                if (error instanceof ConflictError)
+                    return res.status(409).json({ message })
 
                 res.status(500).json({ message })
             })
