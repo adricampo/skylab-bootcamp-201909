@@ -1,49 +1,50 @@
 require('dotenv').config
 const { env: { DB_URL_TEST } } = process
 const { expect } = require('chai')
+const createLeague = require('.')
 const { random, floor } = Math
 const { database, models: { League } } = require('time2padel-data')
-const createLeague = require('.')
+const { errors: { ContentError } } = require('time2padel-util')
 
 describe('logic - create league', () => {
     before(() => database.connect(DB_URL_TEST))
     
-    let levels, indexlevel, level, genders, indexgender, gender, numberOfTeams, dates, indexdates, date, times, indextimes, time
+    let levels, indexlevel, level, genders, indexgender, gender, numberOfTeams, dates, indexdates, date, times, indextimes, time, league
 
     levels = ['D', 'C-', 'C+', 'B-', 'B+', 'A']
     indexlevel = floor(random() * 6)
 
-    genders = ['Male', 'Female']
+    genders = ['MALE', 'FEMALE']
     indexgender = floor(random() * 2)
 
-    numberOfTeams = floor(random() * 6)
+    numberOfTeams = 6
     
-    dates = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    dates = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY']
     indexdates = floor(random() * 5)
 
     times = ['18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30']
     indextimes = floor(random() * 8)
 
 
-    beforeEach(async () => {
+    beforeEach(() => {
         level = levels[indexlevel]
         gender = genders[indexgender]
+        numberOfTeams
         date = dates[indexdates]
         time = times[indextimes]
 
-        await Promise.all([League.deleteMany()])
+        return League.deleteMany()
 
     })
 
-    it('should succeed on correct user and league data', async () => {
-        const leagueId = await createLeague(level, gender, numberOfTeams, date, time)
-
-        expect(leagueId).to.exist
-        expect(leagueId).to.be.a('Object')
+    it('should succeed on correct league data', async () => { 
+        const leagueId = await createLeague(level, gender, numberOfTeams, date, time) 
+        expect(leagueId).not.to.exist
         // expect(leagueId).to.have.length.greaterThan(0)
-        debugger
-        const league = await League.findOne( leagueId._id )
         
+        const league = await League.findOne( {level, gender, numberOfTeams, date, time } )
+        
+        expect(league).to.exist
         expect(league.level).to.equal(level)
         expect(league.gender).to.equal(gender)
         expect(league.numberOfTeams).to.equal(numberOfTeams)
@@ -52,4 +53,22 @@ describe('logic - create league', () => {
 
     })
 
+    it('should fail on already existing league', async () => {
+        const _league = await League.create({ level, gender, numberOfTeams, date, time })
+    
+        try {
+            await createLeague(level, gender, numberOfTeams, date, time)
+
+            throw Error('should not reach this point')
+        } catch (error) {
+            expect(error).to.exist
+
+            expect(error.message).to.exist
+            expect(typeof error.message).to.equal('string')
+            expect(error.message.length).to.be.greaterThan(0)
+            expect(error.message).to.equal(`league ${_league.id} already exists`)
+        }
+    })
+
+    after(() => League.deleteMany().then(database.disconnect))
 })

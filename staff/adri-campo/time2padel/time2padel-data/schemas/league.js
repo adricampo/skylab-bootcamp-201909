@@ -10,15 +10,17 @@ module.exports = new Schema({
     },
     gender: {
         type: String,
-        enum: ['Male', 'Female'],
+        enum: ['MALE', 'FEMALE'],
         required: true
     },
     date: {
         type: String,
+        enum: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'],
         required: true
     },
     time: {
         type: String,
+        enum: ['18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'],
         required: true
     },
     teams: {
