@@ -1,5 +1,7 @@
-const { Schema } = require('mongoose')
+const { Schema, ObjectId } = require('mongoose')
 const { validators: { isEmail } } = require('time2padel-util')
+// const Team = require('./team')
+// const Request = require('./request')
 
 module.exports = new Schema({
     name: {
@@ -32,5 +34,23 @@ module.exports = new Schema({
     },
     admin: {
         default: false
+    },
+    leagues: {
+        type: [ObjectId],
+        ref: 'League'
+    },
+    teams: {
+        type: [ObjectId],
+        ref: 'Team'
     }
+
+    // request: Request
+    
+    // status: {
+    //     type: String,
+    //     enum: ['',''],
+    //     default: 'ACTIVE'
+    // }
+
 })
+//await User.create({name , surname, username, ... , teams:[], status})

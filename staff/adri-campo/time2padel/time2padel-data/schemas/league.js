@@ -1,12 +1,10 @@
-const { Schema } = require('mongoose')
-const Team = require('./team')
+const { Schema, ObjectId } = require('mongoose')
 
 module.exports = new Schema({
     level: {
         type: String,
         enum: ['D', 'C-', 'C+', 'B-', 'B+', 'A'],
         // required: true
-
     },
     gender: {
         type: String,
@@ -23,12 +21,18 @@ module.exports = new Schema({
         enum: ['18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'],
         // required: true
     },
-    teams: {
-        type: [Team]
-    },
     numberOfTeams: {
         type: Number,
-        default: 6
+        required: true
+    },
+    teams: {
+        type: [ObjectId],
+        ref: 'Team'
+    },
+    status: {
+        type: String,
+        enum: ['COMPLETED', 'AVAILABLE'],
+        default: 'AVAILABLE'
     }
 })
 

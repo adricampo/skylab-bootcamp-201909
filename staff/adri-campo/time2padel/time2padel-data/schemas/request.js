@@ -1,23 +1,17 @@
-const { Schema, ObjectId } = require('mongoose')
-const League = require('./league')
+// const { Schema } = require('mongoose')
+// const Team = require('./team')
 
-module.exports = new Schema({
-    emisor: {
-        type: ObjectId,
-        required: true,
-        ref: 'User'
-    },
-    receptor: {
-        type: ObjectId,
-        required: true,
-        ref: 'User'
-    },
+// module.exports = new Schema({
+//     player1: {
+//         type: ObjectId,
+//         required: true,
+//         ref: 'User'
+//     },
+//     team: Team
+// })
 
-    league: League,
 
-    status: {
-        type: Boolean,
-        default: false,
-        required: false
-    }
-})
+// // player1: {
+// //     type: objectId,
+// //     ref: 'User'
+// // },

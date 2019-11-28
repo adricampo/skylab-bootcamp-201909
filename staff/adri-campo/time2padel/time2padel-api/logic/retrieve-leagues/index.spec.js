@@ -1,7 +1,7 @@
 require('dotenv').config()
-const { env: { TEST_DB_URL } } = process
+const { env: { DB_URL_TEST } } = process
 const { expect } = require('chai')
-const { random } = Math
+const { random, floor } = Math
 const retrieveLeagues = require('.')
 const { errors: { NotFoundError } } = require('time2padel-util')
 const { database, models: { League } } = require('time2padel-data')
@@ -35,18 +35,39 @@ describe('logic - retrieve leagues', () => {
 
         await League.deleteMany()
 
-        for (let i = 0; i < 5; i++) {
-            await League.create({ level, gender, numberOfTeams, date, time })
-        }
+        const insertions = []
+
+        for (let i = 0; i < 5; i++) 
+            insertions.push(League.create({ 
+                level, 
+                gender, 
+                numberOfTeams, 
+                date, 
+                time }))
+        await Promise.all(insertions)
 
     })
 
-    it('should succeed on correct user and tas', async () => {
-        const leagues = await retrieveLeagues
-        
-        
+    it('should succeed on correct league', async () => {
+        const leagues = await retrieveLeagues()
+        expect(leagues).to.exist 
+        expect(leagues).to.have.lengthOf(5)
+    
+        leagues.forEach(league => {
+            expect(league.level).to.exist
+            expect(league.level).to.be.a('string')
+            
+            expect(league.gender).to.exist
+            expect(league.gender).to.be.a('string')
+
+            expect(league.date).to.exist
+            expect(league.date).to.be.a('string')
+
+            expect(league.time).to.exist
+            expect(league.time).to.be.a('string')
+        })
 
     })
 
-    after(() => User.deleteMany().then(database.disconnect))
+    after(() => League.deleteMany().then(database.disconnect))
 })
