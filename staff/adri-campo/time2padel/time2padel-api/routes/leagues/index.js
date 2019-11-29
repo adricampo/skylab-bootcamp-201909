@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { createLeague, deleteLeague, retrieveLeagues } = require('../../logic')
+const { createLeague, deleteLeague, retrieveLeagues, addTeamToLeague } = require('../../logic')
 // const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 const tokenVerifier = require('../../helpers/token-verifier')(SECRET)
@@ -68,6 +68,26 @@ router.get('/', tokenVerifier, (req, res) => {
     } catch (error) {
         const { message } = error
 
+        res.status(400).json({ message })
+    }
+})
+
+// ADD TEAM TO LEAGUE
+router.post('/:leagueId/team/:teamId', jsonBodyParser, (req, res) => {
+    try {
+        const { params: { leagueId, teamId } } = req
+
+        addTeamToLeague(leagueId, teamId)
+            .then(() => res.status(201).end())
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof ConflictError)
+                    return res.status(409).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch ({ message }) {
         res.status(400).json({ message })
     }
 })

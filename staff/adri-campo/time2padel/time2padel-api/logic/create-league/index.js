@@ -1,5 +1,6 @@
 const { validate, errors: { ConflictError } } = require('time2padel-util')
 const { models: { League } } = require('time2padel-data')
+const robin = require('roundrobin');
 
 module.exports = function (level, gender, numberOfTeams, date, time) {
     validate.string(level)
@@ -26,6 +27,11 @@ module.exports = function (level, gender, numberOfTeams, date, time) {
         await League.create({ level, gender, numberOfTeams, date, time })
         
 
+
+
+        debugger
+        let Schedule = robin(6, ['Team1', 'Team2', 'Team3', 'Team4', 'Team5', 'Team6']);
+        debugger
         // league.forEach(league => {
         //     id = league.id
         //     delete league._id

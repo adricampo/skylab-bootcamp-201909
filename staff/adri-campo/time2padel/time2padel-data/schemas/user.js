@@ -6,31 +6,25 @@ const { validators: { isEmail } } = require('time2padel-util')
 module.exports = new Schema({
     name: {
         type: String,
-        // required: true
     },
     surname: {
         type: String,
-        // required: true
     },
     username: {
         type: String,
-        // required: true,
         unique: true
     },
     gender: {
         type: String,
         enum: ['MALE', 'FEMALE'],
-        // required: true
+        default: 'MALE'
     },
     email: {
         type: String,
-        // required: true,
-        validate: isEmail,
-        unique: true
+        validate: isEmail
     },
     password: {
         type: String,
-        // required: true
     },
     admin: {
         default: false

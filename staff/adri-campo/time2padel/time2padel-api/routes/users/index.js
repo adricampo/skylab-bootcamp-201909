@@ -60,7 +60,7 @@ router.get('/', tokenVerifier, (req, res) => {
         const { id } = req
 
         retrieveUser(id)
-            .then(user => res.json({ user }))
+            .then(user => res.json( user ))
             .catch(error => {
                 const { message } = error
 

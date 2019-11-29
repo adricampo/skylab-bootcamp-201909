@@ -3,7 +3,7 @@ const { models: { User } } = require('time2padel-data')
 const bcrypt = require('bcryptjs')
 
 
-module.exports = function (name, surname, email, username, password, gender, admin) {
+module.exports = function (name, surname, email, username, password, gender) {
     validate.string(name)
     validate.string.notVoid('name', name)
     validate.string(surname)
@@ -25,6 +25,6 @@ module.exports = function (name, surname, email, username, password, gender, adm
 
         const hash = await bcrypt.hash(password, 10)
 
-        await User.create({ name, surname, email, username, password: hash, gender, admin })
+        await User.create({ name, surname, username, gender, email, password: hash })
     })()
 }

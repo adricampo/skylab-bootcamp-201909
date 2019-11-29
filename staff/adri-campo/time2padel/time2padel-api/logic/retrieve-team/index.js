@@ -10,7 +10,7 @@ module.exports = function (title) {
         if (!team) throw new NotFoundError(`Team ${team.title} not found`)
         await team.save()
 
-         const { id, title: _title, player1, player2, wins, loses, status, leagues } = team
+        const { id, title: _title, player1, player2, wins, loses, status, leagues } = team
         return { id, title: _title, player1, player2, wins, loses, status, leagues }
     })()
 }

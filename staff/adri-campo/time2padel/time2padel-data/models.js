@@ -1,9 +1,11 @@
 const { model } = require('mongoose')
-const { user, league, team } = require('./schemas')
+const { user, league, team, playingDay, match } = require('./schemas')
 
 module.exports = {
     User: model('User', user),
     League: model('League', league),
-    // Request: model('Request', request),
-    Team: model('Team', team)
+    Team: model('Team', team),
+    PlayingDay: model('PlayingDay', playingDay),
+    Match: model('Match', match)
+
 }

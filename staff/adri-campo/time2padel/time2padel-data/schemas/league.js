@@ -1,4 +1,5 @@
 const { Schema, ObjectId } = require('mongoose')
+const PlayingDay = require('./playingday')
 
 module.exports = new Schema({
     level: {
@@ -23,16 +24,24 @@ module.exports = new Schema({
     },
     numberOfTeams: {
         type: Number,
+        default: 0,
         required: true
     },
     teams: {
         type: [ObjectId],
-        ref: 'Team'
+        ref: 'Team',
+        default: []
     },
     status: {
         type: String,
         enum: ['COMPLETED', 'AVAILABLE'],
         default: 'AVAILABLE'
+    },
+    playingDays: [PlayingDay],
+
+    startDate: {
+        type: Date
     }
+    
 })
 

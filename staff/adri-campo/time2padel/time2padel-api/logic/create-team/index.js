@@ -25,9 +25,10 @@ module.exports = function (id, username, title) {
             const player2Id = player2._id
         
             const retrievedTeam = await Team.findOne({ title, player1: player1Id, player2: player2Id })
-            if (retrievedTeam) throw new ConflictError(`team ${retrievedTeam.title} already exists`)
-            const team = await Team.create({ title, player1: player1Id, player2: player2Id, status: 'PENDING' }) 
-                                                            
-            await team.save()
+            if (retrievedTeam) throw new ConflictError(`Team ${retrievedTeam.title} already exists`)
+            await Team.create({ title, player1: player1Id, player2: player2Id, status: 'PENDING' }) 
+                                                         
+            // check League teams (teams.length)
+            // if  teams.length = 6  --- throw Error(league is full) / if not continue de process
     })()
 }

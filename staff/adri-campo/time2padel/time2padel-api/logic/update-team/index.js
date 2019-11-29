@@ -18,9 +18,11 @@ module.exports = function (id, answer) {
             let status 
             answer ? status = 'ACCEPTED' :  status = 'DENNIED' 
             team.status = status
+            
         } else {
             throw new ConflictError(`this team ${team.title} has already been accepted or dennied`)
         }
-        await team.save()
+        await team.save() 
+        return team.status
     })()
 }

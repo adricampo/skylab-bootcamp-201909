@@ -44,11 +44,11 @@ describe('logic - register user', () => {
 
     describe('when user already exists', async () => {
 
-        await User.create({ name, surname, email, username, password, gender })
+        await User.create({ name, surname, username, gender, email, password })
 
         it('should fail on already existing user', async () => {
             try {
-                await registerUser(name, surname, email, username, password, gender)
+                await registerUser(name, surname, username, gender, email, password )
 
                 throw Error('should not reach this point')
             } catch (error) {
