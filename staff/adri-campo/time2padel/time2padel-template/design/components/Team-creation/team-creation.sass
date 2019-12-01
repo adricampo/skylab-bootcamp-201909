@@ -1,4 +1,4 @@
-.league-registration
+.team-creation
     display: flex
     flex-direction: row
     justify-content: center
@@ -8,9 +8,9 @@
 
     .container
         position: fixed
-        top: 18%
+        top: 12%
         width: 85%
-        min-height: 65vh
+        min-height: 80vh
         border: black solid 2px
         border-radius: 2rem
         background-color: #ece9e9
@@ -50,23 +50,32 @@
                 justify-content: space-around
                 & label
                     margin: 5%
+            
+            &__teamtitle
+                display: flex
+                flex-direction: column
+                align-content: center
+                justify-content: space-around
+                & label
+                    margin: 5%
+
         .buttons
             display: flex
             flex-direction: row
             align-content: center
             justify-content: space-around
-            height: 4vh
+            height: 6vh
             width: 65%
             &__confirm
                 width: 5rem
-                heigth: 5rem
+                height: 2rem
                 border-radius: .2rem
-                background-color: green
+                background-color: #cdf1cc
             &__cancel
                 width: 5rem
-                heigth: 5rem
+                height: 2rem
                 border-radius: .2rem
-                background-color: red
+                background-color: #f88181
 .message
     margin: 5%
     font-size: 65%

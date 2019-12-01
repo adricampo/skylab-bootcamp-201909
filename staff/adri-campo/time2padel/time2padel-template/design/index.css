@@ -363,7 +363,7 @@
 }
 .leagues .list .container {
   width: 100%;
-  height: 11%;
+  height: 15%;
 }
 .leagues .list .container__img {
   width: 15%;
@@ -380,22 +380,58 @@
   justify-content: center;
   margin-left: 5%;
 }
+.leagues .list .container .buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-evenly;
+  height: 4vh;
+  width: 100%;
+}
+.leagues .list .container .buttons__deleteleague {
+  width: 7rem;
+  heigth: 5rem;
+  border-radius: 0.2rem;
+  background-color: #f88181;
+}
+.leagues .list .container .buttons__addteamtoleague {
+  width: 7rem;
+  heigth: 5rem;
+  border-radius: 0.2rem;
+  background-color: #cdf1cc;
+}
+.leagues .create-league {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  height: 4vh;
+  width: 87%;
+  margin-top: 10%;
+}
+.leagues .create-league__button {
+  width: 7rem;
+  heigth: 5rem;
+  border-radius: 0.2rem;
+  background-color: #cdf1cc;
+}
 .leagues .back-button {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-content: center;
   height: 4vh;
-  width: 90%;
-  margin-top: 10%;
+  width: 87%;
+  margin-top: 5%;
 }
 .leagues .back-button__button {
-  width: 5rem;
+  width: 7rem;
   heigth: 5rem;
   border-radius: 0.2rem;
+  background-color: #f88181;
 }
 
-.league-registration {
+.team-creation {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -403,11 +439,11 @@
   height: 100%;
   background-color: #fae885;
 }
-.league-registration .container {
+.team-creation .container {
   position: fixed;
-  top: 18%;
+  top: 12%;
   width: 85%;
-  min-height: 65vh;
+  min-height: 80vh;
   border: black solid 2px;
   border-radius: 2rem;
   background-color: #ece9e9;
@@ -417,7 +453,7 @@
   justify-content: space-around;
   align-items: center;
 }
-.league-registration .container__title {
+.team-creation .container__title {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -425,52 +461,61 @@
   font-family: "Staatliches";
   color: black;
 }
-.league-registration .container .players-info {
+.team-creation .container .players-info {
   margin-top: -10%;
 }
-.league-registration .container .players-info__title {
+.team-creation .container .players-info__title {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 10%;
   margin-bottom: 10%;
 }
-.league-registration .container .players-info__form1 {
+.team-creation .container .players-info__form1 {
   display: flex;
   flex-direction: column;
   align-content: center;
 }
-.league-registration .container .players-info__form1 label {
+.team-creation .container .players-info__form1 label {
   margin: 5%;
 }
-.league-registration .container .players-info__form2 {
+.team-creation .container .players-info__form2 {
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: space-around;
 }
-.league-registration .container .players-info__form2 label {
+.team-creation .container .players-info__form2 label {
   margin: 5%;
 }
-.league-registration .container .buttons {
+.team-creation .container .players-info__teamtitle {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-around;
+}
+.team-creation .container .players-info__teamtitle label {
+  margin: 5%;
+}
+.team-creation .container .buttons {
   display: flex;
   flex-direction: row;
   align-content: center;
   justify-content: space-around;
-  height: 4vh;
+  height: 6vh;
   width: 65%;
 }
-.league-registration .container .buttons__confirm {
+.team-creation .container .buttons__confirm {
   width: 5rem;
-  heigth: 5rem;
+  height: 2rem;
   border-radius: 0.2rem;
-  background-color: green;
+  background-color: #cdf1cc;
 }
-.league-registration .container .buttons__cancel {
+.team-creation .container .buttons__cancel {
   width: 5rem;
-  heigth: 5rem;
+  height: 2rem;
   border-radius: 0.2rem;
-  background-color: red;
+  background-color: #f88181;
 }
 
 .message {
@@ -479,71 +524,7 @@
   width: 100%;
 }
 
-.results {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 12vh;
-  width: 100vw;
-  height: 100vh;
-}
-.results .container {
-  width: 90%;
-  height: 11%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 5%;
-}
-.results .container__img {
-  max-height: 15vh;
-  max-width: 20vw;
-  width: 25%;
-  height: 100%;
-}
-.results .container__item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  width: 75%;
-}
-.results__table {
-  border: solid black 3px;
-  width: 90%;
-}
-.results .back-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: center;
-  height: 4vh;
-  width: 90%;
-  margin-top: 10%;
-}
-.results .back-button__button {
-  width: 5rem;
-  heigth: 5rem;
-  border-radius: 0.2rem;
-}
-
-thead th {
-  font-size: 145%;
-  border-bottom: solid black 2px;
-  background-color: black;
-  color: white;
-  width: 25%;
-  padding: 0.6rem;
-}
-
-tbody p {
-  border-rigth: solid black 5px;
-  margin-top: 7%;
-  margin-bottom: 9%;
-}
-
-.requests {
+.myteams {
   position: absolute;
   top: 12vh;
   display: flex;
@@ -552,27 +533,35 @@ tbody p {
   width: 100vw;
   height: 100vh;
 }
-.requests .box {
+.myteams .box {
   width: 90%;
-  height: 7rem;
+  height: 8rem;
 }
-.requests .box .info {
+.myteams .box .info {
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   border: solid red 2px;
-  background-color: #e2dfdf;
+  background-color: #ebe7e7;
   margin-bottom: 3%;
 }
-.requests .box .info__message {
+.myteams .box .info__message {
   font-size: 95%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
-.requests .box .info__league {
+.myteams .box .info__teamtitle {
   font-size: 120%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
-.requests .box .info .buttons {
+.myteams .box .info .buttons {
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -580,19 +569,57 @@ tbody p {
   height: 4vh;
   width: 65%;
 }
-.requests .box .info .buttons__confirm {
+.myteams .box .info .buttons__confirm {
   width: 5rem;
   heigth: 5rem;
   border-radius: 0.2rem;
-  background-color: green;
+  background-color: #cdf1cc;
 }
-.requests .box .info .buttons__cancel {
+.myteams .box .info .buttons__cancel {
   width: 5rem;
   heigth: 5rem;
   border-radius: 0.2rem;
-  background-color: red;
+  background-color: #f88181;
 }
-.requests .back-button {
+.myteams .box .infoifaccepted {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: solid red 2px;
+  background-color: #ebe7e7;
+  margin-bottom: 3%;
+}
+.myteams .box .infoifaccepted__teamtitle {
+  font-size: 120%;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.myteams .box .infoifaccepted__teaminfo {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.myteams .box .infoifaccepted .buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-around;
+  height: 4vh;
+  width: 65%;
+}
+.myteams .box .infoifaccepted .buttons__delete {
+  width: 7rem;
+  heigth: 5rem;
+  border-radius: 0.2rem;
+  background-color: #f88181;
+}
+.myteams .create-team {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -601,10 +628,246 @@ tbody p {
   width: 100%;
   margin-top: 5%;
 }
-.requests .back-button__button {
-  width: 5rem;
+.myteams .create-team__button {
+  width: 7rem;
   heigth: 5rem;
   border-radius: 0.2rem;
+  background-color: #cdf1cc;
+}
+.myteams .back-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  height: 4vh;
+  width: 100%;
+  margin-top: 5%;
+}
+.myteams .back-button__button {
+  width: 7rem;
+  heigth: 5rem;
+  border-radius: 0.2rem;
+  background-color: #f88181;
+}
+
+.league-detail {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 180vh;
+  position: absolute;
+  top: 12vh;
+}
+.league-detail .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 90%;
+}
+.league-detail .container__league-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.league-detail .container .teams {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.league-detail .container .teams li {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 6%;
+}
+.league-detail .container .league-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 8%;
+  margin-bottom: 8%;
+}
+.league-detail .container .container-playingday {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 40vh;
+}
+.league-detail .container .container-playingday__title {
+  margin-left: 5%;
+}
+.league-detail .container .container-playingday .match {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.league-detail .back-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  height: 6vh;
+  width: 90%;
+  margin-top: 5%;
+}
+.league-detail .back-button__button {
+  width: 7rem;
+  heigth: 5rem;
+  border-radius: 0.2rem;
+  background-color: #f88181;
+}
+
+.league-creation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #fae885;
+}
+.league-creation .container {
+  position: fixed;
+  top: 12%;
+  width: 80%;
+  padding: 3%;
+  min-height: 80vh;
+  border: black solid 2px;
+  border-radius: 2rem;
+  background-color: #ece9e9;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.league-creation .container__title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 150%;
+  font-family: "Staatliches";
+  color: black;
+}
+.league-creation .container .league-info {
+  margin-top: -25%;
+}
+.league-creation .container .league-info__title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.league-creation .container .league-info__form {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.league-creation .container .league-info__form label {
+  margin-top: 10%;
+}
+.league-creation .container .buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-around;
+  height: 6vh;
+  width: 65%;
+}
+.league-creation .container .buttons__confirm {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 0.2rem;
+  background-color: #cdf1cc;
+}
+.league-creation .container .buttons__cancel {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 0.2rem;
+  background-color: #f88181;
+}
+
+.message {
+  margin: 5%;
+  font-size: 65%;
+  width: 100%;
+}
+
+.userpage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.userpage .container {
+  position: fixed;
+  top: 14%;
+  width: 80%;
+  min-height: 70%;
+  border: black solid 2px;
+  background-color: #ece9e9;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.userpage .container__title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 130%;
+  padding-bottom: 2%;
+  font-family: "Staatliches";
+  color: black;
+}
+.userpage .container__form {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  align-items: center;
+}
+.userpage .container label, .userpage .container button {
+  margin: 6%;
+}
+.userpage .container label {
+  width: 100%;
+}
+.userpage .container .buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 85%;
+  height: 4rem;
+}
+.userpage .container .buttons .delete-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 7vh;
+  width: 95%;
+}
+.userpage .container .buttons .delete-user__button {
+  width: 7rem;
+  height: 5rem;
+  border-radius: 0.2rem;
+  background-color: #cdf1cc;
+}
+.userpage .container .buttons .modify-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 7vh;
+  width: 87%;
+}
+.userpage .container .buttons .modify-info__button {
+  width: 7rem;
+  height: 5rem;
+  border-radius: 0.2rem;
+  background-color: #f88181;
 }
 
 * {
