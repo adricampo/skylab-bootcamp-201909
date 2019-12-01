@@ -9,11 +9,11 @@ module.exports = function (leagueId) {
         const league = await League.findById(leagueId)
         if (!league) throw new NotFoundError(`league with id ${leagueId} not found`)
 
-        if (league.status !== 'COMPLETED') throw new Error()
+        if (league.status !== 'COMPLETED') throw new Error(`League status not COMPLETED`)
 
         await league.teams.forEach( async (teamId) => {
             const team = await Team.findById(teamId)
-            if (!teamId) throw new NotFoundError(`team with id ${teamId} not found on that league`)
+            if (!teamId) throw new NotFoundError(`Team with id ${teamId} not found on that league`)
             const p1 = await User.findOne({_id: team.player1})
             const p2 = await User.findOne({_id: team.player2})
             if (!p1) throw new NotFoundError(`player not found`)
@@ -29,7 +29,7 @@ module.exports = function (leagueId) {
             }
             await p2.save()
         })
-
+        //SABER COMO PUSHEAR SOLO 1 VEZ AL USUARIO LA LIGA
     })()
 
 }

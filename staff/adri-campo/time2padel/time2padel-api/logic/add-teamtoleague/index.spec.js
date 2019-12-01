@@ -51,13 +51,10 @@ describe('logic - add team to league', () => {
     it('should succeed if team status is ACCEPTED & number of teams in the league is less than 6', async () => { 
         let league = await League.create({ level, gender, date, time, teams })
         const team = await Team.create({ title, player1, player2, wins, loses, status })
-        // const team2 = await Team.create({ title, player1, player2, wins, loses, status })
-        // const team3 = await Team.create({ title, player1, player2, wins, loses, status })
-        // const team4 = await Team.create({ title, player1, player2, wins, loses, status })
-        // const team5 = await Team.create({ title, player1, player2, wins, loses, status })
         league.teams.push(team)
+
         const myTeams = league.teams.map(team => team._id.toString())
-        // myLeagues.forEach(league => league.id)
+        
         await addTeamToLeague(league.id, team.id)
 
         expect(league).to.exist
@@ -67,8 +64,6 @@ describe('logic - add team to league', () => {
         expect(league.time).to.equal(time)
         expect(league.teams.length).to.not.be.greaterThan(5)
     })
-    
-    // describe('when wrong credentials', () => {
     
     it('should fail if number of teams in the league is already 6', async () => { 
         let league = await League.create({ level, gender, date, time, teams })
@@ -88,7 +83,7 @@ describe('logic - add team to league', () => {
             throw new Error(`Sorry, league ${league.id} is complete`)
         } catch(error) {
             expect(error).to.exist
-            expect(error).to.be.an.instanceOf(ConflictError)
+            expect(error).to.be.an.instanceOf(Error)
             expect(error.message).to.equal(`Sorry, league ${league.id} is complete`)
         }
     })
@@ -101,11 +96,11 @@ describe('logic - add team to league', () => {
 
         try{
             await addTeamToLeague(league.id, team.id)
-            throw new Error(`You should validate your team ${addTeam.id} to continue`)
+            throw new Error(`You should validate your team ${team.id} to continue`)
         } catch (error) {
             expect(error).to.exist
-            expect(error).to.be.an.instanceOf(ConflictError)
-            expect(error.message).to.equal(`You should validate your team ${addTeam.id} to continue`)
+            expect(error).to.be.an.instanceOf(Error)
+            expect(error.message).to.equal(`You should validate your team ${team.id} to continue`)
         }
     })                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 
