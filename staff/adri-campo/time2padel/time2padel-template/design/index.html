@@ -13,15 +13,15 @@
 
 <body>
     <!-- Component: HEADER -->
-    <header class="header hidden">
+    <header class="header">
         <img class="header__logo" src="img/logoPro1.png">
         <h1 class="header__title">Time2Padel</h1>
         <input type="checkbox" id="show-menu">
         <label class="header__hamburguer" for="show-menu"><i class="fas fa-bars"></i></label>
         <nav class="header__nav menu">
             <ul class="menu__list list">
-                <li><a href="#" class="list__item">News</a></li>
-                <li><a href="#" class="list__item">Requests</a></li>
+                <li><a href="#" class="list__item">My Teams</a></li>
+                <li><a href="#" class="list__item">User Info</a></li>
                 <li><a href="#" class="list__item">Leagues</a></li>
                 <li><a href="#" class="list__item">Logout</a></li>
             </ul>
@@ -58,7 +58,7 @@
     </footer>
 
     <!-- Wireframe 1 -->
-    <section class="landing">
+    <section class="landing hidden">
         <article class="landing__container container">
             <h2 class="container__title">Time2Padel</h2>
             <div class="container__images images">
@@ -87,11 +87,9 @@
                     <label for="name">Name: <input type="text" class="sign-up__name" name="name"></label>
                     <label for="surname">Surname: <input type="text" class="sign-up__name" name="surname"></label>
                     <label for="username">Username: <input type="email" class="sign-up__name" name="username"></label>
-                    <label for="phone">Phone: <input type="tel" class="sign-up__name" name="phone"></label>
-                    <label for="gender">Gender: <input type="radio" class="sign-up__name" name="gender" value="Male">
-                        Male <input type="radio" class="sign-up__name" name="gender" value="Female"> Female</label>
-                    <label for="password">Password: <input type="password" class="sign-up__name"
-                            name="password"></label>
+                    <label for="gender">Gender: <input type="radio" class="sign-up__name" name="gender" value="Male"> Male<input type="radio" class="sign-up__name" name="gender" value="Female"> Female</label>
+                    <label for="email">Email: <input type="email" class="sign-up__name" name="email"></label>
+                    <label for="password">Password: <input type="password" class="sign-up__name" name="password"></label>
                     <button class="sign-up__button">Sign Up</button>
                 </form>
             </section>

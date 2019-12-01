@@ -44,7 +44,7 @@
   display: flex;
   flex-direction: column;
   top: 10vh;
-  height: 21vh;
+  height: 25vh;
   justify-content: flex-start;
   list-style: none;
   cursor: pointer;
