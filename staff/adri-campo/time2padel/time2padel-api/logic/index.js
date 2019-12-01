@@ -16,5 +16,6 @@ module.exports = {
     retrieveLeaguebyTeam: require('./retrieve-leaguebyteam'),
     retrieveLeague: require('./retrieve-league'),
     retrieveTeamByLeague: require('./retrieve-teambyleague'),
-    updateLeagueUsers: require('./update-leagueusers')
+    updateLeagueUsers: require('./update-leagueusers'),
+    retrieveUserTeams: require('./retrieve-userteams')
 }

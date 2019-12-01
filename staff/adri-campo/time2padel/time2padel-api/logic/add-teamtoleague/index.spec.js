@@ -88,7 +88,7 @@ describe('logic - add team to league', () => {
         }
     })
 
-    it('should fail if status of the team is not ACCEPTED', async () => { debugger
+    it('should fail if status of the team is not ACCEPTED', async () => {
         let league = await League.create({ level, gender, date, time, teams })
         let team = await Team.create({ title, player1, player2, wins, loses, status })
         team.status = 'PENDING'

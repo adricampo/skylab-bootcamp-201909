@@ -16,6 +16,7 @@ module.exports = function (leagueId, teamId) {
 
         if (addTeam.status !== 'ACCEPTED') throw new Error(`You should validate your team ${addTeam.id} to continue`)
         if (league.teams.length >= 6) throw new Error(`Sorry, league ${league.id} is complete`)
+        if (league.teams.toString().includes(addTeam._id.toString())) throw new Error (`This team has been already registered on that league`)
 
         league.teams.push(teamId)
         addTeam.leagues.push(leagueId)

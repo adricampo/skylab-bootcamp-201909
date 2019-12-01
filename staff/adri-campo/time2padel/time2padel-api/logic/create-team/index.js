@@ -28,12 +28,22 @@ module.exports = function (id, username, title) {
             if (retrievedTeam) throw new ConflictError(`Team ${retrievedTeam.title} already exists`)
             const team = await Team.create({ title, player1: player1Id, player2: player2Id, status: 'PENDING' }) 
             
-            player1.teams.push(team)
-            player2.teams.push(team)
+            const player1Teams = player1.teams.indexOf(player1Id)
+            const player2Teams = player2.teams.indexOf(player2Id)
+            
+            if (player1Teams === -1) {
+                player1.teams.push(team.id)
+            } else {
+                player1.teams.splice(player1Teams, 1)
+            }
             await player1.save()
+
+            if (player2Teams === -1) {
+                player2.teams.push(team.id)
+            } else {
+                player2.teams.splice(player2Teams, 1)
+            }
             await player2.save()
 
-            // check League teams (teams.length)
-            // if  teams.length = 6  --- throw Error(league is full) / if not continue de process
     })()
 }

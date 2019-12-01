@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { registerUser, authenticateUser, retrieveUser, modifyUser, deleteUser } = require('../../logic')
+const { registerUser, authenticateUser, retrieveUser, modifyUser, deleteUser, retrieveUserTeams} = require('../../logic')
 const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 const tokenVerifier = require('../../helpers/token-verifier')(SECRET)
@@ -116,6 +116,28 @@ router.delete('/:id', tokenVerifier, (req, res) => {
                 res.status(500).json({ message })
             })
     } catch ({ message }) {
+        res.status(400).json({ message })
+    }
+})
+
+//RETRIEVE USER TEAMS
+router.get('/:id', tokenVerifier, (req, res) => {
+    try {
+        const { params: { id } } = req
+
+        retrieveUserTeams(id)
+            .then(user => res.json( user ))
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch (error) {
+        const { message } = error
+
         res.status(400).json({ message })
     }
 })
