@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { createTeam, updateTeam, deleteTeam, retrieveTeam, retrieveTeamByLeague } = require('../../logic')
+const { createTeam, updateTeam, deleteTeam, retrieveTeam, retrieveLeaguebyTeam } = require('../../logic')
 // const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 const tokenVerifier = require('../../helpers/token-verifier')(SECRET)
@@ -100,13 +100,13 @@ router.post('/', tokenVerifier, jsonBodyParser, (req, res) => {
     }
 })
 
-//RETRIEVE TEAM BY LEAGUE
+//RETRIEVE LEAGUES BY TEAM
 router.get('/:id', jsonBodyParser, (req, res) => {
     try {
         const { params: { id } } = req
 
-        retrieveTeamByLeague(id)
-            .then(league => res.json( league ))
+        retrieveLeaguebyTeam(id)
+            .then(team => res.json( team ))
             .catch(error => {
                 const { message } = error
 

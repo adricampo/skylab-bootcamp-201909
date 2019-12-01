@@ -26,9 +26,9 @@ module.exports = new Schema({
     password: {
         type: String,
     },
-    admin: {
-        default: false
-    },
+    // admin: {
+    //     default: false
+    // },
     leagues: {
         type: [ObjectId],
         ref: 'League'

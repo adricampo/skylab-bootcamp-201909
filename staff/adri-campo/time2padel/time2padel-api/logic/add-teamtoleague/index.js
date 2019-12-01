@@ -10,40 +10,37 @@ module.exports = function (leagueId, teamId) {
     validate.string.notVoid('teamId', teamId)
     return (async () => {
         const league = await League.findById(leagueId)
-        //errror
-
+        if (!league) throw new NotFoundError(`league with id ${leagueId} not found`)
         const addTeam = await Team.findById(teamId)
-        //error
+        if (!addTeam) throw new NotFoundError(`league with id ${addTeam} not found`)
 
-        if (addTeam.status === 'ACCEPTED' && league.teams.length < 6) {
+        if (addTeam.status !== 'ACCEPTED') throw new Error(`You should validate your team ${addTeam.id} to continue`)
+        if (league.teams.length >= 6) throw new Error(`Sorry, league ${league.id} is complete`)
 
-            league.teams.push(teamId)
-            //saveLeague
-            addTeam.leagues.push(leagueId)
-            //saveTeam
+        league.teams.push(teamId)
+        addTeam.leagues.push(leagueId)
 
-            if (league.teams.length === 6) {
-                league.status = 'COMPLETED'
-                const myTeams = league.teams.map(team => team._id.toString())
-                // const deleteme = ['1','2','3','4','5','6']
-                let schedule = robin(myTeams)
+        if (league.teams.length === 6) {
+            league.status = 'COMPLETED'
+            const myTeams = league.teams.map(team => team._id.toString())
 
-                for (let i = 0; i < schedule.length; i++) {
-                    const playingDay = new PlayingDay
-                    for (let j = 0; j < schedule[i].length; j++) {
-                        const match = new Match
-                        match.teams.push(schedule[i][j][0], schedule[i][j][1])
-                        playingDay.matches.push(match)
-                    }
-                    league.playingDays.push(playingDay)
+            let schedule = robin(myTeams)
+
+            for (let i = 0; i < schedule.length; i++) {
+                const playingDay = new PlayingDay
+                for (let j = 0; j < schedule[i].length; j++) {
+                    const match = new Match
+                    match.teams.push(schedule[i][j][0], schedule[i][j][1])
+                    playingDay.matches.push(match)
                 }
-                league.startDate = new Date
+                league.playingDays.push(playingDay)
             }
-            await addTeam.save()
-            await league.save()
-
-        } else {
-            throw new ConflictError(`Sorry, you cannot join this league ${league.id} beacuse is already completed`)
+            league.startDate = new Date
+            league.startDate.toLocaleDateString()
         }
+        await addTeam.save()
+        await league.save()
+
+
     })()
 }

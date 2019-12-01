@@ -4,14 +4,14 @@ const { expect } = require('chai')
 const { random, floor } = Math
 const retrieveTeam = require('.')
 const { errors: { NotFoundError } } = require('time2padel-util')
-const { database, models: { Team } } = require('time2padel-data')
+const { database, models: { User, Team } } = require('time2padel-data')
 
 describe('logic - retrieve team', () => {
     before(() => database.connect(DB_URL_TEST))
     
     let title, player1, player2, wins, loses, status, index, statuses
-    statuses = ['ACCEPTED', 'DENNIED']
-    index = floor(random()* 2)
+    statuses = ['PENDING', 'ACCEPTED', 'DENNIED']
+    index = floor(random()* 3)
 
     beforeEach(async () => {
         const p1 = await User.create({username : `username1-${random()}`, email : `email1-${random()}@mail.com` })
@@ -34,23 +34,23 @@ describe('logic - retrieve team', () => {
 
         expect(team).to.exist
         expect(team.title).to.equal(title)
-        expect(team.player1.toString()).to.equal(player1.id)
-        expect(team.player2.toString()).to.equal(player2.id)
+        expect(team.player1.toString()).to.equal(player1)
+        expect(team.player2.toString()).to.equal(player2)
     })
 
-    it('should fail on wrong user id', async () => {
-        const id = '012345678901234567890123'
-
+    it('should fail on wrong team title', async () => {
+        const title = '01234567890'
+        
         try {
-            await retrieveTeam(id)
+            await retrieveTeam(title)
 
             throw Error('should not reach this point')
         } catch (error) {
             expect(error).to.exist
             expect(error).to.be.an.instanceOf(NotFoundError)
-            expect(error.message).to.equal(`user with id ${id} not found`)
+            expect(error.message).to.equal(`Team ${title} not found`)
         }
     })
 
-    after(() => User.deleteMany().then(database.disconnect))
+    after(() => Promise.all([Team.deleteMany(), User.deleteMany()]).then(database.disconnect))
 })

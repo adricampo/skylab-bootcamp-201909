@@ -9,15 +9,13 @@ const { database, models: { League } } = require('time2padel-data')
 describe('logic - retrieve leagues', () => {
     before(() => database.connect(DB_URL_TEST))
     
-    let levels, indexlevel, level, genders, indexgender, gender, numberOfTeams, dates, indexdates, date, times, indextimes, time
+    let levels, indexlevel, level, genders, indexgender, gender, dates, indexdates, date, times, indextimes, time
 
     levels = ['D', 'C-', 'C+', 'B-', 'B+', 'A']
     indexlevel = floor(random() * 6)
 
     genders = ['MALE', 'FEMALE']
     indexgender = floor(random() * 2)
-
-    numberOfTeams = 6
     
     dates = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY']
     indexdates = floor(random() * 5)
@@ -29,7 +27,6 @@ describe('logic - retrieve leagues', () => {
     beforeEach(async () => {
         level = levels[indexlevel]
         gender = genders[indexgender]
-        numberOfTeams
         date = dates[indexdates]
         time = times[indextimes]
 
@@ -41,7 +38,6 @@ describe('logic - retrieve leagues', () => {
             insertions.push(League.create({ 
                 level, 
                 gender, 
-                numberOfTeams, 
                 date, 
                 time }))
         await Promise.all(insertions)

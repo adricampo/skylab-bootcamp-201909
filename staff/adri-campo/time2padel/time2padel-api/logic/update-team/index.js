@@ -1,16 +1,13 @@
 const { validate, errors: { NotFoundError, ConflictError } } = require('time2padel-util')
 const { models: { Team } } = require('time2padel-data')
 
-// Update Team
-
 module.exports = function (id, answer) {
     validate.string(id)
     validate.string.notVoid('id', id)
 
-    validate.string(answer)
-    validate.string.notVoid('answer', answer)
+    validate.boolean(answer)
 
-    return (async () => {
+    return (async () => { 
         const team = await Team.findById(id)
         if (!team) throw new NotFoundError(`team ${team.title} not exists`)
 
@@ -23,6 +20,6 @@ module.exports = function (id, answer) {
             throw new ConflictError(`this team ${team.title} has already been accepted or dennied`)
         }
         await team.save() 
-        return team.status
+        return team
     })()
 }

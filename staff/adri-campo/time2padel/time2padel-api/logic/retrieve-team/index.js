@@ -7,7 +7,7 @@ module.exports = function (title) {
 
     return (async () => {
         const team = await Team.findOne({title})
-        if (!team) throw new NotFoundError(`Team ${team.title} not found`)
+        if (!team) throw new NotFoundError(`Team ${title} not found`)
         await team.save()
 
         const { id, title: _title, player1, player2, wins, loses, status, leagues } = team

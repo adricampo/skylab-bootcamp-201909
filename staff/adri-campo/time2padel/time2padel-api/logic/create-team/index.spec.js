@@ -42,7 +42,7 @@ describe('logic - create team', () => {
 
     })
 
-    it('should fail on already existing team', async () => {debugger
+    it('should fail on already existing team', async () => {
         let player1 = await User.findById(id1)
         let player2 = await User.findOne( { username } )
         const _team = await Team.create({ title, player1, player2, wins, loses, status })

@@ -1,19 +1,19 @@
 require('dotenv').config
 const { env: { DB_URL_TEST } } = process
 const { expect } = require('chai')
-const retrieveTeamByLeague = require('.')
+const retrieveLeaguebyTeam = require('.')
 const { random, floor } = Math
 const { database, models: { Team, User, League } } = require('time2padel-data')
 const { errors: { ContentError } } = require('time2padel-util')
 
-describe('logic - retrieve team by league', () => {
+describe('logic - retrieve league by team', () => {
     before(() => database.connect(DB_URL_TEST))
     
     let title, player1, player2, wins, loses, status, index, statuses
     statuses = ['PENDING', 'ACCEPTED', 'DENNIED']
     index = floor(random()* 3)
 
-    let levels, indexlevel, level, genders, indexgender, gender, dates, indexdates, date, times, indextimes, time, teams
+    let levels, indexlevel, level, genders, indexgender, gender, dates, indexdates, date, times, indextimes, time
 
     levels = ['D', 'C-', 'C+', 'B-', 'B+', 'A']
     indexlevel = floor(random() * 6)
@@ -37,34 +37,32 @@ describe('logic - retrieve team by league', () => {
         wins = `wins-${random()}`
         loses = `loses-${random()}`
         status = statuses[index]
-    
+        leagues = []
         //LEAGUE
         level = levels[indexlevel]
         gender = genders[indexgender]
         date = dates[indexdates]
         time = times[indextimes]
-        teams = []
         
         await Promise.all([Team.deleteMany(), User.deleteMany(), League.deleteMany()])
 
-        // const team = await Team.create({ title, player1, player2, wins, loses, status })
-        // id = team.id
+        const team = await Team.create({ title, player1, player2, wins, loses, status, leagues })
+        id = team.id
     })
 
-    it('should succeed on correct team id', async () => {
-        let league = await League.create({ level, gender, date, time, teams })
-        const team = await Team.create({ title, player1, player2, wins, loses, status })
-        league.teams.push(team)
-        const myTeams = league.teams.map(team => team._id.toString())
+    it('should succeed on correct team id', async () => { 
+        const league = await League.create({ level, gender, date, time })
+        let team = await Team.create({ title, player1, player2, wins, loses, status, leagues })
+        team.leagues.push(league)
+        const myLeagues = team.leagues.map(league => league._id.toString())
         // myLeagues.forEach(league => league.id)
-        await retrieveTeamByLeague(league.id)
+        await retrieveLeaguebyTeam(team.id)
 
-        expect(league).to.exist
-        expect(league.level).to.equal(level)
-        expect(league.gender).to.equal(gender)
-        expect(league.date).to.equal(date)
-        expect(league.time).to.equal(time)
-        expect(league.teams.toString()).to.equal(myTeams[0])
+        expect(team).to.exist
+        expect(team.title).to.equal(title)
+        expect(team.player1.toString()).to.equal(player1)
+        expect(team.player2.toString()).to.equal(player2)
+        expect(team.leagues.toString()).to.equal(myLeagues[0])
     })
 
     after(() => Promise.all([Team.deleteMany(), User.deleteMany(), League.deleteMany()]).then(database.disconnect))

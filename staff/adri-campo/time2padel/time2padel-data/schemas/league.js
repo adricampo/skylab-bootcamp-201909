@@ -22,11 +22,6 @@ module.exports = new Schema({
         enum: ['18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'],
         // required: true
     },
-    numberOfTeams: {
-        type: Number,
-        default: 0,
-        required: true
-    },
     teams: {
         type: [ObjectId],
         ref: 'Team',

@@ -11,7 +11,7 @@ module.exports = function (username, password) {
     return (async () => {
         const user = await User.findOne({ username })
         if (!user) throw new CredentialsError('wrong username')
-        debugger
+        
         const match = await bcrypt.compare(password, user.password)
         if(!match) throw new CredentialsError ('wrong password')
 

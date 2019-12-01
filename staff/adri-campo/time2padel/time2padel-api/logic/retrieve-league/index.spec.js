@@ -1,15 +1,15 @@
-require('dotenv').config()
+require('dotenv').config
 const { env: { DB_URL_TEST } } = process
 const { expect } = require('chai')
-const deleteLeague = require('.')
+const retrieveLeague = require('.')
 const { random, floor } = Math
-const { errors: { NotFoundError, ConflictError } } = require('time2padel-util')
-const { database, ObjectId, models: { League } } = require('time2padel-data')
+const { database, models: { League } } = require('time2padel-data')
+const { errors: { NotFoundError } } = require('time2padel-util')
 
-describe('logic - delete league', () => {
+describe('logic - retrieve league', () => {
     before(() => database.connect(DB_URL_TEST))
     
-    let levels, indexlevel, level, genders, indexgender, gender, dates, indexdates, date, times, indextimes, time, league
+    let levels, indexlevel, level, genders, indexgender, gender, dates, indexdates, date, times, indextimes, time
 
     levels = ['D', 'C-', 'C+', 'B-', 'B+', 'A']
     indexlevel = floor(random() * 6)
@@ -24,7 +24,7 @@ describe('logic - delete league', () => {
     indextimes = floor(random() * 8)
 
 
-    beforeEach(async () => {
+    beforeEach( async () => {
         level = levels[indexlevel]
         gender = genders[indexgender]
         date = dates[indexdates]
@@ -33,36 +33,34 @@ describe('logic - delete league', () => {
         await League.deleteMany()
 
         const league = await League.create({ level, gender, date, time })
-    
         id = league.id
-
     })
 
     it('should succeed on correct data', async () => {
-        await deleteLeague(id)
+        const league = await retrieveLeague(id)
 
-        const league = await League.findById(id)
+        expect(league).to.exist
+        expect(league.id).to.equal(id)
+        expect(league.level).to.equal(level)
+        expect(league.gender).to.equal(gender)
+        expect(league.date).to.equal(date)
+        expect(league.time).to.equal(time)
 
-        expect(league).not.to.exist
-      
     })
 
-
-    it('should fail on wrong league id or not existing', async () => {
+    it('should fail on wrong league id', async () => {
         const id = '012345678901234567890123'
 
         try {
-            await deleteLeague(id)
-            throw Error('should not reach this point')
+            await retrieveLeague(id)
 
+            throw Error('should not reach this point')
         } catch (error) {
             expect(error).to.exist
             expect(error).to.be.an.instanceOf(NotFoundError)
-            expect(error.message).to.equal(`league with id ${id} does not exist`)
+            expect(error.message).to.equal(`League ${id} not found`)
         }
     })
 
     after(() => League.deleteMany().then(database.disconnect))
 })
-
-    
