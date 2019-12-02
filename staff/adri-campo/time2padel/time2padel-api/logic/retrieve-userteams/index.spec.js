@@ -27,7 +27,7 @@ describe('logic - retrieve user teams', () => {
         id = user.id
     })
 
-    it('should succeed on correct user id', async () => { debugger
+    it('should succeed on correct user id', async () => {
         const user = await retrieveUserTeams(id)
 
         expect(user).to.exist

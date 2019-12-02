@@ -137,7 +137,7 @@ router.get('/:id', jsonBodyParser, (req, res) => {
 })
 
 //UPDATE LEAGUE USERS
-router.patch('/:leagueId', jsonBodyParser, (req, res) => { debugger
+router.patch('/:leagueId', jsonBodyParser, (req, res) => { 
     try {
         const { params: { leagueId } } = req
 
