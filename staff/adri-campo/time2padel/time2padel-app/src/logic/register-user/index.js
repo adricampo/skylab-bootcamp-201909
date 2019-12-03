@@ -1,6 +1,6 @@
+const call = require('../../utils/call')
 const { validate, errors: { ConflictError } } = require('time2padel-util')
-const { models: { User } } = require('time2padel-data')
-const bcrypt = require('bcryptjs')
+const API_URL = process.env.REACT_APP_API_URL
 
 module.exports = function (name, surname, username, gender, email, password) {
     validate.string(name)
@@ -18,12 +18,15 @@ module.exports = function (name, surname, username, gender, email, password) {
     validate.string.notVoid('password', password)
 
     return (async () => {
-        const user = await User.findOne({ username })
+        const res = await call(`${API_URL}/users`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, surname, username, gender, email, password })
+        })
+        if (res.status === 201) return
 
-        if (user) throw new ConflictError(`user with username ${username} already exists`)
+        if (res.status === 409) throw new ConflictError(JSON.parse(res.body).message)
 
-        const hash = await bcrypt.hash(password, 10)
-
-        await User.create({ name, surname, username, gender, email, password: hash })
+        throw new Error(JSON.parse(res.body).message)
     })()
 }

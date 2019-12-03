@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { env: { REACT_APP_TEST_DB_URL: TEST_DB_URL } } = process
 const authenticateUser = require('.')
 const { random, floor } = Math
@@ -7,9 +6,9 @@ const { database, models: { User } } = require('time2padel-data')
 const bcrypt = require('bcryptjs')
 
 describe('logic - authenticate user', () => {
-    before(() => database.connect(TEST_DB_URL))
+    beforeAll(() => database.connect(TEST_DB_URL))
 
-    let name, surname, username, gender, email, password, index, genders
+    let id, name, surname, username, gender, email, password, index, genders
     genders = ['MALE', 'FEMALE']
     index = floor(random()* 2)
 
@@ -95,5 +94,5 @@ describe('logic - authenticate user', () => {
         expect(() => authenticateUser(email, ' \t\r')).toThrow(ContentError, 'password is empty or blank')
     })
 
-    after(() => User.deleteMany().then(database.disconnect))
+    afterAll(() => User.deleteMany().then(database.disconnect))
 })

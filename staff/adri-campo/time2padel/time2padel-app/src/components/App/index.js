@@ -1,19 +1,33 @@
 import React, { useState, useEffect } from 'react';
+import { Route, withRouter, Redirect } from 'react-router-dom'
 import './index.sass'
+//COMPONENTS
 import Landing from '../Landing'
 import RegistrationPage from '../Registration-page'
 import Main from '../Main'
-import { Route, withRouter, Redirect } from 'react-router-dom'
-import { authenticateUser, registerUser } from '../../logic'
+//LOGIC
+import { authenticateUser, registerUser, retrieveUser } from '../../logic'
 
-export default withRouter(function ({ history }) {
+export default withRouter(function ({ history }) { 
+    const [name, setName] = useState()
+	const [error, setError] = useState()
 
-    const { token } = sessionStorage
+    useEffect(() => { 
+        const { token } = sessionStorage;   
 
+        (async () => {
+            if (token) {
+                
+                const { name } = await retrieveUser(token)
+
+                setName(name)
+            }
+        })()
+    }, [sessionStorage.token])
 
     function handleGoToRegistrationPage() { history.push('/registration-page') }
 
-    async function handleGoToMainSignIn(username, password) {
+    async function handleSignIn(username, password) {
         try {
             const token = await authenticateUser(username, password)
 
@@ -21,29 +35,38 @@ export default withRouter(function ({ history }) {
 
             history.push('/main')
         } catch (error) {
-            console.error(error)
+            const { message } = error
+            setError(message)
         }
     }
 
-    async function handleGoToMainSignUp(name, surname, email, username, password) {
+    async function handleSignUp(name, surname, username, gender, email, password) {
         try {
-            await registerUser(name, surname, email, username, password)
+            await registerUser(name, surname, username, gender, email, password)
 
             history.push('/main')
         } catch (error) {
-            console.error(error)
+            const { message } = error
+            setError(message)
         }
     }
 
-    // function handleGoToMainSignIn() { history.push('/main') }
+    function handleLogout() {
+        sessionStorage.clear()
 
-    // function handleGoToMainSignUp() { history.push('/main') }
+        history.push('/')
+    }
 
-    return (<>
-        <Route exact path="/" render={() => token ? <Redirect to="/main" /> : <Landing onRegister={handleGoToRegistrationPage} />} />
-        <Route path="/registration-page" render={() => token ? <Redirect to="/main" /> : <RegistrationPage onSignIn={handleGoToMainSignIn} onSignUp={handleGoToMainSignUp} />} />  
-        <Route path="/main" render={() => <Main />} />  
-    </>)
+    const { token } = sessionStorage
+
+    return (
+            <>
+                <Route exact path="/" render={() => token ? <Redirect to="/main" /> : <Landing onRegistrationPage={handleGoToRegistrationPage} />} />
+                <Route path="/registration-page" render={() => token ? <Redirect to="/main" /> : <RegistrationPage onSignIn={handleSignIn} onSignUp={handleSignUp} error={error} />} />  
+                <Route path="/main" render={() => token ? <Main name={name} /> : <Redirect to="/" /> } />  
+                { token && <Main onLogout={handleLogout} /> }
+            </>
+    )
 })
 
 

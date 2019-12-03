@@ -2,7 +2,7 @@ import React from 'react'
 import './index.sass'
 import Feedback from '../Feedback'
 
-export default function ({ handleGoToMainSignIn, handleGoToMainSignUp, error }) {
+export default function ({ onSignIn, onSignUp, error }) {
     return <section className="registration-page">
                 <div className="registration-page__container container">
                     <section className="container__sign-in sign-in">
@@ -12,10 +12,10 @@ export default function ({ handleGoToMainSignIn, handleGoToMainSignUp, error }) 
 
                             const { username: { value: username }, password: { value: password } } = event.target
 
-                            handleGoToMainSignIn(username, password)   
+                            onSignIn(username, password)   
                         }}>
-                            <label for="username">Username: <input type="email" className="sign-in__name" name="username"/></label>
-                            <label for="password">Password: <input type="password" className="sign-in__name" name="password"/></label>
+                            <label name="username">Username: <input type="text" className="sign-in__name" name="username"/></label>
+                            <label name="password">Password: <input type="password" className="sign-in__name" name="password"/></label>
                             <a href="#" className="link">Forgot your password?</a>
                             <div className="sign-in__button button">
                                 <button className="button__registerbuttons">Sign In</button>
@@ -30,14 +30,14 @@ export default function ({ handleGoToMainSignIn, handleGoToMainSignUp, error }) 
 
                             const { name: { value: name }, surname: { value: surname }, username: { value: username }, gender: { value: gender }, email: { value: email }, password: { value: password } } = event.target
 
-                            handleGoToMainSignUp(name, surname, username, gender, email, password )
+                            onSignUp(name, surname, username, gender, email, password )
                         }}>
-                            <label for="name">Name: <input type="text" className="sign-up__name" name="name"/></label>
-                            <label for="surname">Surname: <input type="text" className="sign-up__name" name="surname"/></label>
-                            <label for="username">Username: <input type="email" className="sign-up__name" name="username"/></label>
-                            <label for="gender">Gender: <input type="radio" className="sign-up__name" name="gender" value="Male"/> Male<input type="radio" className="sign-up__name" name="gender" value="Female"/> Female</label>
-                            <label for="email">Email: <input type="email" className="sign-up__name" name="email"/></label>
-                            <label for="password">Password: <input type="password" className="sign-up__name" name="password"/></label>
+                            <label name="name">Name: <input type="text" className="sign-up__name" name="name"/></label>
+                            <label name="surname">Surname: <input type="text" className="sign-up__name" name="surname"/></label>
+                            <label name="username">Username: <input type="text" className="sign-up__name" name="username"/></label>
+                            <label name="gender">Gender: <input type="radio" className="sign-up__name" name="gender" value="Male"/> Male<input type="radio" className="sign-up__name" name="gender" value="Female"/> Female</label>
+                            <label name="email">Email: <input type="email" className="sign-up__name" name="email"/></label>
+                            <label name="password">Password: <input type="password" className="sign-up__name" name="password"/></label>
                             <div className="sign-up__button button">
                                 <button className="button__registerbuttons">Sign Up</button>
                             </div>
