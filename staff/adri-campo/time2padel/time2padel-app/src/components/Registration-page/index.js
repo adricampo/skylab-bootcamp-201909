@@ -2,7 +2,7 @@ import React from 'react'
 import './index.sass'
 import Feedback from '../Feedback'
 
-export default function ({ onSignIn, onSignUp, error }) {
+export default function ({ onSignIn, onSignUp, error, onClose }) {
     return <section className="registration-page">
                 <div className="registration-page__container container">
                     <section className="container__sign-in sign-in">
@@ -45,6 +45,6 @@ export default function ({ onSignIn, onSignUp, error }) {
                     </section>
                 </div>
 
-                {error && <Feedback message={error} />}
+                {error && <Feedback message={error} onClose={onClose} />}
             </section>  
 }

@@ -77,9 +77,9 @@ router.get('/', tokenVerifier, (req, res) => {
 })
 
 //MODIFY USER
-router.patch('/:id', tokenVerifier, jsonBodyParser, (req, res) => {
+router.patch('/update', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
-        const { params: { id }, body: { username, password } } = req
+        const { id, body: { username, password } } = req
 
         modifyUser(id, username, password)
             .then(() => res.status(201).end())
@@ -97,9 +97,9 @@ router.patch('/:id', tokenVerifier, jsonBodyParser, (req, res) => {
 })
 
 //DELETE USER
-router.delete('/:id', tokenVerifier, (req, res) => {
+router.delete('/', tokenVerifier, (req, res) => {
     try {
-        const { params: { id } } = req
+        const { id } = req
 
         deleteUser(id)
             .then(() =>

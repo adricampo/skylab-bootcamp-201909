@@ -16,7 +16,7 @@ module.exports = function (username, password) {
         })
 
 		if (res.status === 200) return JSON.parse(res.body).token
-        debugger
+        
         if (res.status === 401) throw new CredentialsError(JSON.parse(res.body).message)
 
         throw new Error(JSON.parse(res.body).message)

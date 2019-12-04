@@ -1,15 +1,32 @@
 .feedback
-    border: .3rem solid orange
-    border-radius: 1rem
-    padding: 1rem
-    margin: 1rem
-    background-color: #ffc3c3
+    position: fixed
+    top: 13rem
+    z-index: 2000000000
+    color: whitesmoke
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 90vw
+    height: 30vh
+    background: #f88181
+    border: solid black
+
+    &__container
+        top: 30%
+        display: flex
+        flex-wrap: wrap
+        justify-content: center
+        align-items: center
+        width: 70%
+        box-shadow: 5px 5px 5px black
+        opacity: 1
+        color: black
 
     &__icon
         font-size: 1rem
 
     &__message
         display: inline
-        color: white
+        color: black
         font-size: 1rem
         font-family: 'Staatliches'
