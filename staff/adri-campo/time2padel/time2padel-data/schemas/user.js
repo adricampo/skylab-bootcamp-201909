@@ -33,10 +33,10 @@ module.exports = new Schema({
         type: [ObjectId],
         ref: 'League'
     },
-    teams: {
-        type: [ObjectId],
+    teams: [{
+        type: ObjectId,
         ref: 'Team'
-    }
+    }]
 
     // request: Request
     

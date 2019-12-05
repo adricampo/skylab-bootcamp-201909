@@ -121,12 +121,12 @@ router.delete('/', tokenVerifier, (req, res) => {
 })
 
 //RETRIEVE USER TEAMS
-router.get('/:id', tokenVerifier, (req, res) => {
+router.get('/teams', tokenVerifier, (req, res) => {
     try {
-        const { params: { id } } = req
+        const { id } = req
 
         retrieveUserTeams(id)
-            .then(user => res.json( user ))
+            .then(teams => res.json( teams ))
             .catch(error => {
                 const { message } = error
 

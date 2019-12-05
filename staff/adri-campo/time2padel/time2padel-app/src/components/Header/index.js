@@ -1,7 +1,7 @@
 import React from 'react'
 import './index.sass'
 
-export default function ({onLogout, name, onUserInfo, onMyTeams, onLeagues}) {
+export default function ({onLogout, name, onUserInfo, onMyTeams, onLeagues, onMyPendingTeams}) {
     return <header className="header">
                 <img className="header__logo" src={process.env.PUBLIC_URL + '/img/iconopalapadel.png'}/>
                 <h1 className="header__title">Time2Padel</h1>
@@ -15,6 +15,11 @@ export default function ({onLogout, name, onUserInfo, onMyTeams, onLeagues}) {
 
                         onMyTeams()
                         }}>My Teams</a></li>
+                        <li><a href="#" className="list__item" onClick={event => {
+                        event.preventDefault()
+
+                        onMyPendingTeams()
+                        }}>Requests</a></li>
                         <li><a href="#" className="list__item" onClick={event => {
                         event.preventDefault()
 
