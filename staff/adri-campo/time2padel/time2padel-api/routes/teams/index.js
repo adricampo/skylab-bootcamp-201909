@@ -31,11 +31,11 @@ router.post('/', tokenVerifier, jsonBodyParser, (req, res) => {
 })
 
 //UPDATE TEAM
-router.patch('/:id', jsonBodyParser, (req, res) => {
+router.patch('/teamId', jsonBodyParser, tokenVerifier, (req, res) => {
     try {
-        const { params: { id }, body: { answer } } = req
+        const { id, body: { teamId, answer } } = req
 
-        updateTeam(id, answer)
+        updateTeam(id, teamId, answer)
             .then(() =>
                 res.end()
             )
@@ -78,7 +78,7 @@ router.delete('/:id', tokenVerifier, (req, res) => {
     }
 })
 
-//RETRIEVE TEAM
+//RETRIEVE TEAM //mirar ruta
 router.post('/', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
         const { body: { title } } = req

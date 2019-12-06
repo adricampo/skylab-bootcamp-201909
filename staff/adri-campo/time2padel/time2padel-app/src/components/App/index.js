@@ -17,7 +17,7 @@ import LeagueCreation from '../League-creation'
 
 
 //LOGIC
-import { authenticateUser, registerUser, retrieveUser, modifyUser, createTeam, retrieveUserTeams } from '../../logic'
+import { authenticateUser, registerUser, retrieveUser, modifyUser, createTeam, retrieveUserTeams, updateTeam } from '../../logic'
 
 export default withRouter(function ({ history }) { 
     const [name, setName] = useState()
@@ -160,8 +160,44 @@ export default withRouter(function ({ history }) {
         }
     }
 
-    // 3.1) REQUESTS - CONFIRM OR CANCEL THE TEAM
-    
+    // 3.1) REQUESTS - CONFIRM THE TEAM
+    async function handleConfirmTeam(teamId) { 
+        try { 
+            const token = sessionStorage.token
+
+            let answer = 'true'
+
+            await updateTeam(token, teamId, answer)
+
+            const teams = await retrieveUserTeams(token)
+                
+            setTeams(teams)
+            history.push('/main') 
+
+        } catch (error) {
+            const { message } = error
+            setError(message)
+        }
+    } 
+    // 3.2) REQUESTS - CANCEL THE TEAM
+    async function handleCancelTeam(teamId) { debugger
+        try { 
+            const token = sessionStorage.token
+
+            let answer = 'false'
+
+            await updateTeam(token, teamId, answer)
+
+            const teams = await retrieveUserTeams(token)
+                
+            setTeams(teams)
+            history.push('/main') 
+
+        } catch (error) {
+            const { message } = error
+            setError(message)
+        }
+    } 
 
 
     //  4) LEAGUES 
@@ -200,7 +236,7 @@ export default withRouter(function ({ history }) {
                 <Route path="/main" render={() => token ? <Main /> : <Redirect to="/" /> } /> 
                 <Route path="/userpage" render={() => token ? <UserPage name={name} surname={surname} gender={gender} email={email} onModifyUser={handleModifyUser} onBack={handleGoBack} error={error} onClose={handleOnClose} /> : <Redirect to="/" />} />
                 <Route path="/myteams" render={() => token ? <MyTeams onBack={handleGoBack} onCreateTeam={handleCreateTeam} teams={teams} /> : <Redirect to="/" />} />
-                <Route path="/mypendingteams" render={() => token ? <MyPendingteams onBack={handleGoBack} teams={teams} id={id} /> : <Redirect to="/" />} />
+                <Route path="/mypendingteams" render={() => token ? <MyPendingteams onBack={handleGoBack} teams={teams} id={id} onConfirmTeam={handleConfirmTeam} onCancelTeam={handleCancelTeam} /> : <Redirect to="/" />} />
                 <Route path="/team-creation" render={() => token ? <TeamCreation username={username} onCreateNewTeam={handleCreateNewTeam} onBack={handleGoBackMyTeams} error={error} onClose={handleOnClose} /> : <Redirect to="/" />} />
                 <Route path="/leagues" render={() => token ? <Leagues onBack={handleGoBack} onCreateLeague={handleCreateLeague} /> : <Redirect to="/" />} />
                 <Route path="/league-creation" render={() => token ? <LeagueCreation onBack={handleGoBack}  /> : <Redirect to="/" />} />

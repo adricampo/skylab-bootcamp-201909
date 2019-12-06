@@ -6,7 +6,7 @@ module.exports = function (id) {
     validate.string.notVoid('id', id)
     if (!ObjectId.isValid(id)) throw new ContentError(`${id} is not a valid id`)
 
-    return (async () => { debugger
+    return (async () => { 
         const user = await User.findById(id).populate({
             path: 'teams',
             model: 'Team',

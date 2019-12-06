@@ -8,7 +8,7 @@ module.exports = {
     // deleteLeague: require('./delete-league'),
     // retrieveLeagues: require('./retrieve-leagues'),
     createTeam: require('./create-team'),
-    // updateTeam: require('./update-team'),
+    updateTeam: require('./update-team'),
     // deleteTeam: require('./delete-team'),
     // retrieveTeam: require('./retrieve-team'),
     // retrieveTeamByLeague: require('./retrieve-teambyleague'),
