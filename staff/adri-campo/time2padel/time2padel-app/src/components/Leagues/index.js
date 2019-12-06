@@ -1,50 +1,12 @@
 import React from 'react'
 import './index.sass'
 import Feedback from '../Feedback'
+import League from '../League'
 
-export default function ({ error, onClose, onBack, onCreateLeague }) {
+export default function ({ error, onClose, onBack, onCreateLeague, leagues, onLeagueDetail }) {
     return <main className="leagues">
-        <ul className="leagues__list list">
-            <div className="list__container container">
-                <li><a href="#" className="container__item"><img className="container__img" src={process.env.PUBLIC_URL + '/img/iconopelotapadel.png'}/><p>Level B - Masc - W: 20:00h</p></a>
-                    <div className="container__buttons buttons">
-                        <button className="buttons__addteamtoleague">Add Team</button>
-                        <button className="buttons__deleteleague">Delete League</button>
-                    </div>
-                </li>
-            </div>
-            <div className="list__container container">
-                <li><a href="#" className="container__item"><img className="container__img" src={process.env.PUBLIC_URL + '/img/iconopelotapadel.png'}/><p>Level C+ - Fem - M: 19:00h</p></a>
-                    <div className="container__buttons buttons">
-                        <button className="buttons__addteamtoleague">Add Team</button>
-                        <button className="buttons__deleteleague">Delete League</button>
-                    </div>
-                </li>
-            </div>
-            <div className="list__container container">
-                <li><a href="#" className="container__item"><img className="container__img" src={process.env.PUBLIC_URL + '/img/iconopelotapadel.png'}/><p>Level B+ - Masc - Tu: 18:00h</p></a>
-                    <div className="container__buttons buttons">
-                        <button className="buttons__addteamtoleague">Add Team</button>
-                        <button className="buttons__deleteleague">Delete League</button>
-                    </div>
-                </li>
-            </div>
-            <div className="list__container container">
-                <li><a href="#" className="container__item"><img className="container__img" src={process.env.PUBLIC_URL + '/img/iconopelotapadel.png'}/><p>Level D - Mix - F: 20:00h</p></a>
-                    <div className="container__buttons buttons">
-                        <button className="buttons__addteamtoleague">Add Team</button>
-                        <button className="buttons__deleteleague">Delete League</button>
-                    </div>
-                </li>
-            </div>
-            <div className="list__container container">
-                <li><a href="#" className="container__item"><img className="container__img" src={process.env.PUBLIC_URL + '/img/iconopelotapadel.png'}/><p>Level B+ - Fem - F: 21:00h</p></a>
-                    <div className="container__buttons buttons">
-                        <button className="buttons__addteamtoleague">Add Team</button>
-                        <button className="buttons__deleteleague">Delete League</button>
-                    </div>
-                </li>
-            </div>
+        <ul className="leagues__list">
+            {leagues && leagues.map(league => <li className="league" key={league.id}><League league={league} onLeagueDetail={onLeagueDetail} /></li>)}
         </ul>
         <div className="leagues__buttons buttons">
             <div className="buttons__create-league create-league">

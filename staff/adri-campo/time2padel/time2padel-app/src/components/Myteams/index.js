@@ -3,7 +3,7 @@ import './index.sass'
 import Feedback from '../Feedback'
 import Team from '../Team'
 
-export default function ({error, onBack, onCreateTeam, teams}) { 
+export default function ({ error, onBack, onCreateTeam, teams }) { 
     return <section className="myteams">
         <ul className="myteams__box"> 
             {teams && teams.map(team => <li className="team" key={team.id}><Team team={team} /></li>)}

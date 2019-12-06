@@ -2,25 +2,13 @@ const call = require('../../utils/call')
 const { validate, errors: { CredentialsError, NotFoundError } } = require('time2padel-util')
 const API_URL = process.env.REACT_APP_API_URL
 
-module.exports = function (token, teamId, answer) { 
-    validate.string(token)
-    validate.string.notVoid('token', token)
-
+module.exports = function (teamId) { debugger
     validate.string(teamId)
     validate.string.notVoid('teamId', teamId)
-
-    validate.string(answer)
-    validate.string.notVoid('answer', answer)
- 
-
     return (async () => { 
-        const res = await call(`${API_URL}/teams/teamId`, {
-            method: 'PATCH',
-            headers: { 
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ teamId, answer })
+        const res = await call(`${API_URL}/teams`, {
+            method: 'DELETE',
+            body: JSON.stringify({ teamId })
         })
 
         if (res.status === 200)  return

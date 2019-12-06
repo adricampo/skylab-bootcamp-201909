@@ -5,16 +5,12 @@ export default function ({team}) {
     const {title, player1, player2, status} = team
     return <section className="team">
                 {team && status === 'ACCEPTED' &&
-                <>< div className="team__box box">
+                <><div className="team__box box">
                         <h3 className="box__title">Team {title}</h3>
                         <div className="box__info info">
                             <p className="info__player1">Player 1 {player1.username}</p>
                             <p className="info__player2">Player 2 {player2.username}</p>
                             <p className="info__wins">{status}</p>
-            
-                        </div>
-                        <div className="box__buttons buttons">
-                            <button className="buttons__delete">Delete Team</button>
                         </div>
                     </div>
                     </>}

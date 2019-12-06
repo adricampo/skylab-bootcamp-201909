@@ -55,11 +55,11 @@ router.patch('/teamId', jsonBodyParser, tokenVerifier, (req, res) => {
 })
 
 //DELETE TEAM
-router.delete('/:id', tokenVerifier, (req, res) => {
+router.delete('/', (req, res) => {
     try {
-        const { params: { id } } = req
+        const { body: { teamId } } = req
 
-        deleteTeam(id)
+        deleteTeam(teamId)
             .then(() =>
                 res.end()
             )
