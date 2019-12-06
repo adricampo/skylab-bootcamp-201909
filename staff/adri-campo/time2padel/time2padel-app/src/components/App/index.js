@@ -17,7 +17,7 @@ import LeagueCreation from '../League-creation'
 
 
 //LOGIC
-import { authenticateUser, registerUser, retrieveUser, modifyUser, createTeam, listTeams, retrieveUserTeams } from '../../logic'
+import { authenticateUser, registerUser, retrieveUser, modifyUser, createTeam, retrieveUserTeams } from '../../logic'
 
 export default withRouter(function ({ history }) { 
     const [name, setName] = useState()
@@ -51,7 +51,7 @@ export default withRouter(function ({ history }) {
         })()
     }, [sessionStorage.token])
 
-    // async function retrieveUserTeams(token) {
+    // async function retrieveTeams(token) {
     //     const teams = await listTeams(token)
 
     //     setTeams(teams)
@@ -87,28 +87,11 @@ export default withRouter(function ({ history }) {
     }
 
     //MAIN -HEADER MENU-
+
+    //  1) USERPAGE
     function handleGoToUserPage() { history.push('/userpage') } 
    
-    async function handleGoToMyTeams() { 
-        try { debugger
-            const token = sessionStorage.token
-        
-            const teams = await retrieveUserTeams(token)
-                
-            setTeams(teams)
-            history.push('/myteams') 
-
-        } catch (error) {
-            const { message } = error
-            setError(message)
-        }
-    }
-            
-    function handleGoToMyPendingTeams() { history.push('/mypendingteams') }
-    function handleGoToLeagues() { history.push('/leagues') } 
-    //como hacer para que el menu desaparesca
-    
-    //USER-PAGE
+    // 1.1) USERPAGE - MODIFY USER
     async function handleModifyUser(username, password) {
         try {
             const token = sessionStorage.token
@@ -122,28 +105,26 @@ export default withRouter(function ({ history }) {
         }
     }
 
-    // MYTEAMS
+    //  2) MYTEAMS
+    async function handleGoToMyTeams() { 
+        try { 
+            const token = sessionStorage.token
+          
+            const teams = await retrieveUserTeams(token)
+       
+            setTeams(teams)
+            history.push('/myteams') 
+
+        } catch (error) {
+            const { message } = error
+            setError(message)
+        }
+    }
+
+    // 2.1) MYTEAMS - CREATE TEAM
     function handleCreateTeam() { history.push('/team-creation') } 
-
-    // async function handleListTeams() {
-    //     try {
-    //         const token = sessionStorage.token
-        
-    //         const teams = await retrieveUserTeams(token, id)
-
-    //         setTeams(teams)
-    //     } catch (error) {
-    //         const { message } = error
-    //         setError(message)
-    //     }
-    // }
-
-    // REQUESTS (PENDING TEAMS)
-
-    // LEAGUES 
-    function handleCreateLeague() { history.push('/league-creation')}
-
-    // TEAM CREATION
+            
+    // 2.1.1) CREATE TEAM - TEAM CREATION
     async function handleCreateNewTeam(username, title) {
         try {
             const token = sessionStorage.token
@@ -160,10 +141,43 @@ export default withRouter(function ({ history }) {
         }
     }
 
+    // GO BACK -TO MYTEAMS FROM TEAMCREATION
+    function handleGoBackMyTeams() { history.push('/myteams') }
+
+    //  3) REQUESTS (MY PENDING TEAMS)
+    async function handleGoToMyPendingTeams() { 
+        try { 
+        const token = sessionStorage.token
+        
+        const teams = await retrieveUserTeams(token)
+            
+        setTeams(teams)
+        history.push('/mypendingteams') 
+
+        } catch (error) {
+            const { message } = error
+            setError(message)
+        }
+    }
+
+    // 3.1) REQUESTS - CONFIRM OR CANCEL THE TEAM
+    
+
+
+    //  4) LEAGUES 
+    function handleGoToLeagues() { history.push('/leagues') } 
+    //como hacer para que el menu desaparesca
+    
+
+    // 4.1) LEAGUES - CREATE LEAGUE
+    function handleCreateLeague() { history.push('/league-creation')}
+
+   
+
+
     // GO BACK -TO MAIN PAGE-
     function handleGoBack() { history.push('/main') }
-    // GO BACK -TO FROM TEAMCREATION -> MYTEAMS
-    function handleGoBackMyTeams() { history.push('/myteams') }
+   
 
     // CLOSE ERROR
     function handleOnClose() { 
@@ -186,7 +200,7 @@ export default withRouter(function ({ history }) {
                 <Route path="/main" render={() => token ? <Main /> : <Redirect to="/" /> } /> 
                 <Route path="/userpage" render={() => token ? <UserPage name={name} surname={surname} gender={gender} email={email} onModifyUser={handleModifyUser} onBack={handleGoBack} error={error} onClose={handleOnClose} /> : <Redirect to="/" />} />
                 <Route path="/myteams" render={() => token ? <MyTeams onBack={handleGoBack} onCreateTeam={handleCreateTeam} teams={teams} /> : <Redirect to="/" />} />
-                <Route path="/mypendingteams" render={() => token ? <MyPendingteams onBack={handleGoBack} teams={teams} /> : <Redirect to="/" />} />
+                <Route path="/mypendingteams" render={() => token ? <MyPendingteams onBack={handleGoBack} teams={teams} id={id} /> : <Redirect to="/" />} />
                 <Route path="/team-creation" render={() => token ? <TeamCreation username={username} onCreateNewTeam={handleCreateNewTeam} onBack={handleGoBackMyTeams} error={error} onClose={handleOnClose} /> : <Redirect to="/" />} />
                 <Route path="/leagues" render={() => token ? <Leagues onBack={handleGoBack} onCreateLeague={handleCreateLeague} /> : <Redirect to="/" />} />
                 <Route path="/league-creation" render={() => token ? <LeagueCreation onBack={handleGoBack}  /> : <Redirect to="/" />} />

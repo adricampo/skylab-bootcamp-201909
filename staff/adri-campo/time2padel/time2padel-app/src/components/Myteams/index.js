@@ -6,7 +6,7 @@ import Team from '../Team'
 export default function ({error, onBack, onCreateTeam, teams}) { 
     return <section className="myteams">
         <ul className="myteams__box"> 
-            {teams && teams.map(team => <li className="item" key={team.id}><Team team={team} /></li>)}
+            {teams && teams.map(team => <li className="team" key={team.id}><Team team={team} /></li>)}
         </ul>
         <div className="myteams__create-team create-team">
             <button className="create-team__button" onClick={event => {

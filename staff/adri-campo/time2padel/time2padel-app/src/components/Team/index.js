@@ -4,7 +4,7 @@ import './index.sass'
 export default function ({team}) { 
     const {title, player1, player2, status} = team
     return <section className="team">
-                {team && team.status === 'ACCEPTED' &&
+                {team && status === 'ACCEPTED' &&
                 <>< div className="team__box box">
                         <h3 className="box__title">Team {title}</h3>
                         <div className="box__info info">
