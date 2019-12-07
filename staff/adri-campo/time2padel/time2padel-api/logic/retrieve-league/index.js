@@ -1,16 +1,40 @@
 const { validate, errors: { NotFoundError, ContentError } } = require('time2padel-util')
-const { models: { League } } = require('time2padel-data')
+const { models: { League, Team } } = require('time2padel-data')
 
-module.exports = function (id) {
-    validate.string(id)
-    validate.string.notVoid('id', id)
+module.exports = function (leagueId) { 
+    validate.string(leagueId)
+    validate.string.notVoid('leagueId', leagueId)
 
-    return (async () => {
-        const league = await League.findById(id)
-        if (!league) throw new NotFoundError(`League ${id} not found`)
+
+    return (async () => { 
+        const league = await League.findById(leagueId).populate({
+            path: 'teams',
+            model: 'Team',
+            populate: {
+                path : 'player1 player2',
+                model: 'User'
+            }
+        })
+
+        if (!league) throw new NotFoundError(`League not found`)
+
         await league.save()
+       
+        const { _id: id, level, date, time, teams, status, playingDays, startDate } = league.toObject()
+        
+        // let a = playingDays[0].matches[0].teams[0]
+        // a = a.toString()
+        // const b = await Team.findById(a)
 
-        const { level, gender, date, time, teams, status, playingDays, startDate } = league.toObject()
-        return { id, level, gender, date, time, teams, status, playingDays, startDate }
+        await Promise.all(playingDays.map(async playingDay => {
+            await Promise.all(playingDay.matches.map(async match =>{
+                match.teams[0] = await Team.findOne({ _id: match.teams[0]})
+                match.teams[1] = await Team.findOne({ _id: match.teams[1]})
+            }))
+            
+        }))
+        
+    
+        return { id, level, date, time, teams, status, playingDays, startDate }
     })()
 }

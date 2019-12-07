@@ -3,10 +3,10 @@ import './index.sass'
 import Feedback from '../Feedback'
 import League from '../League'
 
-export default function ({ error, onClose, onBack, onCreateLeague, leagues, onLeagueDetail }) {
+export default function ({ error, onClose, onBack, onCreateLeague, leagues, onLeagueDetail, onAddTeamToLeague }) {
     return <main className="leagues">
         <ul className="leagues__list">
-            {leagues && leagues.map(league => <li className="league" key={league.id}><League league={league} onLeagueDetail={onLeagueDetail} /></li>)}
+            {leagues && leagues.map(league => <li className="league" key={league.id}><League league={league} onLeagueDetail={onLeagueDetail} onAddTeamToLeague={onAddTeamToLeague} /></li>)}
         </ul>
         <div className="leagues__buttons buttons">
             <div className="buttons__create-league create-league">

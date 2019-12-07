@@ -19,7 +19,7 @@ module.exports = function (id) {
         if (!user) throw new NotFoundError(`user with id ${id} not found`)
 
         const { teams } = user
-
+        debugger
         return teams
 
     })()

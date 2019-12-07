@@ -12,9 +12,9 @@ module.exports = {
     deleteTeam: require('./delete-team'),
     // retrieveTeam: require('./retrieve-team'),
     // retrieveTeamByLeague: require('./retrieve-teambyleague'),
-    // addTeamToLeague: require('./add-teamtoleague'),
+    addTeamToLeague: require('./add-teamtoleague'),
     // retrieveLeaguebyTeam: require('./retrieve-leaguebyteam'),
-    // retrieveLeague: require('./retrieve-league'),
+    retrieveLeague: require('./retrieve-league'),
     // retrieveTeamByLeague: require('./retrieve-teambyleague'),
     // updateLeagueUsers: require('./update-leagueusers'),
     retrieveUserTeams: require('./retrieve-userteams')

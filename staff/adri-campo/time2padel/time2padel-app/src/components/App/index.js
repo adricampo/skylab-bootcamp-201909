@@ -15,9 +15,8 @@ import Leagues from '../Leagues'
 import LeagueDetail from '../League-detail'
 import LeagueCreation from '../League-creation'
 
-
 //LOGIC
-import { authenticateUser, registerUser, retrieveUser, modifyUser, createTeam, retrieveUserTeams, updateTeam, retrieveLeagues, createLeague } from '../../logic'
+import { authenticateUser, registerUser, retrieveUser, modifyUser, createTeam, retrieveUserTeams, updateTeam, retrieveLeagues, createLeague, retrieveLeague, addTeamToLeague } from '../../logic'
 
 export default withRouter(function ({ history }) { 
     const [name, setName] = useState()
@@ -29,6 +28,7 @@ export default withRouter(function ({ history }) {
     const [id, setId] = useState()
     const [teams, setTeams] = useState([])
     const [leagues, setLeagues] = useState([])
+    const [league, setLeague] = useState()
 
     useEffect(() => {   
         const { token } = sessionStorage;   
@@ -233,8 +233,42 @@ export default withRouter(function ({ history }) {
         }
     }
 
-    // 4.1.2) LEAGUES - GO TO LEAGUE DETAIL
-    async function handleGoLeagueDetail() { history.push('/league-detail') }
+    // 4.1.2) LEAGUES - ADD TEAM TO LEAGUE
+    async function handleAddTeamToLeague(leagueId, teamId) {
+        try {
+            await addTeamToLeague(leagueId, teamId)
+
+            let league = await retrieveLeague(leagueId)
+            
+            if (league.startDate){
+                league.startDate = league.startDate.split("T",12)[0]
+            }
+
+            setLeague(league)
+            history.push('/league-detail') 
+        } catch (error) {
+            const { message } = error
+            setError(message)
+        }
+    }
+
+    // 4.1.3) LEAGUES - GO TO LEAGUE DETAIL
+    async function handleGoLeagueDetail(leagueId) { 
+        try {
+            let league = await retrieveLeague(leagueId)
+            
+            if (league.startDate){
+                league.startDate = league.startDate.split("T",12)[0]
+            }
+
+            setLeague(league)
+            history.push('/league-detail') 
+        } catch (error) {
+            const { message } = error
+            setError(message)
+        }
+    }
+
 
 
     // GO BACK -TO LEAGUES FROM LEAGUE CREATION
@@ -268,9 +302,9 @@ export default withRouter(function ({ history }) {
                 <Route path="/myteams" render={() => token ? <MyTeams onBack={handleGoBack} onCreateTeam={handleCreateTeam} teams={teams} /> : <Redirect to="/" />} />
                 <Route path="/mypendingteams" render={() => token ? <MyPendingteams onBack={handleGoBack} teams={teams} id={id} onConfirmTeam={handleConfirmTeam} onCancelTeam={handleCancelTeam} /> : <Redirect to="/" />} />
                 <Route path="/team-creation" render={() => token ? <TeamCreation username={username} onCreateNewTeam={handleCreateNewTeam} onBack={handleGoBackMyTeams} error={error} onClose={handleOnClose} /> : <Redirect to="/" />} />
-                <Route path="/leagues" render={() => token ? <Leagues onBack={handleGoBack} onCreateLeague={handleCreateLeague} leagues={leagues} onLeagueDetail={handleGoLeagueDetail} /> : <Redirect to="/" />} />
+                <Route path="/leagues" render={() => token ? <Leagues onBack={handleGoBack} onCreateLeague={handleCreateLeague} leagues={leagues} onLeagueDetail={handleGoLeagueDetail} onAddTeamToLeague={handleAddTeamToLeague} /> : <Redirect to="/" />} />
                 <Route path="/league-creation" render={() => token ? <LeagueCreation onBack={handleGoBackLeagues} onCreateNewLeague={handleCreateNewLeague} /> : <Redirect to="/" />} />
-                <Route path="/league-detail" render={() => token ? <LeagueDetail onBack={handleGoBackLeagues} error={error} onClose={handleOnClose} /> : <Redirect to="/" />} />
+                <Route path="/league-detail" render={() => token ? <LeagueDetail onBack={handleGoBackLeagues} error={error} onClose={handleOnClose} teams={teams} league={league} /> : <Redirect to="/" />} />
 
                 { token && <> <Header onLogout={handleLogout} name={name} onUserInfo={handleGoToUserPage} onMyTeams={handleGoToMyTeams} onLeagues={handleGoToLeagues} onMyPendingTeams={handleGoToMyPendingTeams} error={error} /> <Footer /> </>}
             </>
