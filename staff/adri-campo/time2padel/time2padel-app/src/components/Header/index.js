@@ -5,7 +5,7 @@ export default function ({onLogout, name, onUserInfo, onMyTeams, onLeagues, onMy
     return <header className="header">
                 <img className="header__logo" src={process.env.PUBLIC_URL + '/img/iconopalapadel.png'}/>
                 <h1 className="header__title">Time2Padel</h1>
-                <span className="header__welcome">Hi {name} 👋🏻</span>
+                <span className="header__welcome">👋🏻 {name}</span>
                 <input type="checkbox" id="show-menu"/>
                 <label className="header__hamburguer" htmlFor="show-menu"><i className="fas fa-bars"></i></label>
                 <nav className="header__nav menu">
