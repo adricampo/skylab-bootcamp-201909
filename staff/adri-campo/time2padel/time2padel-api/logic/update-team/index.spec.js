@@ -25,28 +25,31 @@ describe('logic - update team', () => {
         await Promise.all([Team.deleteMany(), User.deleteMany()])
 
         const team = await Team.create({ title, player1, player2, wins, loses, status })
-        id = team.id
+        teamId = team.id
+
+        const user = await User.create({username})
+        id = user.id
     })
 
     it('should succeed if answer is true(ACCEPTED)', async () => {
-        let team = await Team.findById(id)
-        const answer = true 
+        let user = await User.findById(id)
+        let team = await Team.findById(teamId)
+        const answer = "true"
         
-        const teamOk = await updateTeam(team.id, answer)
+        let teamOk = await updateTeam(user.id, team.id, answer)
     
         expect(teamOk.status).to.be.equal('ACCEPTED')
-        expect(teamOk.id).to.equal(id)
 
     })
 
     it('should succeed if answer is false(DENNIED)', async () => {
-        let team = await Team.findById(id)
-        const answer = false 
+        let user = await User.findById(id)
+        let team = await Team.findById(teamId)
+        const answer = "false" 
         
-        const teamOk = await updateTeam(team.id, answer)
+        const teamOk = await updateTeam(user.id, team.id, answer)
     
         expect(teamOk.status).to.be.equal('DENNIED')
-        expect(teamOk.id).to.equal(id)
 
     })
 

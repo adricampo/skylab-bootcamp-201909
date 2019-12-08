@@ -1,7 +1,7 @@
 const { validate, errors: { NotFoundError, ConflictError, ContentError } } = require('time2padel-util')
 const { ObjectId, models: { Team } } = require('time2padel-data')
 
-module.exports = function (teamId) { debugger
+module.exports = function (teamId) {
     validate.string(teamId, 'teamId')
     if (!ObjectId.isValid(teamId)) throw new ContentError(`${teamId} is not a valid id`)
     

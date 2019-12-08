@@ -104,7 +104,7 @@ describe('logic - update league users', () => {
         const myTeams = league.teams.map(team => team._id.toString())
         let wrongteam = await Team.create({ title, player1, player2, wins, loses })
         
-        try{ debugger
+        try{
             await updateLeagueUsers(league.id)
             throw new NotFoundError(`Team with id ${wrongteam.id} not found on that league`)
         } catch(error) {
