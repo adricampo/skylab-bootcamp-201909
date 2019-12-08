@@ -16,7 +16,7 @@
         display: flex
         flex-direction: column
         flex-wrap: wrap
-        justify-content: space-between
+        justify-content: center
         align-items: center
 
         &__title
@@ -31,6 +31,12 @@
         .players-info
             margin-top: 5%
             .box
+                display: flex
+                flex-direction: column
+                flex-wrap: wrap
+                justify-content: space-between
+                padding: 2%
+                align-items: center
                 &__title
                     display: flex
                     flex-direction: row
@@ -47,9 +53,15 @@
                     flex-direction: column
                     align-content: center
                     justify-content: space-around
+                    margin-top: 5%
+                    margin-bottom: 5%
                     & label
                         margin: 5%
-                
+                    & span
+                        margin-bottom: 8%
+                        margin-left: 6%
+                        font-size: 65%
+                        width: 100%
                 &__teamtitle
                     display: flex
                     flex-direction: column
@@ -57,16 +69,16 @@
                     justify-content: space-around
                     margin-bottom: 10%
                     & label
-                        margin: 5%
-
+                        margin-top: 5%
                 .buttons
                     display: flex
                     flex-direction: row
                     align-content: center
                     justify-content: space-around
                     height: 6vh
-                    width: 65%
+                    width: 90%
                     margin-bottom: 5%
+                    margin-top: 3%
                     &__confirm
                         width: 5rem
                         height: 2rem
@@ -77,8 +89,3 @@
                         height: 2rem
                         border-radius: .2rem
                         background-color: #f88181
-.message
-    margin-bottom: 8%
-    margin-left: 6%
-    font-size: 65%
-    width: 100%

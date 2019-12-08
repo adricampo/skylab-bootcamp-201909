@@ -16,7 +16,6 @@ export default function ({ onSignIn, onSignUp, error, onClose }) {
                         }}>
                             <label name="username">Username: <input type="text" className="sign-in__name" name="username"/></label>
                             <label name="password">Password: <input type="password" className="sign-in__name" name="password"/></label>
-                            <a href="#" className="link">Forgot your password?</a>
                             <div className="sign-in__button button">
                                 <button className="button__registerbuttons">Sign In</button>
                             </div>
@@ -35,7 +34,7 @@ export default function ({ onSignIn, onSignUp, error, onClose }) {
                             <label name="name">Name: <input type="text" className="sign-up__name" name="name"/></label>
                             <label name="surname">Surname: <input type="text" className="sign-up__name" name="surname"/></label>
                             <label name="username">Username: <input type="text" className="sign-up__name" name="username"/></label>
-                            <label name="gender">Gender: <input type="radio" className="sign-up__name" name="gender" value="Male"/> Male<input type="radio" className="sign-up__name" name="gender" value="Female"/> Female</label>
+                            <label name="gender">Gender: <input type="radio" className="sign-up__name" name="gender" value="MALE"/> Male<input type="radio" className="sign-up__name" name="gender" value="FEMALE"/> Female</label>
                             <label name="email">Email: <input type="email" className="sign-up__name" name="email"/></label>
                             <label name="password">Password: <input type="password" className="sign-up__name" name="password"/></label>
                             <div className="sign-up__button button">

@@ -10,7 +10,7 @@ module.exports = function (leagueId, teamId) {
     validate.string.notVoid('teamId', teamId)
 
     return (async () => {
-        const res = await call(`${API_URL}/${leagueId}/team/${teamId}`, {
+        const res = await call(`${API_URL}/leagues/${leagueId}/team/${teamId}`, {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json' 

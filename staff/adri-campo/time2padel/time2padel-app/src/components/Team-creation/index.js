@@ -24,7 +24,7 @@ export default function ({ error, username, onClose, onBack, onCreateNewTeam }) 
                                 <span className="message">A request will be sent to this user</span>
                             </div>
                             <div className="box__teamtitle">
-                                <h3 className="players-info__title">Team Title</h3>
+                                <h3 className="box__title">Team Title</h3>
                                 <label>Name: <input type="text" className="box_name" name="title" required/></label>
                             </div>
                             <div className="box__buttons buttons"> 

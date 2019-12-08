@@ -10,7 +10,6 @@ export default function ({team}) {
                         <div className="box__info info">
                             <p className="info__player1">Player 1 {player1.username}</p>
                             <p className="info__player2">Player 2 {player2.username}</p>
-                            <p className="info__wins">{status}</p>
                         </div>
                     </div>
                     </>}

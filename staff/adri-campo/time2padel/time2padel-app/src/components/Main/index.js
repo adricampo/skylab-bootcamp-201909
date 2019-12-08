@@ -9,24 +9,14 @@ export default function ({}) {
                 </section>
                 <section className="main__news news">
                     <article className="news__new new">
-                        <h2 className="new__title">New 1</h2>
+                        <a href="https://www.worldpadeltour.com/"><h2 className="new__title">About WPT</h2></a>
                         <img className="new__img" src={process.env.PUBLIC_URL + '/img/main2.jpeg'}/>
-                        <p className="new__text">Description</p>
+                        <p className="new__text">Have a look to the oficial site! Check information about championships, results, information.. about the best players in the world!</p>
                     </article>
                     <article className="news__new new">
-                        <h2 className="new__title">New 2</h2>
-                        <img className="new__img" src={process.env.PUBLIC_URL + '/img/main3.jpeg'}/>
-                        <p className="new__text">Description</p>
-                    </article>
-                    <article className="news__new new">
-                        <h2 className="new__title">New 3</h2>
-                        <img className="new__img" src={process.env.PUBLIC_URL + '/img/main4.jpeg'}/>
-                        <p className="new__text">Description</p>
-                    </article>
-                    <article className="news__new new">
-                        <h2 className="new__title">New 4</h2>
-                        <img className="new__img" src={process.env.PUBLIC_URL + '/img/padelballs.jpg'}/>
-                        <p className="new__text">Description</p>
+                        <a href="https://www.bullpadel.com/es/"><h2 className="new__title">New Colab</h2></a>
+                        <img className="new__img" src={process.env.PUBLIC_URL + '/img/bullpadel-logo.png'}/>
+                        <p className="new__text">Agreement with Bullpadel, we finally closed a contract with them. Very soon we will start selling their products in our shop.</p>
                     </article>
                 </section>
                 <section className="main__speech speech">

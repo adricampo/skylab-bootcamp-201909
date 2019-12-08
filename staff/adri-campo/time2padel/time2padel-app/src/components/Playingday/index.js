@@ -2,7 +2,7 @@ import React from 'react'
 import './index.sass'
 export default function ({playingDay}) { 
     const { matches } = playingDay 
-    console.log(matches)
+  
     return <> <div className="playingday">
                 <h2 className="playingday__title">PLAYING DAY</h2>
                 <div className="playingday__match match">
