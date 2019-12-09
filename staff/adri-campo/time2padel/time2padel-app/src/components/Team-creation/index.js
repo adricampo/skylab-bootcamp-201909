@@ -21,8 +21,8 @@ export default function ({ error, username, onClose, onBack, onCreateNewTeam }) 
                             <div className="box__form2">
                                 <h3 className="box__title">Player2</h3>
                                 <label>Username: <input type="text" className="box_name" name="usernamep2" required/></label>
-                                <span className="message">A request will be sent to this user</span>
                             </div>
+                            <span className="box__message">A request will be sent to your teammate! 👍🏻🎾</span>
                             <div className="box__teamtitle">
                                 <h3 className="box__title">Team Title</h3>
                                 <label>Name: <input type="text" className="box_name" name="title" required/></label>

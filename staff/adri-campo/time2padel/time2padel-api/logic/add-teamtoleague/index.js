@@ -37,11 +37,10 @@ module.exports = function (leagueId, teamId) {
                 league.playingDays.push(playingDay)
             }
             league.startDate = new Date
-            league.startDate.toLocaleDateString()
+           
         }
         await addTeam.save()
         await league.save()
-
 
     })()
 }

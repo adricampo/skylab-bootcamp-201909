@@ -2,9 +2,9 @@
     display: flex
     flex-direction: column
     width: 100vw
-    height: 180vh
     position: absolute
     top: 12vh
+    height: 325%
 
     .container
         display: flex
@@ -15,6 +15,10 @@
             display: flex
             flex-direction: row
             justify-content: space-around
+            border-bottom: 1px solid
+            width: 86%
+            margin-left: 5%
+            font-family: 'Staatliches'
         .teams
             display: flex
             flex-direction: column
@@ -32,6 +36,10 @@
             margin-left: 9%
             margin-top: 8%
             margin-bottom: 8%
+            &__start-date
+                border: 1px solid
+                padding: 3%
+                background-color: #cdf1cc
 
 
         .back-button
@@ -39,11 +47,12 @@
             flex-direction: row
             justify-content: flex-end
             align-content: center
-            height: 6vh
             width: 90%
             margin-top: 5%
             &__button
                 width: 7rem
-                heigth: 5rem
+                height: 2rem
                 border-radius: .2rem
                 background-color: #f88181
+                font-family: 'Big Shoulders Text'
+                letter-spacing: .1rem
