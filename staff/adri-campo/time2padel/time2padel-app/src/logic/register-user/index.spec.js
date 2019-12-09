@@ -23,7 +23,7 @@ describe('logic - register user', () => {
         return User.deleteMany()
     })
 
-    it('should succeed on correct credentials', async () => { 
+    it('should succeed on correct credentials', async () => {
         const response = await registerUser(name, surname, username, gender, email, password)
         expect(response).toBeUndefined()
 
@@ -31,6 +31,7 @@ describe('logic - register user', () => {
         expect(user).toBeDefined()
         expect(user.name).toBe(name)
         expect(user.surname).toBe(surname)
+        expect(user.gender).toBe(gender)
         expect(user.email).toBe(email)
         expect(user.username).toBe(username)
 
