@@ -10,7 +10,7 @@ export default function () {
                     <div className="footer-menu__conditions">Conditions</div>
                 </div>
                 <div className="footer__others others">
-                    <div className="others__copyright"> adricampo productions ©2019 </div>
+                    <div className="others__copyright"> AC productions ©2019 </div>
                     <ul className="others__social-media social-media">
                         <li className="social-media__media-icon">
                             <a href="#"><i className="fab fa-twitter-square"></i></a>

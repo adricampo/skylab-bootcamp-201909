@@ -31,6 +31,7 @@ export default withRouter(function ({ history }) {
     const [teams, setTeams] = useState([])
     const [leagues, setLeagues] = useState([])
     const [league, setLeague] = useState()
+    
 
     useEffect(() => {   
         const { token } = sessionStorage;   
@@ -314,7 +315,7 @@ export default withRouter(function ({ history }) {
                 <Route path="/mypendingteams" render={() => token ? <MyPendingteams onBack={handleGoBack} teams={teams} id={id} onConfirmTeam={handleConfirmTeam} onCancelTeam={handleCancelTeam} /> : <Redirect to="/" />} />
                 <Route path="/team-creation" render={() => token ? <TeamCreation username={username} onCreateNewTeam={handleCreateNewTeam} onBack={handleGoBackMyTeams} error={error} onClose={handleOnClose} /> : <Redirect to="/" />} />
                 <Route path="/leagues" render={() => token ? <Leagues onBack={handleGoBack} onCreateLeague={handleCreateLeague} leagues={leagues} onLeagueDetail={handleGoLeagueDetail} onGoToAddTeamToLeague={handleGoToAddTeamToLeague} /> : <Redirect to="/" />} />
-                <Route path="/league-creation" render={() => token ? <LeagueCreation onBack={handleGoBackLeagues} onCreateNewLeague={handleCreateNewLeague} /> : <Redirect to="/" />} />
+                <Route path="/league-creation" render={() => token ? <LeagueCreation onBack={handleGoBackLeagues} onCreateNewLeague={handleCreateNewLeague} error={error} onClose={handleOnClose} /> : <Redirect to="/" />} />
                 <Route path="/league-detail" render={() => token ? <LeagueDetail onBack={handleGoBackLeagues} error={error} onClose={handleOnClose} teams={teams} league={league} /> : <Redirect to="/" />} />
                 <Route path="/team-registration" render={() => token ? <TeamRegistration onBack={handleGoBackLeagues} error={error} onClose={handleOnClose} teams={teams} onAddTeamToLeague={handleAddTeamToLeague} league={league} /> : <Redirect to="/" />} />
 

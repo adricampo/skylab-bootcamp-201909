@@ -62,7 +62,7 @@ describe('logic - create league', () => {
             expect(error.message).to.exist
             expect(typeof error.message).to.equal('string')
             expect(error.message.length).to.be.greaterThan(0)
-            expect(error.message).to.equal(`league ${_league.id} already exists`)
+            expect(error.message).to.equal(`This league already exists`)
         }
     })
 
