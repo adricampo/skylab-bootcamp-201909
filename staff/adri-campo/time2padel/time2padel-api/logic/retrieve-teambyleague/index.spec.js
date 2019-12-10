@@ -56,7 +56,7 @@ describe('logic - retrieve team by league', () => {
         const team = await Team.create({ title, player1, player2, wins, loses, status })
         league.teams.push(team)
         const myTeams = league.teams.map(team => team._id.toString())
-        // myLeagues.forEach(league => league.id)
+   
         await retrieveTeamByLeague(league.id)
 
         expect(league).to.exist
@@ -64,7 +64,7 @@ describe('logic - retrieve team by league', () => {
         expect(league.gender).to.equal(gender)
         expect(league.date).to.equal(date)
         expect(league.time).to.equal(time)
-        expect(league.teams.toString()).to.equal(myTeams[0])
+        expect(league.teams[0].id).to.equal(myTeams[0])
     })
 
     after(() => Promise.all([Team.deleteMany(), User.deleteMany(), League.deleteMany()]).then(database.disconnect))

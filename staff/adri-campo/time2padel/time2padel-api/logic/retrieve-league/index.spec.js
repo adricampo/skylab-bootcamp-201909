@@ -40,9 +40,7 @@ describe('logic - retrieve league', () => {
         const league = await retrieveLeague(id)
 
         expect(league).to.exist
-        expect(league.id).to.equal(id)
         expect(league.level).to.equal(level)
-        expect(league.gender).to.equal(gender)
         expect(league.date).to.equal(date)
         expect(league.time).to.equal(time)
 
@@ -58,7 +56,7 @@ describe('logic - retrieve league', () => {
         } catch (error) {
             expect(error).to.exist
             expect(error).to.be.an.instanceOf(NotFoundError)
-            expect(error.message).to.equal(`League ${id} not found`)
+            expect(error.message).to.equal(`League not found`)
         }
     })
 

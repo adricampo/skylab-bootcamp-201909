@@ -15,7 +15,7 @@ module.exports = function (leagueId, teamId) {
         if (!addTeam) throw new NotFoundError(`league with id ${addTeam} not found`)
 
         if (addTeam.status !== 'ACCEPTED') throw new Error(`You should validate your team ${addTeam.id} to continue`)
-        if (league.teams.length >= 6) throw new Error(`Sorry, league ${league.id} is complete`)
+        if (league.teams.length >= 6) throw new Error(`Sorry, this league is complete`)
         if (league.teams.toString().includes(addTeam._id.toString())) throw new Error (`This team has been already registered on that league`)
 
         league.teams.push(teamId)
@@ -37,11 +37,10 @@ module.exports = function (leagueId, teamId) {
                 league.playingDays.push(playingDay)
             }
             league.startDate = new Date
-            league.startDate.toLocaleDateString()
+           
         }
         await addTeam.save()
         await league.save()
-
 
     })()
 }

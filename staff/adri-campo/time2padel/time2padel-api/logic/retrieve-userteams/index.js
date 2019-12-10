@@ -6,15 +6,21 @@ module.exports = function (id) {
     validate.string.notVoid('id', id)
     if (!ObjectId.isValid(id)) throw new ContentError(`${id} is not a valid id`)
 
-    return (async () => {
-        const user = await User.findById(id)
+    return (async () => { 
+        const user = await User.findById(id).populate({
+            path: 'teams',
+            model: 'Team',
+            populate: {
+                path : 'player1 player2',
+                model: 'User'
+            }
+        })
 
         if (!user) throw new NotFoundError(`user with id ${id} not found`)
 
-        await user.save()
+        const { teams } = user
+        
+        return teams
 
-        const { teams } = user.toObject()
-
-        return { teams }
     })()
 }

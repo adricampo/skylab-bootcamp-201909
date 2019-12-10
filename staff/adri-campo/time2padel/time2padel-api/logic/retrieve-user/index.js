@@ -1,7 +1,5 @@
 const { validate, errors: { NotFoundError, ContentError } } = require('time2padel-util')
 const { ObjectId, models: { User } } = require('time2padel-data')
-const bcrypt = require('bcryptjs')
-
 
 module.exports = function (id) {
     validate.string(id)

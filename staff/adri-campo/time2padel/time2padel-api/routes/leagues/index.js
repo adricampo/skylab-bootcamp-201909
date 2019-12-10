@@ -115,11 +115,11 @@ router.get('/add/:id', jsonBodyParser, (req, res) => {
 })
 
 //RETRIEVE LEAGUE
-router.get('/:id', jsonBodyParser, (req, res) => {
-    try {
-        const { params: { id } } = req
+router.get('/:leagueId', jsonBodyParser, (req, res) => {
+    try { 
+        const { params: { leagueId } } = req
         
-        retrieveLeague(id)
+        retrieveLeague(leagueId)
             .then(league => res.json(league))
             .catch(error => {
                 const { message } = error

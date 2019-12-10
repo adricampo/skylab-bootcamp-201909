@@ -14,7 +14,7 @@ module.exports = function (id, username, title) {
     validate.string.notVoid('title', title)
 
 
-    return (async () => {
+    return (async () => { 
             let player1 = await User.findById(id)
             if(!player1) throw new NotFoundError(`player1 with username ${username} does not exist`)
             const player1Id = player1._id
@@ -43,7 +43,7 @@ module.exports = function (id, username, title) {
             } else {
                 player2.teams.splice(player2Teams, 1)
             }
-            await player2.save()
+            await player2.save() 
 
     })()
 }

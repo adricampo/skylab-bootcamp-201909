@@ -80,11 +80,11 @@ describe('logic - add team to league', () => {
         try{
             const team = await Team.create({ title, player1, player2, wins, loses, status })
             await addTeamToLeague(league.id, team.id)
-            throw new Error(`Sorry, league ${league.id} is complete`)
+            throw new Error(`Sorry, this league is complete`)
         } catch(error) {
             expect(error).to.exist
             expect(error).to.be.an.instanceOf(Error)
-            expect(error.message).to.equal(`Sorry, league ${league.id} is complete`)
+            expect(error.message).to.equal(`Sorry, this league is complete`)
         }
     })
 

@@ -18,7 +18,7 @@ module.exports = function (level, gender, date, time) {
     return (async () => {
         const league = await League.findOne({ level, gender, date, time })
 
-        if (league) throw new ConflictError(`league ${league.id} already exists`)
+        if (league) throw new ConflictError(`This league already exists`)
 
         await League.create({ level, gender, date, time })
         

@@ -1,6 +1,6 @@
 const { Router } = require('express')
-const { createTeam, updateTeam, deleteTeam, retrieveTeam, retrieveLeaguebyTeam } = require('../../logic')
-// const jwt = require('jsonwebtoken')
+const { createTeam, updateTeam, deleteTeam, retrieveTeam, retrieveLeaguebyTeam, listTeams } = require('../../logic')
+const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 const tokenVerifier = require('../../helpers/token-verifier')(SECRET)
 const bodyParser = require('body-parser')
@@ -11,8 +11,8 @@ const jsonBodyParser = bodyParser.json()
 const router = Router()
 
 //CREATE TEAM
-router.post('/:id', jsonBodyParser, (req, res) => {
-    const { params: { id }, body: { username, title } } = req
+router.post('/', tokenVerifier, jsonBodyParser, (req, res) => { 
+    const { id, body: { username, title } } = req
 
     try {
         createTeam(id, username, title)
@@ -31,11 +31,11 @@ router.post('/:id', jsonBodyParser, (req, res) => {
 })
 
 //UPDATE TEAM
-router.patch('/:id', jsonBodyParser, (req, res) => {
+router.patch('/teamId', jsonBodyParser, tokenVerifier, (req, res) => {
     try {
-        const { params: { id }, body: { answer } } = req
+        const { id, body: { teamId, answer } } = req
 
-        updateTeam(id, answer)
+        updateTeam(id, teamId, answer)
             .then(() =>
                 res.end()
             )
@@ -55,11 +55,11 @@ router.patch('/:id', jsonBodyParser, (req, res) => {
 })
 
 //DELETE TEAM
-router.delete('/:id', tokenVerifier, (req, res) => {
+router.delete('/', (req, res) => {
     try {
-        const { params: { id } } = req
+        const { body: { teamId } } = req
 
-        deleteTeam(id)
+        deleteTeam(teamId)
             .then(() =>
                 res.end()
             )
@@ -78,7 +78,7 @@ router.delete('/:id', tokenVerifier, (req, res) => {
     }
 })
 
-//RETRIEVE TEAM
+//RETRIEVE TEAM //mirar ruta
 router.post('/', tokenVerifier, jsonBodyParser, (req, res) => {
     try {
         const { body: { title } } = req
@@ -107,6 +107,28 @@ router.get('/:id', jsonBodyParser, (req, res) => {
 
         retrieveLeaguebyTeam(id)
             .then(team => res.json( team ))
+            .catch(error => {
+                const { message } = error
+
+                if (error instanceof NotFoundError)
+                    return res.status(404).json({ message })
+
+                res.status(500).json({ message })
+            })
+    } catch (error) {
+        const { message } = error
+
+        res.status(400).json({ message })
+    }
+})
+
+//LIST TEAMS
+router.get('/', tokenVerifier, (req, res) => { 
+    try {
+        const { id } = req
+
+        listTeams(id)
+            .then(teams => res.json( teams ))
             .catch(error => {
                 const { message } = error
 

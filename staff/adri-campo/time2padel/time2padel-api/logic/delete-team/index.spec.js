@@ -49,7 +49,7 @@ describe('logic - delete team', () => {
         } catch (error) {
             expect(error).to.exist
             expect(error).to.be.an.instanceOf(NotFoundError)
-            expect(error.message).to.equal(`team with id ${id} does not exist`)
+            expect(error.message).to.equal(`team not exist`)
         }
     })
 

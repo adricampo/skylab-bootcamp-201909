@@ -1,6 +1,6 @@
 module.exports = function (teams) {
     schedule = []
-    for (i = 0; i < teams.length; i++) {
+    for (i = 0; i < teams.length -1; i++) {
         min = 0
         max = 5
         playingDay = []
