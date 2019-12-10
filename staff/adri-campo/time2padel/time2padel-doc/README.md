@@ -28,19 +28,20 @@ Users information will be stored in a data base where we will later call them to
     2) The other user will receive a request and will have the possiblity to accept it or decline it. 
 
 In the list of leagues available every user that have teams can join any league if the team has not been added yet. User can also see the details of the league:
+
 - Teams already registered
 - Starting date and playing days (only if the league is completed)
 
 
 ### Use cases
 
-User can Log-In, Log-Out, Register, Find Leagues, Join a League, Accept Requests, Decline Requests and Check the results. 
+User can Log-In, Log-Out, Register, Find Leagues, Join a League, Accept Requests, Decline Requests and Check Results. 
 
 ![Use Cases](usecasesfinal.png)
 
 ## Flow
 
-![Flow](flow.png)
+![Flow](finalflow.png)
 
 ## Technical Description
 
@@ -48,22 +49,37 @@ User can Log-In, Log-Out, Register, Find Leagues, Join a League, Accept Requests
 
 List of the components used in the project:
 
+    - App
     - Header
     - Footer
+    - Feedback
     - Landing
     - Registration-page
     - Main
-    - Requests
+    - MyTeams
+    - Userpage
+    - Team
+    - Team-creation
+    - Team-registration
+    - Mypendingteams
+    - Pendingteam
     - Leagues
+    - League-creation
+    - League-detail
+    - League-team
+    - League
     - League-registration
-    - Results
+    - Playingday
     
 ### Blocks
 ### Data Model 
 
-![Data Model](datamodelfinal.png)
+![Data Model](datamodel.png)
 
 
+## TODO's
 
 
-
+- Implement diferent roles (admin & users) to separate some actions as create leagues.
+- Implement Results handshaking and make the admin responsible of confirming that both    teams response is the same. 
+- Delete account, delete teams & delete leagues (must be really well controlled because the information is interconnected and can cause many conflicts in the leagues).
