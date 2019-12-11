@@ -2,6 +2,17 @@ const call = require('../../utils/call')
 const { validate, errors: { CredentialsError, NotFoundError } } = require('time2padel-util')
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * It calls the API to verificate if the league already exists or not. If not, it generates a new one with the combination of information
+ * you write with the params below.
+ * 
+ * @param {string} level, league level from D (lower) to A (higher)
+ * @param {string} gender, could be MALE or FEMALE
+ * @param {string} date, the week day from Monday to Friday
+ * @param {string} time, the hour of the day
+ * 
+ */
+
 module.exports = function (level, gender, date, time) { 
     validate.string(level)
     validate.string.notVoid('level', level)

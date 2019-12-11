@@ -2,6 +2,16 @@ const call = require('../../utils/call')
 const { validate, errors: { CredentialsError, NotFoundError } } = require('time2padel-util')
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * It calls the API to recover the user related to the id, the team associated to the teamId and then an answer is written to follow one 
+ * of the options we have: true = ACCEPTED team, false = DENNIED team.
+ * 
+ * @param {string} id, user id
+ * @param {string} teamId, team id
+ * @param {string} answer, answer provided by the user 
+ * 
+ */
+
 module.exports = function (token, teamId, answer) { 
     validate.string(token)
     validate.string.notVoid('token', token)

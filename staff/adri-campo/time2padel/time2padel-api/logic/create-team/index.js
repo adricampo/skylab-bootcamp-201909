@@ -1,7 +1,15 @@
 const { validate, errors: { NotFoundError, ConflictError } } = require('time2padel-util')
 const { models: { User, Team } } = require('time2padel-data')
 
-// Create Team
+/**
+ * It calls the API to verificate if the team already exists or not. If not, it generates a new one
+ * with status PENDING.
+ * 
+ * @param {string} id, user's id
+ * @param {string} username, username of the user you want to play with
+ * @param {title} title, team title
+ * 
+ */
 
 module.exports = function (id, username, title) {
     validate.string(id)

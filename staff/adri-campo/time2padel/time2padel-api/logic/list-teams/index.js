@@ -1,6 +1,12 @@
 const { validate, errors: { NotFoundError, ContentError } } = require('time2padel-util')
 const { ObjectId, models: { User, Team } } = require('time2padel-data')
 
+/**
+ * It calls the API to return the list of teams.
+ * 
+ * @param {string} id, user id
+ */
+
 module.exports = function (id) { 
     validate.string(id)
     validate.string.notVoid('id', id)

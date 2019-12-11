@@ -9,7 +9,7 @@ export default function ({error, onClose, onBack, league}) {
     let counter = 1
     return <section className="league-detail">
             <div className="league-detail__container container">
-                <h2 className="container__league-info league-info">Level: {level} - {date} {time}</h2>
+                <h2 className="container__league-info league-info">Level: {level} / {date} {time}</h2>
                 <ul className="container__teams">
                     {teams && teams.map(team => <li className="teamdetail" key={team.id}><DetailTeam team={team} /></li>)}  
                 </ul>

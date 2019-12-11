@@ -2,6 +2,14 @@ const call = require('../../utils/call')
 const { validate, errors: { CredentialsError, NotFoundError } } = require('time2padel-util')
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * It calls the API to recover user info and then give the user the opportunity to modify the username & password.
+ * 
+ * @param {string} id, user id
+ * @param {string} username, user username
+ * @param {string} password, user password
+ */
+
 module.exports = function (token, username, password) {
     validate.string(token)
     validate.string.notVoid('token', token)

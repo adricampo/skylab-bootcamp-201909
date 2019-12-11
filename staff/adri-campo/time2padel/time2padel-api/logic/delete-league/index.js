@@ -1,6 +1,12 @@
 const { validate, errors: { NotFoundError, ConflictError, ContentError } } = require('time2padel-util')
 const { ObjectId, models: { League } } = require('time2padel-data')
 
+/**
+ * 
+ * TODO
+ * 
+ */
+
 module.exports = function (id) {
     validate.string(id, 'id')
     if (!ObjectId.isValid(id)) throw new ContentError(`${id} is not a valid id`)

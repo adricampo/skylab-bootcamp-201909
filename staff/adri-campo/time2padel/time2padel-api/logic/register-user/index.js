@@ -2,6 +2,16 @@ const { validate, errors: { ConflictError } } = require('time2padel-util')
 const { models: { User } } = require('time2padel-data')
 const bcrypt = require('bcryptjs')
 
+/**
+ * It calls the API to recover user info, if user not exists creates a new one.
+ * 
+ * @param {string} name, user name
+ * @param {string} surname, user surname
+ * @param {string} email, user email
+ * @param {string} username, user username
+ * @param {string} password, user password 
+ * @param {string} gender, user gender 
+ */
 
 module.exports = function (name, surname, email, username, password, gender) {
     validate.string(name)

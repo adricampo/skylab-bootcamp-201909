@@ -1,5 +1,11 @@
-const { validate, errors: { NotFoundError, ContentError } } = require('time2padel-util')
+const { validate, errors: { NotFoundError } } = require('time2padel-util')
 const { ObjectId, models: { Team } } = require('time2padel-data')
+
+/**
+ * It calls the API to get info about a concrete team searched by title. 
+ * 
+ * @param {title} title, team title 
+ */
 
 module.exports = function (title) {
     validate.string(title)

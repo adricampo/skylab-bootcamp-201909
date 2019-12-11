@@ -2,6 +2,13 @@ const call = require('../../utils/call')
 const { validate, errors: { CredentialsError } } = require('time2padel-util')
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * It calls to the API and verificates the username & password. If credentials are OK, returns the id and the APP generates the token associated
+ * 
+ * @param {string} username, user username 
+ * @param {string} password, user password
+ */
+
 module.exports = function (username, password) {
     validate.string(username)
     validate.string.notVoid('username', username)

@@ -1,5 +1,11 @@
-const { validate, errors: { NotFoundError, ContentError } } = require('time2padel-util')
+const { validate, errors: { NotFoundError } } = require('time2padel-util')
 const { ObjectId, models: { League } } = require('time2padel-data')
+
+/**
+ * It calls the API to find a league, extracts the teams array inside and returns it.
+ * 
+ * @param {string} id, league id
+ */
 
 module.exports = function (id) {
     validate.string(id)

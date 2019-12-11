@@ -1,6 +1,16 @@
 const { validate, errors: { ConflictError } } = require('time2padel-util')
 const { models: { League } } = require('time2padel-data')
-// const robin = require('roundrobin');
+
+/**
+ * It calls the API to verificate if the league already exists or not. If not, it generates a new one with the combination of information
+ * you write with the params below.
+ * 
+ * @param {string} level, league level from D (lower) to A (higher)
+ * @param {string} gender, could be MALE or FEMALE
+ * @param {string} date, the week day from Monday to Friday
+ * @param {string} time, the hour of the day
+ * 
+ */
 
 module.exports = function (level, gender, date, time) {
     validate.string(level)
@@ -22,16 +32,5 @@ module.exports = function (level, gender, date, time) {
 
         await League.create({ level, gender, date, time })
         
-
-        // debugger
-        // let Schedule = robin(6, ['Team1', 'Team2', 'Team3', 'Team4', 'Team5', 'Team6']);
-        // debugger
-        // league.forEach(league => {
-        //     id = league.id
-        //     delete league._id
-        //     delete league.__v
-        // })
-
-        // return league
     })()
 }

@@ -2,6 +2,16 @@ const call = require('../../utils/call')
 const { validate, errors: { CredentialsError, NotFoundError } } = require('time2padel-util')
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * It calls the API to verificate if the team already exists or not. If not, it generates a new one
+ * with status PENDING.
+ * 
+ * @param {string} id, user's id
+ * @param {string} username, username of the user you want to play with
+ * @param {title} title, team title
+ * 
+ */
+
 module.exports = function (token, username, title) { 
     validate.string(token)
     validate.string.notVoid('token', token)

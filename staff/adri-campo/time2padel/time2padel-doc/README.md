@@ -71,15 +71,21 @@ List of the components used in the project:
     - League-registration
     - Playingday
     
-### Blocks
+<!-- ### Blocks
+
+![Blocks](Blocks.png) -->
+
 ### Data Model 
 
 ![Data Model](datamodel.png)
 
+## Test coverage
+
+![Test coverage](picture-testcoverageAPI.png)
 
 ## TODO's
 
-
 - Implement diferent roles (admin & users) to separate some actions as create leagues.
-- Implement Results handshaking and make the admin responsible of confirming that both    teams response is the same. 
-- Delete account, delete teams & delete leagues (must be really well controlled because the information is interconnected and can cause many conflicts in the leagues).
+- Implement Results handshaking and make the admin responsible of confirming that both teams response is the same. 
+- Implement new logics to add the selection by gender, and create MALE FEMALE & MIXED leagues. 
+- Delete users, delete teams & delete leagues (must be really well controlled because the information is interconnected and can cause many conflicts in the leagues).

@@ -2,6 +2,14 @@ const { validate, errors: { NotFoundError, ContentError } } = require('time2pade
 const { ObjectId, models: { User } } = require('time2padel-data')
 const bcrypt = require('bcryptjs')
 
+/**
+ * It calls the API to recover user info and then give the user the opportunity to modify the username & password.
+ * 
+ * @param {string} id, user id
+ * @param {string} username, user username
+ * @param {string} password, user password
+ */
+
 module.exports = function (id, username, password) {
     validate.string(id)
     validate.string.notVoid('id', id)

@@ -1,10 +1,15 @@
 const { validate, errors: { NotFoundError, ContentError } } = require('time2padel-util')
 const { models: { League, Team } } = require('time2padel-data')
 
+/**
+ * It calls the API to recover a league by id.
+ * 
+ * @param {string} leagueId, league id 
+ */
+
 module.exports = function (leagueId) { 
     validate.string(leagueId)
     validate.string.notVoid('leagueId', leagueId)
-
 
     return (async () => { 
         const league = await League.findById(leagueId).populate({
@@ -21,10 +26,6 @@ module.exports = function (leagueId) {
         await league.save()
        
         const { _id: id, level, date, time, teams, status, playingDays, startDate } = league.toObject()
-        
-        // let a = playingDays[0].matches[0].teams[0]
-        // a = a.toString()
-        // const b = await Team.findById(a)
 
         await Promise.all(playingDays.map(async playingDay => {
             await Promise.all(playingDay.matches.map(async match =>{
@@ -34,7 +35,6 @@ module.exports = function (leagueId) {
             
         }))
         
-    
         return { id, level, date, time, teams, status, playingDays, startDate }
     })()
 }

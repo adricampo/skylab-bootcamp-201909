@@ -2,6 +2,15 @@ const call = require('../../utils/call')
 const { validate, errors: { CredentialsError, NotFoundError } } = require('time2padel-util')
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * This function add a team to a league, using the id's of each one searched in the API. The team should be validated (status: ACCEPTED), and the league should have availability,
+ * that means to have less than 6 teams (status: AVAILABLE). If you add the 6th team and the league status change to COMPLETED, an schedule is generated showing the
+ * playingdays with the corresponding matches and the teams involved in each match. 
+ * 
+ * @param {string} leagueId, the id of the league
+ * @param {string} teamId, the id of the team 
+ */
+
 module.exports = function (leagueId, teamId) {
     validate.string(leagueId)
     validate.string.notVoid('leagueId', leagueId)

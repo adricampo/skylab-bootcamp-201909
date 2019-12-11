@@ -2,6 +2,11 @@ const call = require('../../utils/call')
 const { validate, errors: { CredentialsError, NotFoundError } } = require('time2padel-util')
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * It calls the API to recover a league by id.
+ * 
+ * @param {string} leagueId, league id 
+ */
 
 module.exports = function (leagueId) { 
     validate.string(leagueId)

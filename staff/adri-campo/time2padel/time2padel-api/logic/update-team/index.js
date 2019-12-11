@@ -1,6 +1,16 @@
 const { validate, errors: { NotFoundError, ConflictError } } = require('time2padel-util')
 const { models: { User, Team } } = require('time2padel-data')
 
+/**
+ * It calls the API to recover the user related to the id, the team associated to the teamId and then an answer is written to follow one 
+ * of the options we have: true = ACCEPTED team, false = DENNIED team.
+ * 
+ * @param {string} id, user id
+ * @param {string} teamId, team id
+ * @param {string} answer, answer provided by the user 
+ * 
+ */
+
 module.exports = function (id, teamId, answer) {
     validate.string(teamId)
     validate.string.notVoid('teamId', teamId)

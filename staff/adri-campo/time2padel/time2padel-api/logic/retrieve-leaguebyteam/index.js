@@ -1,6 +1,12 @@
 const { validate, errors: { NotFoundError, ContentError } } = require('time2padel-util')
 const { ObjectId, models: { Team } } = require('time2padel-data')
 
+/**
+ * 
+ * TODO
+ * 
+ */
+
 module.exports = function (id) {
     validate.string(id)
     validate.string.notVoid('id', id)
