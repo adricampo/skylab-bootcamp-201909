@@ -31,7 +31,7 @@ describe('logic - modify user', () => {
         token = jwt.sign({ sub: id }, TEST_SECRET)
     })
 
-    it('should succeed on correct data', async () => { debugger
+    it('should succeed on correct data', async () => {
         const newUserName = `username-${random()}`
         const newPassword = `password-${random()}`
 

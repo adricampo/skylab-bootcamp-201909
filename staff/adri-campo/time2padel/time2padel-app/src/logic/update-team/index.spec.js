@@ -25,7 +25,7 @@ describe('logic - update team', () => {
 
     })
     
-    it('should succeed if answer is true(ACCEPTED)', async () => { debugger
+    it('should succeed if answer is true(ACCEPTED)', async () => {
         const team = await Team.create({ title, player1, player2, wins, loses, status })
         teamId = team.id
     

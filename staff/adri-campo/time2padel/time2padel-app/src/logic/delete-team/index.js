@@ -2,7 +2,7 @@
 // const { validate, errors: { CredentialsError, NotFoundError } } = require('time2padel-util')
 // const API_URL = process.env.REACT_APP_API_URL
 
-// module.exports = function (teamId) { debugger
+// module.exports = function (teamId) {
 //     validate.string(teamId)
 //     validate.string.notVoid('teamId', teamId)
 //     return (async () => { 
