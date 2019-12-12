@@ -71,15 +71,16 @@ List of the components used in the project:
     - League-registration
     - Playingday
     
-<!-- ### Blocks
+### Blocks
 
-![Blocks](Blocks.png) -->
+![Blocks](Blocks.png)
 
 ### Data Model 
 
 ![Data Model](datamodel.png)
 
 ## Test coverage
+![Coverage report](https://img.shields.io/badge/Coverage-95.05%25-green.svg)
 
 ![Test coverage](picture-testcoverageAPI.png)
 
