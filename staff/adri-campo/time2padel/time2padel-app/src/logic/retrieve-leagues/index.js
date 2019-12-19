@@ -1,4 +1,4 @@
-const call = require('../../utils/call')
+import call from '../../utils/call'
 const { validate, errors: { NotFoundError } } = require('time2padel-util')
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -6,7 +6,7 @@ const API_URL = process.env.REACT_APP_API_URL
  * It calls the API to recover leagues info and return all.
  */
 
-module.exports = function () {
+export default function () {
     return (async () => {
         const res = await call(`${API_URL}/leagues`, {
             method: 'GET',

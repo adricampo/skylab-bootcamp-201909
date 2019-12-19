@@ -1,4 +1,4 @@
-const call = require('../../utils/call')
+import call from '../../utils/call'
 const { validate, errors: { CredentialsError, NotFoundError } } = require('time2padel-util')
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -13,7 +13,7 @@ const API_URL = process.env.REACT_APP_API_URL
  * 
  */
 
-module.exports = function (level, gender, date, time) { 
+export default function (level, gender, date, time) { 
     validate.string(level)
     validate.string.notVoid('level', level)
 
